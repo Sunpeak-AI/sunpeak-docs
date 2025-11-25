@@ -9,18 +9,18 @@ The sunpeak Starter Kit includes pre-built React components in your project's `s
 
 ## Top-Level Components
 
-- **[OpenAICard](/api-reference/component-library/openai-card)** - A versatile card component for displaying rich content with images, headers, metadata, and action buttons.
-- **[OpenAICarousel](/api-reference/component-library/openai-carousel)** - A horizontal scrolling carousel for displaying multiple cards with navigation arrows and smooth transitions.
+- **[Card](/api-reference/components/card)** - A versatile card component for displaying rich content with images, headers, metadata, and action buttons.
+- **[Carousel](/api-reference/components/carousel)** - A horizontal scrolling carousel for displaying multiple cards with navigation arrows and smooth transitions.
 
 ## Quick Example
 
 ```tsx
-import '@/styles/globals.css';
-import { OpenAICard } from "@/components";
+import "./styles/globals.css";
+import { Card } from "components/carousel-app/card";
 
 export default function App() {
   return (
-    <OpenAICard
+    <Card
       image="https://example.com/photo.jpg"
       imageAlt="Lady Bird Lake"
       header="Lady Bird Lake"
@@ -29,7 +29,7 @@ export default function App() {
       button2={{ children: "Learn More", onClick: () => {} }}
     >
       Scenic lake perfect for kayaking, paddleboarding, and trails.
-    </OpenAICard>
+    </Card>
   );
 }
 ```

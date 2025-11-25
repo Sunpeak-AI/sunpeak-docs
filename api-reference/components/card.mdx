@@ -1,22 +1,22 @@
 ---
-title: "OpenAICard"
+title: "Card"
 description: "A versatile card component for displaying rich content with images, headers, metadata, and action buttons"
 ---
 
 ## Overview
 
-`OpenAICard` is a production-ready card component included in the sunpeak Starter Kit. It provides a flexible interface for displaying rich content with optional images, headers, metadata, and up to two action buttons.
+`Card` is a production-ready card component included in the sunpeak Starter Kit. It provides a flexible interface for displaying rich content with optional images, headers, metadata, and up to two action buttons.
 
 ## Import
 
 ```tsx
-import { OpenAICard } from '@/components';
+import { Card } from './components/carousel-app/card';
 ```
 
 ## Basic Usage
 
 ```tsx
-<OpenAICard
+<Card
   image="/photo.jpg"
   imageAlt="Scenic view"
   header="Card Title"
@@ -24,7 +24,7 @@ import { OpenAICard } from '@/components';
   button1={{ children: "Primary Action", isPrimary: true, onClick: () => {} }}
 >
   Card description text goes here.
-</OpenAICard>
+</Card>
 ```
 
 ## Props

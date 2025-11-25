@@ -1,27 +1,27 @@
 ---
-title: "OpenAICarousel"
+title: "Carousel"
 description: "A horizontal scrolling carousel for displaying multiple cards with navigation arrows and smooth transitions"
 ---
 
 ## Overview
 
-`OpenAICarousel` is a production-ready carousel component included in the sunpeak Starter Kit. It provides smooth horizontal scrolling with navigation arrows, edge gradients, and persistent state tracking. Built on `embla-carousel-react` with wheel gesture support.
+`Carousel` is a production-ready carousel component included in the sunpeak Starter Kit. It provides smooth horizontal scrolling with navigation arrows, edge gradients, and persistent state tracking. Built on `embla-carousel-react` with wheel gesture support.
 
 ## Import
 
 ```tsx
-import { OpenAICarousel } from '@/components';
-import { OpenAICard } from '@/components';
+import { Carousel } from './components/carousel-app/carousel';
+import { Card } from './components/carousel-app/card';
 ```
 
 ## Basic Usage
 
 ```tsx
-<OpenAICarousel showArrows={true} gap={16}>
-  <OpenAICard header="Card 1">First card</OpenAICard>
-  <OpenAICard header="Card 2">Second card</OpenAICard>
-  <OpenAICard header="Card 3">Third card</OpenAICard>
-</OpenAICarousel>
+<Carousel showArrows={true} gap={16}>
+  <Card header="Card 1">First card</Card>
+  <Card header="Card 2">Second card</Card>
+  <Card header="Card 3">Third card</Card>
+</Carousel>
 ```
 
 ## Props
@@ -30,7 +30,7 @@ import { OpenAICard } from '@/components';
 
 - **Type:** `React.ReactNode`
 - **Optional:** Yes
-- **Description:** The carousel items to display. Typically `OpenAICard` components, but can be any React nodes.
+- **Description:** The carousel items to display. Typically `Card` components, but can be any React nodes.
 
 ### `gap`
 
@@ -73,7 +73,7 @@ import { OpenAICard } from '@/components';
 The carousel uses `useWidgetState` to persist the current scroll position across sessions:
 
 ```tsx
-interface OpenAICarouselState {
+interface CarouselState {
   currentIndex?: number;
 }
 ```
@@ -85,9 +85,9 @@ This means users will see the same scroll position when they return to your widg
 ### Product Gallery
 
 ```tsx
-<OpenAICarousel gap={16} cardWidth={240}>
+<Carousel gap={16} cardWidth={240}>
   {products.map(product => (
-    <OpenAICard
+    <Card
       key={product.id}
       image={product.image}
       imageAlt={product.name}
@@ -100,17 +100,17 @@ This means users will see the same scroll position when they return to your widg
       }}
     >
       {product.description}
-    </OpenAICard>
+    </Card>
   ))}
-</OpenAICarousel>
+</Carousel>
 ```
 
 ### Photo Gallery
 
 ```tsx
-<OpenAICarousel gap={12} cardWidth={280} showArrows={true}>
+<Carousel gap={12} cardWidth={280} showArrows={true}>
   {photos.map(photo => (
-    <OpenAICard
+    <Card
       key={photo.id}
       image={photo.url}
       imageAlt={photo.caption}
@@ -118,15 +118,15 @@ This means users will see the same scroll position when they return to your widg
       metadata={photo.location}
     />
   ))}
-</OpenAICarousel>
+</Carousel>
 ```
 
 ### Recommendations Carousel
 
 ```tsx
-<OpenAICarousel gap={20}>
+<Carousel gap={20}>
   {recommendations.map(item => (
-    <OpenAICard
+    <Card
       key={item.id}
       image={item.thumbnail}
       imageAlt={item.title}
@@ -139,7 +139,7 @@ This means users will see the same scroll position when they return to your widg
       }}
     >
       {item.summary}
-    </OpenAICard>
+    </Card>
   ))}
-</OpenAICarousel>
+</Carousel>
 ```

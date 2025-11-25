@@ -38,22 +38,21 @@ description: "Create your first ChatGPT App UI with sunpeak in just a few minute
     Edit `src/App.tsx` to create your first ChatGPT widget:
 
     ```tsx
-    import 'sunpeak/style.css';
-    import { OpenAICard } from 'sunpeak';
+    import "./styles/globals.css";
+    import { Card } from "./components/carousel-app";
 
     export default function App() {
       return (
-        <OpenAICard
-          header="My First Widget"
-          metadata="Built with sunpeak"
-          button1={{
-            children: "Click me",
-            isPrimary: true,
-            onClick: () => alert('Hello from sunpeak!')
-          }}
+        <Card
+          image="https://example.com/photo.jpg"
+          imageAlt="Lady Bird Lake"
+          header="Lady Bird Lake"
+          metadata="⭐ 4.5 • Austin, TX"
+          button1={{ children: "Visit", isPrimary: true, onClick: () => {} }}
+          button2={{ children: "Learn More", onClick: () => {} }}
         >
-          This is my first ChatGPT widget built with sunpeak!
-        </OpenAICard>
+          Scenic lake perfect for kayaking, paddleboarding, and trails.
+        </Card>
       );
     }
     ```
@@ -62,6 +61,6 @@ description: "Create your first ChatGPT App UI with sunpeak in just a few minute
   </Step>
 </Steps>
 
-<Card title="Project Structure" icon="cube" href="/template/ui-components">
+<Card title="Project Structure" icon="cube" href="/template/project-structure">
   Explore your new MCP App project
 </Card>

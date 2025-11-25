@@ -34,12 +34,12 @@ An npm package (`sunpeak`) for running & testing ChatGPT App UIs:
 Build beautiful ChatGPT widgets with just a few lines of code:
 
 ```tsx
-import '@/styles/globals.css';
-import { OpenAICard } from "@/components";
+import "./styles/globals.css";
+import { Card } from "./components/carousel-app";
 
 export default function App() {
   return (
-    <OpenAICard
+    <Card
       image="https://example.com/photo.jpg"
       imageAlt="Lady Bird Lake"
       header="Lady Bird Lake"
@@ -48,7 +48,7 @@ export default function App() {
       button2={{ children: "Learn More", onClick: () => {} }}
     >
       Scenic lake perfect for kayaking, paddleboarding, and trails.
-    </OpenAICard>
+    </Card>
   );
 }
 ```
