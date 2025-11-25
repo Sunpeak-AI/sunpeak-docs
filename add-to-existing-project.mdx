@@ -1,0 +1,177 @@
+---
+title: "Add to Existing Project"
+description: "Integrate sunpeak into your existing React application"
+---
+
+## Overview
+
+If you already have a React project and want to add ChatGPT widget capabilities, you can integrate the sunpeak library directly.
+
+<Info>
+**Starting from scratch?** Use the [Quickstart](/quickstart) guide to create a new project with the sunpeak Starter Kit.
+</Info>
+
+## Prerequisites
+
+Your existing project needs:
+
+<CardGroup cols={2}>
+  <Card title="React" icon="react">
+    Version 18 or 19
+  </Card>
+  <Card title="React DOM" icon="react">
+    Version 18 or 19
+  </Card>
+  <Card title="Node.js" icon="node-js">
+    Version 20 or higher
+  </Card>
+  <Card title="Build Tool" icon="wrench">
+    Vite recommended (Webpack/Parcel also work)
+  </Card>
+</CardGroup>
+
+## Installation Steps
+
+<Steps>
+  <Step title="Install sunpeak">
+    Add sunpeak to your project dependencies:
+
+    <Tabs>
+      <Tab title="pnpm">
+        ```bash
+        pnpm add sunpeak
+        ```
+      </Tab>
+      <Tab title="npm">
+        ```bash
+        npm install sunpeak
+        ```
+      </Tab>
+      <Tab title="yarn">
+        ```bash
+        yarn add sunpeak
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Install Tailwind CSS 4">
+    sunpeak requires Tailwind CSS 4. If you don't have it installed:
+
+    ```bash
+    pnpm add -D tailwindcss@next @tailwindcss/vite@next
+    ```
+
+    Configure Tailwind in your build config:
+
+    <Tabs>
+      <Tab title="Vite">
+        ```ts
+        // vite.config.ts
+        import { defineConfig } from 'vite';
+        import react from '@vitejs/plugin-react';
+        import tailwindcss from '@tailwindcss/vite';
+
+        export default defineConfig({
+          plugins: [react(), tailwindcss()],
+        });
+        ```
+      </Tab>
+      <Tab title="Webpack">
+        ```js
+        // webpack.config.js
+        module.exports = {
+          module: {
+            rules: [
+              {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader', 'postcss-loader'],
+              },
+            ],
+          },
+        };
+        ```
+
+        ```js
+        // postcss.config.js
+        module.exports = {
+          plugins: {
+            tailwindcss: {},
+            autoprefixer: {},
+          },
+        };
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Wrap with ChatGPT Simulator">
+    For local development, wrap your widget with the ChatGPT Simulator:
+
+    ```tsx
+    import 'sunpeak/style.css'; // Required to style the simulator.
+    import { ChatGPTSimulator } from 'sunpeak';
+    import { MyWidget } from './MyWidget';
+
+    function App() {
+      return (
+        <ChatGPTSimulator>
+          <MyWidget />
+        </ChatGPTSimulator>
+      );
+    }
+    ```
+
+    <Warning>
+    Only use the simulator in development. For production, export your widget component directly.
+    </Warning>
+  </Step>
+
+  <Step title="Build your widget">
+    Build your widget with sunpeak APIs.
+  </Step>
+</Steps>
+
+## Configuration Options
+
+### TypeScript
+
+If using TypeScript, sunpeak types are included. Update your `tsconfig.json` if needed:
+
+```json
+{
+  "compilerOptions": {
+    "moduleResolution": "bundler",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx"
+  }
+}
+```
+
+### Tailwind Configuration
+
+Add to your CSS entrypoint:
+
+```css
+@import "tailwindcss";
+@import "@openai/apps-sdk-ui/css";
+
+/* Scan simulator source files for Tailwind classes */
+@source "./**/*.{ts,tsx}";
+
+/* Required for Tailwind to find class references in Apps SDK UI components. */
+@source "../node_modules/@openai/apps-sdk-ui";
+
+/* Configure dark mode to use data-theme attribute (OpenAI SDK standard) */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+```
+
+## Need the Full Starter Kit?
+
+If you want the complete development setup with pre-built components, build tools, and testing framework, create a new project instead.
+
+See the [Quickstart](/quickstart) guide for details.
+
+<Card title="Multi-Platform APIs" icon="cube" href="/template/ui-components">
+  Start using sunpeak multi-platform APIs
+</Card>

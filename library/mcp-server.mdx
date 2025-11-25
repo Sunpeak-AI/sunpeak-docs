@@ -1,0 +1,77 @@
+---
+title: "MCP Server"
+description: "Serve your widgets to ChatGPT"
+---
+
+## Overview
+
+The MCP (Model Context Protocol) server lets you serve your widgets to ChatGPT. Once your MCP server is running, ChatGPT can discover and render your widgets.
+
+sunpeak includes an MCP server implementation that lets your render your App out-of-the-box.
+
+## What is MCP?
+
+MCP is the protocol ChatGPT uses to communicate with widget servers. It handles:
+
+- Widget registration and discovery
+- Runtime API communication
+- Tool invocation and state synchronization
+
+<Info>
+Learn more in the [Model Context Protocol documentation](https://modelcontextprotocol.io/).
+</Info>
+
+## Quick Start
+
+<Steps>
+  <Step title="Build your app">
+    Build your app first.
+
+    ```bash
+    pnpm build
+    ```
+    <Warning>
+      You must rebuild you application for later changes to take effect.
+    </Warning>
+  </Step>
+
+  <Step title="Start the MCP server">
+    Start the MCP server on port 6766:
+
+    ```bash
+    pnpm mcp
+    ```
+  </Step>
+
+  <Step title="Run a tunnel">
+    In another terminal, run a tunnel to expose your local server:
+
+    ```bash
+    ngrok http 6766
+    ```
+
+    Copy the forwarding URL (e.g., `https://abc123.ngrok.io`)
+  </Step>
+
+  <Step title="Connect to ChatGPT">
+    Open ChatGPT **in developer mode** and connect your app:
+
+    1. Go to `User > Settings > Apps & Connectors > Create`
+    2. Enter your tunnel URL with the `/mcp` path: `https://abc123.ngrok.io/mcp`
+    3. Complete the connection flow
+  </Step>
+
+  <Step title="Test your widget">
+    Send `show app` to ChatGPT to see your widget in action!
+
+    <Warning>
+      ChatGPT caches UIs aggressively. Your changes usually require you to **Refresh** your app from the same settings modal as the previous step.
+    </Warning>
+  </Step>
+</Steps>
+
+## Dive Deeper
+
+<Card title="MCP API" icon="server" href="/api-reference/mcp/setup">
+  Complete sunpeak server configuration reference
+</Card>

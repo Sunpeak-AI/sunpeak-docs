@@ -1,0 +1,54 @@
+---
+title: "useWidgetAPI"
+description: "Access the widget runtime API"
+---
+
+## Overview
+
+The `useWidgetAPI` hook provides access to the widget runtime API, which includes methods for calling tools, sending messages, and controlling the widget display.
+
+## Import
+
+```tsx
+import { useWidgetAPI } from 'sunpeak';
+```
+
+## Signature
+
+```tsx
+function useWidgetAPI(): WidgetAPI | null
+```
+
+## Returns
+
+The API object with methods, or `null` if not available.
+
+## API Methods
+
+The returned API object includes:
+
+- `callTool(name, args)` - Invoke an MCP tool
+- `sendFollowUpMessage({ prompt })` - Send a follow-up message to the chat
+- `openExternal({ href })` - Open an external URL
+- `requestDisplayMode({ mode })` - Request a display mode change
+- `requestModal({ mode, params })` - Request modal view
+- `notifyIntrinsicHeight(height)` - Notify the platform of content height
+
+## Usage
+
+```tsx
+import { useWidgetAPI } from 'sunpeak';
+
+function MyWidget() {
+  const api = useWidgetAPI();
+
+  const handleAction = async () => {
+    if (api) {
+      const result = await api.callTool('my-tool', { arg: 'value' });
+      console.log(result);
+    }
+  };
+
+  return <button onClick={handleAction}>Call Tool</button>;
+}
+```

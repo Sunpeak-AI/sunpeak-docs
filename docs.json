@@ -1,68 +1,89 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "Mint Starter Kit",
+  "theme": "maple",
+  "name": "sunpeak",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#1A1F36",
+    "light": "#FFB800",
+    "dark": "#1A1F36"
   },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Documentation",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Getting Started",
             "pages": [
               "index",
               "quickstart",
-              "development"
+              "add-to-existing-project"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Starter Kit",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "template/project-structure",
+              "template/ui-components"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "sunpeak Library",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+              "library/multi-platform-apis",
+              "library/chatgpt-simulator",
+              "library/mcp-server"
             ]
           },
           {
-            "group": "AI tools",
+            "group": "Guides",
             "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "guides/testing",
+              "guides/deployment"
+            ]
+          },
+          {
+            "group": "Resources",
+            "pages": [
+              "links"
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "API Reference",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Component Library",
             "pages": [
-              "api-reference/introduction"
+              "api-reference/component-library/openai-card",
+              "api-reference/component-library/openai-carousel"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Hooks",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/hooks/use-theme",
+              "api-reference/hooks/use-display-mode",
+              "api-reference/hooks/use-widget-state",
+              "api-reference/hooks/use-locale",
+              "api-reference/hooks/use-max-height",
+              "api-reference/hooks/use-is-mobile",
+              "api-reference/hooks/use-safe-area",
+              "api-reference/hooks/use-user-agent",
+              "api-reference/hooks/use-view",
+              "api-reference/hooks/use-tool-input",
+              "api-reference/hooks/use-tool-response-metadata",
+              "api-reference/hooks/use-widget-props",
+              "api-reference/hooks/use-widget-global",
+              "api-reference/hooks/use-widget-api"
+            ]
+          },
+          {
+            "group": "MCP Server",
+            "pages": [
+              "api-reference/mcp/configuration"
             ]
           }
         ]
@@ -71,14 +92,19 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "GitHub",
+          "href": "https://github.com/Sunpeak-AI/sunpeak",
+          "icon": "github"
         },
         {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "npm",
+          "href": "https://www.npmjs.com/package/sunpeak",
+          "icon": "box"
+        },
+        {
+          "anchor": "sunpeak.ai",
+          "href": "https://sunpeak.ai",
+          "icon": "globe"
         }
       ]
     }
@@ -90,15 +116,10 @@
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "Source",
+        "href": "https://github.com/Sunpeak-AI/sunpeak-docs"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
+    ]
   },
   "contextual": {
     "options": [
@@ -114,9 +135,8 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "github": "https://github.com/Sunpeak-AI/sunpeak",
+      "website": "https://sunpeak.ai"
     }
   }
 }

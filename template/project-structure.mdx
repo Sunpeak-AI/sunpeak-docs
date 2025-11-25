@@ -1,0 +1,63 @@
+---
+title: "Project Structure"
+description: "Understanding your sunpeak project structure"
+---
+
+## Overview
+
+When you create a new project with `pnpm dlx sunpeak new`, the sunpeak Starter Kit gives you a complete project scaffold with everything needed for ChatGPT widget development.
+
+## Pre-Configured Tools
+
+### Vite
+
+Fast build tool with hot-reload (HMR) for instant development feedback. Configured via `vite` files.
+
+### Tailwind CSS 4
+
+Utility-first CSS framework for rapid UI development. Configured via Vite plugin & CSS import.
+
+### TypeScript
+
+Type safety and better developer experience. Configured via `tsconfig` files.
+
+#### Vitest (Unit Tests)
+
+Vite-native testing framework. Configured via `vitest.config.ts`.
+
+## npm Scripts
+
+<ResponseField name="pnpm build" type="command">
+  Build optimized production bundle.
+</ResponseField>
+
+<ResponseField name="pnpm dev" type="command">
+  Start development server with ChatGPT simulator at `http://localhost:6767`.
+</ResponseField>
+
+<ResponseField name="pnpm mcp" type="command">
+  Start MCP server for ChatGPT testing. Requires `pnpm build` to be run first.
+</ResponseField>
+
+<ResponseField name="pnpm lint" type="command">
+  Run linter (ESLint & Prettier).
+</ResponseField>
+
+<ResponseField name="pnpm typecheck" type="command">
+  Check TypeScript types without building.
+</ResponseField>
+
+<ResponseField name="pnpm test" type="command">
+  Run unit tests.
+</ResponseField>
+
+<ResponseField name="pnpm validate" type="command">
+  Run and validate all of the above commands.
+</ResponseField>
+
+## Key Files
+
+- `src/App.tsx` - Your main MCP App UI that will ultimately be shipped.
+- `src/index.chatgpt.tsx` - Production build root. Entrypoint for `pnpm build`.
+- `dev/main.tsx` - ChatGPT simulator setup for `<App>`. Entrypoint for `pnpm dev`.
+- `mcp/server.ts` - Simple MCP server for live ChatGPT testing with dummy data. Entrypoint for `pnpm mcp`.

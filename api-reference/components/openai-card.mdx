@@ -1,0 +1,336 @@
+---
+title: "OpenAICard"
+description: "API reference for the OpenAICard component"
+---
+
+## Overview
+
+The `OpenAICard` component is the primary building block for ChatGPT widgets, following OpenAI's design guidelines.
+
+## Import
+
+```tsx
+import { OpenAICard } from 'sunpeak';
+```
+
+## Props
+
+<ResponseField name="header" type="string">
+  Card title/heading
+</ResponseField>
+
+<ResponseField name="metadata" type="string">
+  Subtitle or additional information displayed below header
+</ResponseField>
+
+<ResponseField name="image" type="string">
+  URL of the card image
+</ResponseField>
+
+<ResponseField name="imageAlt" type="string">
+  Alt text for the image (required if `image` is provided)
+</ResponseField>
+
+<ResponseField name="button1" type="ButtonProps">
+  Primary button configuration
+</ResponseField>
+
+<ResponseField name="button2" type="ButtonProps">
+  Secondary button configuration
+</ResponseField>
+
+<ResponseField name="children" type="ReactNode">
+  Card body content
+</ResponseField>
+
+<ResponseField name="className" type="string">
+  Additional CSS classes
+</ResponseField>
+
+<ResponseField name="style" type="CSSProperties">
+  Inline styles
+</ResponseField>
+
+## ButtonProps
+
+<ResponseField name="children" type="ReactNode" required>
+  Button text or content
+</ResponseField>
+
+<ResponseField name="onClick" type="() => void">
+  Click handler
+</ResponseField>
+
+<ResponseField name="isPrimary" type="boolean" default="false">
+  Apply primary button styling
+</ResponseField>
+
+<ResponseField name="disabled" type="boolean" default="false">
+  Disable the button
+</ResponseField>
+
+## Usage
+
+### Basic Card
+
+```tsx
+<OpenAICard header="Hello World">
+  This is a simple card
+</OpenAICard>
+```
+
+### With Metadata
+
+```tsx
+<OpenAICard
+  header="Restaurant Name"
+  metadata="⭐ 4.8 • Austin, TX"
+>
+  Award-winning Italian restaurant
+</OpenAICard>
+```
+
+### With Image
+
+```tsx
+<OpenAICard
+  image="https://example.com/photo.jpg"
+  imageAlt="Restaurant exterior"
+  header="Restaurant Name"
+  metadata="⭐ 4.8 • Austin, TX"
+>
+  Award-winning Italian restaurant
+</OpenAICard>
+```
+
+### With Buttons
+
+```tsx
+<OpenAICard
+  header="Product Name"
+  metadata="$299.99"
+  button1={{
+    children: "Buy Now",
+    isPrimary: true,
+    onClick: () => console.log('Buy clicked')
+  }}
+  button2={{
+    children: "Learn More",
+    onClick: () => console.log('Learn more clicked')
+  }}
+>
+  Product description
+</OpenAICard>
+```
+
+### Complete Example
+
+```tsx
+<OpenAICard
+  image="https://example.com/restaurant.jpg"
+  imageAlt="Restaurant interior"
+  header="The Italian Kitchen"
+  metadata="⭐ 4.8 • $$ • Italian • Austin, TX"
+  button1={{
+    children: "Reserve Table",
+    isPrimary: true,
+    onClick: handleReservation
+  }}
+  button2={{
+    children: "View Menu",
+    onClick: handleViewMenu
+  }}
+>
+  Award-winning Italian restaurant featuring fresh pasta, wood-fired pizzas,
+  and an extensive wine selection. Perfect for date nights and family dinners.
+</OpenAICard>
+```
+
+## Design Guidelines
+
+<AccordionGroup>
+  <Accordion title="Images">
+    - Use high-quality images (recommended: 1200x630px)
+    - Always provide `imageAlt` for accessibility
+    - Images are optional but recommended
+  </Accordion>
+
+  <Accordion title="Headers">
+    - Keep headers concise (1-5 words)
+    - Use sentence case, not ALL CAPS
+    - Headers should describe the card content
+  </Accordion>
+
+  <Accordion title="Metadata">
+    - Use for supplementary information
+    - Common patterns: ratings, location, price, time
+    - Use emojis sparingly for visual interest
+  </Accordion>
+
+  <Accordion title="Body Content">
+    - Keep to 1-3 sentences
+    - Focus on key information
+    - Avoid long paragraphs
+  </Accordion>
+
+  <Accordion title="Buttons">
+    - Maximum 2 buttons per card
+    - Primary button for main action
+    - Clear, action-oriented labels ("Buy Now" not "Click Here")
+  </Accordion>
+</AccordionGroup>
+
+## Examples
+
+<Tabs>
+  <Tab title="E-commerce">
+    ```tsx
+    <OpenAICard
+      image="/product.jpg"
+      imageAlt="Wireless headphones"
+      header="Premium Headphones"
+      metadata="$299.99 • In Stock"
+      button1={{
+        children: "Add to Cart",
+        isPrimary: true,
+        onClick: handleAddToCart
+      }}
+      button2={{
+        children: "Details",
+        onClick: handleDetails
+      }}
+    >
+      Noise-cancelling wireless headphones with 30-hour battery life.
+    </OpenAICard>
+    ```
+  </Tab>
+
+  <Tab title="Travel">
+    ```tsx
+    <OpenAICard
+      image="/destination.jpg"
+      imageAlt="Beach sunset"
+      header="Maui, Hawaii"
+      metadata="✈️ 5h flight • 🌴 Beach Resort"
+      button1={{
+        children: "Book Trip",
+        isPrimary: true,
+        onClick: handleBook
+      }}
+      button2={{
+        children: "Learn More",
+        onClick: handleLearnMore
+      }}
+    >
+      Tropical paradise with pristine beaches, volcanic landscapes, and aloha spirit.
+    </OpenAICard>
+    ```
+  </Tab>
+
+  <Tab title="Events">
+    ```tsx
+    <OpenAICard
+      image="/concert.jpg"
+      imageAlt="Outdoor concert"
+      header="Summer Music Festival"
+      metadata="🎵 Aug 15-17 • Austin, TX"
+      button1={{
+        children: "Get Tickets",
+        isPrimary: true,
+        onClick: handleTickets
+      }}
+      button2={{
+        children: "Lineup",
+        onClick: handleLineup
+      }}
+    >
+      Three-day outdoor festival featuring 50+ artists across multiple stages.
+    </OpenAICard>
+    ```
+  </Tab>
+
+  <Tab title="Recipe">
+    ```tsx
+    <OpenAICard
+      image="/cookies.jpg"
+      imageAlt="Chocolate chip cookies"
+      header="Chocolate Chip Cookies"
+      metadata="⏱️ 25 min • 🍪 24 cookies • 👨‍🍳 Easy"
+      button1={{
+        children: "Start Cooking",
+        isPrimary: true,
+        onClick: handleCook
+      }}
+      button2={{
+        children: "Save Recipe",
+        onClick: handleSave
+      }}
+    >
+      Classic homemade chocolate chip cookies with crispy edges and soft centers.
+    </OpenAICard>
+    ```
+  </Tab>
+</Tabs>
+
+## Styling
+
+### Custom Classes
+
+```tsx
+<OpenAICard
+  className="shadow-lg rounded-xl"
+  header="Styled Card"
+>
+  Custom Tailwind classes applied
+</OpenAICard>
+```
+
+### Theme-Aware
+
+Cards automatically adapt to ChatGPT's theme:
+
+```tsx
+import { useTheme } from 'sunpeak';
+
+function ThemedCard() {
+  const theme = useTheme();
+
+  return (
+    <OpenAICard
+      header="Theme-Aware Card"
+      style={{
+        borderColor: theme === 'dark' ? '#444' : '#ddd'
+      }}
+    >
+      Adapts to {theme} theme
+    </OpenAICard>
+  );
+}
+```
+
+## Accessibility
+
+Cards are built with accessibility in mind:
+
+- Semantic HTML structure
+- Proper heading hierarchy
+- Keyboard navigation support
+- Screen reader friendly
+- WCAG 2.1 AA compliant
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Components Guide" icon="cube" href="/template/ui-components">
+    Learn about all components
+  </Card>
+  <Card title="OpenAIButton" icon="hand-pointer" href="/api-reference/components/ui-components">
+    Button component reference
+  </Card>
+  <Card title="Design Guidelines" icon="palette" href="https://developers.openai.com/apps-sdk/concepts/design-guidelines">
+    ChatGPT design principles
+  </Card>
+  <Card title="Examples" icon="code-branch" href="https://github.com/openai/openai-apps-sdk-examples">
+    See example widgets
+  </Card>
+</CardGroup>

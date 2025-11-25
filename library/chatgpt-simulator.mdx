@@ -1,0 +1,72 @@
+---
+title: "ChatGPT Simulator"
+description: "Test your widgets locally without deploying"
+---
+
+## Overview
+
+The ChatGPT Simulator is a local development environment that replicates ChatGPT's widget runtime. It lets you build and test your widgets instantly without deploying to production.
+
+<img
+  src="/images/chatgpt-simulator.png"
+  alt="ChatGPT Simulator"
+/>
+
+## Why Use the Simulator?
+
+<CardGroup cols={2}>
+  <Card title="Instant Feedback" icon="rotate">
+    See changes immediately with hot module replacement
+  </Card>
+  <Card title="Test All Modes" icon="palette">
+    Switch between light/dark themes and mobile/tablet/desktop views
+  </Card>
+  <Card title="No Deployment Needed" icon="desktop">
+    Develop locally without setting up MCP servers
+  </Card>
+  <Card title="Full Runtime Access" icon="code">
+    All ChatGPT runtime APIs work in the simulator
+  </Card>
+</CardGroup>
+
+## Quick Start
+
+Wrap your widget with the simulator in development:
+
+```tsx
+import 'sunpeak/style.css'; // Required to style the simulator.
+import { ChatGPTSimulator } from 'sunpeak';
+import { MyWidget } from './MyWidget';
+
+function App() {
+  return (
+    <ChatGPTSimulator>
+      <MyWidget />
+    </ChatGPTSimulator>
+  );
+}
+```
+
+Start your dev server and you're ready to go:
+
+```bash
+pnpm dev
+```
+
+## What Gets Simulated
+
+The simulator provides a complete ChatGPT-like environment including:
+
+- **Runtime APIs**: Full access to `window.openai` including theme, display mode, and state management
+- **UI Environment**: ChatGPT's chat interface, message bubbles, and widget containers
+- **User Interactions**: All standard interactions like clicks, form submissions, and navigation
+
+<Warning>
+The simulator is for development only. For production testing with real ChatGPT, use the [MCP Server](/library/mcp-server).
+</Warning>
+
+## Dive Deeper
+
+<Card title="ChatGPTSimulator API" icon="code" href="/api-reference/components/chatgpt-simulator">
+  Full component documentation and configuration options
+</Card>

@@ -1,0 +1,40 @@
+---
+title: "useLocale"
+description: "Get the user's locale"
+---
+
+## Overview
+
+The `useLocale` hook returns the user's current locale (language and region).
+
+## Import
+
+```tsx
+import { useLocale } from 'sunpeak';
+```
+
+## Signature
+
+```tsx
+function useLocale(): string | null
+```
+
+## Returns
+
+A locale string (e.g., `'en-US'`, `'fr-FR'`, `'ja-JP'`), or `null` if not available.
+
+## Usage
+
+```tsx
+import { useLocale } from 'sunpeak';
+
+function MyWidget() {
+  const locale = useLocale();
+
+  return (
+    <div>
+      Current locale: {locale || 'Unknown'}
+    </div>
+  );
+}
+```

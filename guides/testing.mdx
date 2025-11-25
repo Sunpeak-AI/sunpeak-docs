@@ -1,0 +1,144 @@
+---
+title: "Testing"
+description: "Testing and validation in sunpeak projects"
+---
+
+## Overview
+
+sunpeak projects come pre-configured with testing tools and validation commands. The starter kit includes Vitest for unit testing and several npm scripts for code quality checks.
+
+## Available Commands
+
+<ResponseField name="pnpm test" type="command">
+  Run unit tests with Vitest
+</ResponseField>
+
+<ResponseField name="pnpm lint" type="command">
+  Run ESLint and Prettier to check code style
+</ResponseField>
+
+<ResponseField name="pnpm typecheck" type="command">
+  Check TypeScript types without building
+</ResponseField>
+
+<ResponseField name="pnpm validate" type="command">
+  Run all validation commands (lint, typecheck, test)
+</ResponseField>
+
+## Testing Setup
+
+sunpeak uses [Vitest](https://vitest.dev/), a fast unit testing framework built on Vite. The test configuration is in `vitest.config.ts`.
+
+### What's Configured
+
+The test environment includes:
+
+- **jsdom**: Browser-like environment for React component testing
+- **@testing-library/react**: For rendering and testing components
+- **@testing-library/jest-dom**: Additional matchers for assertions
+- **Global test utilities**: `describe`, `it`, `expect`, `beforeEach`, `afterEach`
+- **Browser API mocks**: `matchMedia`, `IntersectionObserver`, `ResizeObserver`
+
+All configuration is in `src/test/setup.ts`.
+
+## Running Tests
+
+Run all tests:
+
+```bash
+pnpm test
+```
+
+Run tests in watch mode during development:
+
+```bash
+pnpm test --watch
+```
+
+Run tests with coverage:
+
+```bash
+pnpm test --coverage
+```
+
+## Code Quality
+
+Beyond unit tests, sunpeak includes tools for code quality:
+
+### Linting
+
+ESLint and Prettier check code style and catch common issues:
+
+```bash
+pnpm lint
+```
+
+This automatically fixes many issues. Check without fixing:
+
+```bash
+pnpm lint --no-fix
+```
+
+### Type Checking
+
+TypeScript type checking catches type errors:
+
+```bash
+pnpm typecheck
+```
+
+This runs faster than a full build and only checks types.
+
+### Validation
+
+Run all checks at once:
+
+```bash
+pnpm validate
+```
+
+This runs lint, typecheck, and test in sequence. Great for pre-commit checks.
+
+## Testing Best Practices
+
+<AccordionGroup>
+  <Accordion title="Keep tests simple">
+    Test one thing per test case. Clear tests are maintainable tests.
+  </Accordion>
+
+  <Accordion title="Use meaningful test descriptions">
+    ```tsx
+    // ✅ Good
+    it('displays error message when API fails', () => {})
+
+    // ❌ Bad
+    it('test 1', () => {})
+    ```
+  </Accordion>
+
+  <Accordion title="Test user-facing behavior">
+    Test what users see and interact with, not implementation details:
+    ```tsx
+    // ✅ Good
+    expect(screen.getByText('Submit')).toBeInTheDocument();
+
+    // ❌ Bad
+    expect(component.props.buttonLabel).toBe('Submit');
+    ```
+  </Accordion>
+
+  <Accordion title="Clean up after tests">
+    Use `afterEach` to reset state between tests:
+    ```tsx
+    afterEach(() => {
+      // Clean up mocks, reset state, etc.
+    });
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Dive Deeper
+
+<Card title="Vitest Docs" icon="book" href="https://vitest.dev/">
+  Learn more about Vitest
+</Card>
