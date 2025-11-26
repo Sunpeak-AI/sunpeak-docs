@@ -1,0 +1,19 @@
+```tsx
+import '../../styles/globals.css';
+import { Card } from "../card";
+
+export function App() {
+  return (
+    <Card
+      image="https://images.unsplash.com/photo-1520950237264-dfe336995c34"
+      imageAlt="Lady Bird Lake"
+      header="Lady Bird Lake"
+      metadata="⭐ 4.5 • Austin, TX"
+      button1={{ children: "Visit", isPrimary: true, onClick: () => {} }}
+      button2={{ children: "Learn More", onClick: () => {} }}
+    >
+      Scenic lake perfect for kayaking, paddleboarding, and trails.
+    </Card>
+  );
+}
+```

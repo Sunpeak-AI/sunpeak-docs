@@ -3,6 +3,8 @@ title: "Quickstart"
 description: "Create your first ChatGPT App UI with sunpeak in just a few minutes."
 ---
 
+import QuickstartExample from '/snippets/quickstart-example.mdx';
+
 ## New projects
 
 <Steps>
@@ -35,27 +37,9 @@ description: "Create your first ChatGPT App UI with sunpeak in just a few minute
   </Step>
 
   <Step title="Build your first component">
-    Edit `src/App.tsx` to create your first ChatGPT widget:
+    Edit `src/components/apps/App.tsx` to create your first ChatGPT widget:
 
-    ```tsx
-    import "./styles/globals.css";
-    import { Card } from "./components/card";
-
-    export default function App() {
-      return (
-        <Card
-          image="https://example.com/photo.jpg"
-          imageAlt="Lady Bird Lake"
-          header="Lady Bird Lake"
-          metadata="⭐ 4.5 • Austin, TX"
-          button1={{ children: "Visit", isPrimary: true, onClick: () => {} }}
-          button2={{ children: "Learn More", onClick: () => {} }}
-        >
-          Scenic lake perfect for kayaking, paddleboarding, and trails.
-        </Card>
-      );
-    }
-    ```
+    <QuickstartExample file="quickstart-example.mdx" />
 
     Save the file and watch your changes appear instantly in the simulator.
   </Step>

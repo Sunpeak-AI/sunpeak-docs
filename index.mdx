@@ -1,7 +1,9 @@
 ---
 title: "Overview"
-description: "The ChatGPT Apps SDK - Build and test ChatGPT App UIs locally"
+description: "Quickstart, build, and test your ChatGPT App locally with the sunpeak MCP App SDK."
 ---
+
+import QuickstartExample from '/snippets/quickstart-example.mdx';
 
 <img
   src="/images/chatgpt-simulator.png"
@@ -10,7 +12,7 @@ description: "The ChatGPT Apps SDK - Build and test ChatGPT App UIs locally"
 
 ## What is sunpeak?
 
-sunpeak helps you build and test your MCP App UI locally with OpenAI apps-sdk-ui React components.
+sunpeak is an SDK for MCP Apps. With sunpeak, you can quickly build and ship OpenAI ChatGPT Apps, all from your local machine.
 
 sunpeak consists of two main parts:
 
@@ -18,12 +20,12 @@ sunpeak consists of two main parts:
 
 A pre-configured Starter Kit (`pnpm dlx sunpeak new`) that includes:
 
-- **UI Components** - Production-ready components following ChatGPT design guidelines
+- **UI Components** - Production-ready components following ChatGPT design guidelines, built on OpenAI's apps-sdk-ui.
 - **Complete Setup** - Build tools, testing framework, and development environment
 
 ### The sunpeak Library
 
-An npm package (`sunpeak`) for running & testing ChatGPT App UIs:
+An npm package (`sunpeak`) for running & testing MCP Apps:
 
 - **Multi-Platform APIs** - Runtime hooks & APIs architected to support future genAI offerings (Gemini, Claude, etc.)
 - **ChatGPT Simulator** - Test your widgets locally with instant feedback, easily trigger advanced ChatGPT functionality
@@ -33,22 +35,4 @@ An npm package (`sunpeak`) for running & testing ChatGPT App UIs:
 
 Build beautiful ChatGPT widgets with just a few lines of code:
 
-```tsx
-import "./styles/globals.css";
-import { Card } from "./components/card";
-
-export default function App() {
-  return (
-    <Card
-      image="https://example.com/photo.jpg"
-      imageAlt="Lady Bird Lake"
-      header="Lady Bird Lake"
-      metadata="⭐ 4.5 • Austin, TX"
-      button1={{ children: "Visit", isPrimary: true, onClick: () => {} }}
-      button2={{ children: "Learn More", onClick: () => {} }}
-    >
-      Scenic lake perfect for kayaking, paddleboarding, and trails.
-    </Card>
-  );
-}
-```
+<QuickstartExample file="quickstart-example.mdx" />

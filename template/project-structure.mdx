@@ -57,7 +57,8 @@ Vite-native testing framework. Configured via `vitest.config.ts`.
 
 ## Key Files
 
-- `src/App.tsx` - Your main MCP App UI that will ultimately be shipped.
 - `src/index.chatgpt.tsx` - Production build root. Entrypoint for `pnpm build`.
-- `dev/main.tsx` - ChatGPT simulator setup for `<App>`. Entrypoint for `pnpm dev`.
+- `dev/main.tsx` - ChatGPT simulator setup. Entrypoint for `pnpm dev`.
 - `mcp/server.ts` - Simple MCP server for live ChatGPT testing with dummy data. Entrypoint for `pnpm mcp`.
+- `src/components/apps/App.tsx` - Your main MCP App UI that will ultimately be shipped.
+- `src/components/apps/active-app.ts` - Where you can change the App to be built or served on the MCP server.

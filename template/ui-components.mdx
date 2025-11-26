@@ -3,6 +3,8 @@ title: "UI Components"
 description: "Production-ready components in the Starter Kit"
 ---
 
+import QuickstartExample from '/snippets/quickstart-example.mdx';
+
 ## Overview
 
 The sunpeak Starter Kit includes pre-built React components in your project's `src/components/` directory. These components are built on [openai/apps-sdk-ui](https://github.com/openai/apps-sdk-ui) and follow ChatGPT's design guidelines.
@@ -14,25 +16,7 @@ The sunpeak Starter Kit includes pre-built React components in your project's `s
 
 ## Quick Example
 
-```tsx
-import "./styles/globals.css";
-import { Card } from "components/card";
-
-export default function App() {
-  return (
-    <Card
-      image="https://example.com/photo.jpg"
-      imageAlt="Lady Bird Lake"
-      header="Lady Bird Lake"
-      metadata="⭐ 4.5 • Austin, TX"
-      button1={{ children: "Visit", isPrimary: true, onClick: () => {} }}
-      button2={{ children: "Learn More", onClick: () => {} }}
-    >
-      Scenic lake perfect for kayaking, paddleboarding, and trails.
-    </Card>
-  );
-}
-```
+<QuickstartExample file="quickstart-example.mdx" />
 
 ## Customization
 
