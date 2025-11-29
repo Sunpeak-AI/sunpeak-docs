@@ -1,6 +1,6 @@
 ---
-title: "ChatGPT Simulator"
-description: "Test your widgets locally without deploying"
+title: "Local Testing"
+description: "Test your App manually & automatically."
 ---
 
 ## Overview
@@ -8,7 +8,7 @@ description: "Test your widgets locally without deploying"
 The ChatGPT Simulator is a local development environment that replicates ChatGPT's widget runtime. It lets you build and test your widgets instantly without deploying to production.
 
 <img
-  src="/images/chatgpt-simulator.png"
+  src="https://sunpeak.ai/images/chatgpt-simulator.png"
   alt="ChatGPT Simulator"
 />
 
@@ -16,16 +16,16 @@ The ChatGPT Simulator is a local development environment that replicates ChatGPT
 
 <CardGroup cols={2}>
   <Card title="Instant Feedback" icon="rotate">
-    See changes immediately with hot module replacement
+    See changes immediately with hot module replacement. No more constantly reloading ChatGPT.
   </Card>
-  <Card title="Test All Modes" icon="palette">
-    Switch between light/dark themes and mobile/tablet/desktop views
+  <Card title="Visualize Design Variations" icon="palette">
+    Toggle between light/dark themes, mobile/tablet/desktop views, and other platform states.
+  </Card>
+  <Card title="Testing" icon="flask">
+    Perform manual and automated tests locally. Create CI/CD integration and regression tests.
   </Card>
   <Card title="No Deployment Needed" icon="desktop">
-    Develop locally without setting up MCP servers
-  </Card>
-  <Card title="Full Runtime Access" icon="code">
-    All ChatGPT runtime APIs work in the simulator
+    Develop locally without setting up MCP servers.
   </Card>
 </CardGroup>
 
@@ -35,27 +35,7 @@ The ChatGPT Simulator is a local development environment that replicates ChatGPT
 If you set up your project via the sunpeak Starter Kit, the simulator is already set up!
 </Info>
 
-Wrap your widget with the simulator in development:
-
-```tsx
-import 'sunpeak/style.css'; // Required to style the simulator.
-import { ChatGPTSimulator } from 'sunpeak';
-import { MyWidget } from './MyWidget';
-
-function App() {
-  return (
-    <ChatGPTSimulator>
-      <MyWidget />
-    </ChatGPTSimulator>
-  );
-}
-```
-
-Start your dev server and you're ready to go:
-
-```bash
-pnpm dev
-```
+To learn how to manually configure the simulator, see [Add to Existing Project](/add-to-existing-project).
 
 ## What Gets Simulated
 
@@ -66,7 +46,7 @@ The simulator provides a complete ChatGPT-like environment including:
 - **User Interactions**: All standard interactions like clicks, form submissions, and navigation
 
 <Warning>
-The simulator is for development only. For production testing with real ChatGPT, use the [MCP Server](/library/mcp-server).
+The simulator is for development only. For production testing with real ChatGPT, use the [MCP Server](/library/platform-testing).
 </Warning>
 
 ## Dive Deeper

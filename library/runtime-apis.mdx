@@ -1,52 +1,83 @@
 ---
 title: "Runtime APIs"
-description: "Build once, run on ChatGPT, Gemini, and Claude"
+description: "Strongly typed, multi-platform APIs."
 ---
 
 ## Overview
 
-sunpeak provides a multi-platform runtime abstraction layer that lets you build
-widgets once and potentially deploy them across different AI chat platforms like
+sunpeak provides a multi-platform runtime abstraction layer that helps you build
+components once and deploy them across different AI chat platforms like
 ChatGPT, Gemini, and Claude.
 
 ## Why Multi-Platform?
 
 <CardGroup cols={2}>
   <Card title="Write Once, Deploy Everywhere" icon="recycle">
-    Build your widget logic once, run it on multiple platforms without rewriting
+    Build your component logic once, run it on multiple platforms without rewriting.
   </Card>
 
   <Card title="Consistent Developer Experience" icon="code">
-    Same React hooks and patterns across all platforms
+    Same React hooks and patterns across all platforms.
   </Card>
 
   <Card title="Future-Proof" icon="shield">
-    Automatically support new platforms as they emerge
+    Automatically support new platforms as they emerge.
   </Card>
 
   <Card title="Easy Migration" icon="arrow-right-arrow-left">
-    Switch platforms without major code changes
+    Switch platforms without major code changes.
   </Card>
 </CardGroup>
 
 ## React Hooks
 
-sunpeak provides platform-agnostic React hooks for common runtime features:
+sunpeak provides access to the entire platform runtime API via platform-agnostic React hooks.
+
+Here is an example component using some of these hooks:
 
 ```tsx
 import { useTheme, useDisplayMode, useWidgetState } from 'sunpeak';
 
-function MyWidget() {
+function MyComponentResource() {
   const theme = useTheme();                    // 'light' | 'dark'
   const displayMode = useDisplayMode();        // 'mobile' | 'tablet' | 'desktop'
   const [data, setData] = useWidgetState('key', defaultValue);
 
-  return <div className={theme === 'dark' ? 'dark-mode' : 'light-mode'}>...</div>;
+  return <div className={displayMode === 'mobile' ? 'w-full' : 'w-1/2'}>...</div>;
+}
+```
+
+### Widget API
+
+One of these hooks, the `useWidgetAPI`, provides methods for interacting with the
+platform runtime, including calling MCP tools, sending messages,
+and controlling the platform display.
+
+```tsx
+import { useWidgetAPI } from 'sunpeak';
+
+function MyComponentResource() {
+  const api = useWidgetAPI();
+
+  const handleAction = async () => {
+    if (api) {
+      // Call an MCP tool.
+      const result = await api.callTool('my-tool', { arg: 'value' });
+
+      // Send a follow-up message.
+      await api.sendFollowUpMessage({ prompt: 'Continue the conversation' });
+
+      // Open an external URL.
+      await api.openExternal({ href: 'https://sunpeak.ai' });
+    }
+  };
+
+  return <button onClick={handleAction}>Interact with Platform</button>;
 }
 ```
 
 ## Dive Deeper
 
-<Card title="Hooks" icon="code" href="/api-reference/hooks/use-theme">
+<Card title="Runtime API Reference" icon="code" href="/api-reference/hooks/use-theme">
   All hooks provided by sunpeak.
 </Card>
