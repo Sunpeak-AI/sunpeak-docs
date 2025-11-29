@@ -1,6 +1,6 @@
 ---
 title: "Simulation"
-description: "Type definition for packaging components with MCP metadata and example data for testing and development"
+description: "Type definition for packaging components with MCP metadata and example data for testing and development."
 ---
 
 import CreateSimulation from '/snippets/create-simulation.mdx';
@@ -51,7 +51,7 @@ import type { Simulation } from 'sunpeak';
   Official MCP SDK Resource type used in the ListResources response. Defines the resource URI, name, and metadata.
 
   **Key properties:**
-  - `uri`: Resource URI (e.g., `ui://MyComponent.tsx`).
+  - `uri`: Resource URI (e.g., `ui://MyComponentResource`).
   - `name`: Simulation identifier (used internally).
   - `title`: Display label for the simulation.
   - `description`: Human-readable description.
@@ -135,7 +135,7 @@ export const counterSimulation: Simulation = {
     title: 'Show Counter',
     annotations: { readOnlyHint: true },
     _meta: {
-      'openai/outputTemplate': 'ui://CounterResource.tsx',
+      'openai/outputTemplate': 'ui://CounterResource',
       'openai/toolInvocation/invoking': 'Counting beans',
       'openai/toolInvocation/invoked': 'Beans counted',
       'openai/widgetAccessible': true,
@@ -144,7 +144,7 @@ export const counterSimulation: Simulation = {
   },
 
   resource: {
-    uri: 'ui://CounterResource.tsx',
+    uri: 'ui://CounterResource',
     name: 'counter',
     title: 'Counter',
     description: 'Show a simple counter tool widget markup',
@@ -185,14 +185,14 @@ export const albumsSimulation: Simulation = {
     title: 'Show Albums',
     annotations: { readOnlyHint: true },
     _meta: {
-      'openai/outputTemplate': 'ui://AlbumsResource.tsx',
+      'openai/outputTemplate': 'ui://AlbumsResource',
       'openai/widgetAccessible': true,
       'openai/resultCanProduceWidget': true,
     },
   },
 
   resource: {
-    uri: 'ui://AlbumsResource.tsx',
+    uri: 'ui://AlbumsResource',
     name: 'albums',
     title: 'Albums',
     description: 'Album collection widget',

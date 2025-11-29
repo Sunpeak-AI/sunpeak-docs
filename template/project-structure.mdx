@@ -1,34 +1,28 @@
 ---
 title: "Project Structure"
-description: "Understanding your sunpeak project structure"
+description: "Understanding your sunpeak project structure."
 ---
 
 ## Overview
 
 When you create a new project with `pnpm dlx sunpeak new`, the sunpeak Starter Kit gives you a complete project scaffold with everything needed for ChatGPT widget development.
 
-## Pre-Configured Tools
+## Key Files & Directories
 
-### Vite
-
-Fast build tool with hot-reload (HMR) for instant development feedback. Configured via `vite` files.
-
-### Tailwind CSS 4
-
-Utility-first CSS framework for rapid UI development. Configured via Vite plugin & CSS import.
-
-### TypeScript
-
-Type safety and better developer experience. Configured via `tsconfig` files.
-
-#### Vitest (Unit Tests)
-
-Vite-native testing framework. Configured via `vitest.config.ts`.
+- `dev/main.tsx` - ChatGPT simulator setup. Entrypoint for `pnpm dev`.
+- `mcp/server.ts` - Simple MCP server for running simulations in the real ChatGPT. Entrypoint for `pnpm mcp`.
+- `src/components/resources/` - Directory containing all your MCP Resources (ChatGPT App UIs).
+    Every file in this directory ending with `-resource.tsx` will be built by `pnpm build` to
+    `dist/chatgpt/name.js`, where the output name will be whatever was prefixed to `-resource.tsx`.
+- `src/simulations/` - Directory containing all your sunpeak simulations. Every simulation added to
+    `SIMULATIONS` in `template/src/simulations/index.ts` will be wired into the `ChatGPTSimulator`
+    and `runMCPServer`.
 
 ## npm Scripts
 
 <ResponseField name="pnpm build" type="command">
-  Build optimized production bundle.
+  Build optimized production bundles, one for each Resource.
+  Builds a one-file bundle for each resource in the `src/components/resources/` directory.
 </ResponseField>
 
 <ResponseField name="pnpm dev" type="command">
@@ -36,7 +30,8 @@ Vite-native testing framework. Configured via `vitest.config.ts`.
 </ResponseField>
 
 <ResponseField name="pnpm mcp" type="command">
-  Start MCP server for ChatGPT testing. Requires `pnpm build` to be run first.
+  Start MCP server for ChatGPT testing. Also watches your `src/` directory
+  and re-builds automatically on relevant file changes.
 </ResponseField>
 
 <ResponseField name="pnpm lint" type="command">
@@ -55,10 +50,21 @@ Vite-native testing framework. Configured via `vitest.config.ts`.
   Run and validate all of the above commands.
 </ResponseField>
 
-## Key Files
+## Pre-Configured Tools
 
-- `src/index.chatgpt.tsx` - Production build root. Entrypoint for `pnpm build`.
-- `dev/main.tsx` - ChatGPT simulator setup. Entrypoint for `pnpm dev`.
-- `mcp/server.ts` - Simple MCP server for live ChatGPT testing with dummy data. Entrypoint for `pnpm mcp`.
-- `src/components/apps/App.tsx` - Your main MCP App UI that will ultimately be shipped.
-- `src/components/apps/active-app.ts` - Where you can change the App to be built or served on the MCP server.
+### Vite
+
+Fast build tool with hot-reload (HMR) for instant development feedback. Configured via `vite` files.
+
+### Tailwind CSS 4
+
+Utility-first CSS framework for rapid UI development. Configured via Vite plugin & CSS import.
+Required for [@openai/apps-sdk-ui](https://github.com/openai/apps-sdk-ui), which is also configured out-of-the-box.
+
+### TypeScript
+
+Type safety. Configured via `tsconfig` files.
+
+#### Vitest (Unit Tests)
+
+Vite-native testing framework. Configured via `vitest.config.ts`.

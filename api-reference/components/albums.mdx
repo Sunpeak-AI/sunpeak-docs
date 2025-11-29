@@ -1,0 +1,220 @@
+---
+title: "Albums"
+description: "A photo album viewer with carousel display and fullscreen viewing capability."
+---
+
+## Overview
+
+`Albums` is a production-ready album viewer component included in the sunpeak Starter Kit. It displays photo albums in a carousel layout with the ability to open albums in fullscreen mode for detailed photo browsing. The component automatically switches between inline and fullscreen display modes.
+
+## Import
+
+```tsx
+import { Albums } from './components/album/albums';
+```
+
+## Basic Usage
+
+```tsx
+<Albums />
+```
+
+The component retrieves album data from `useWidgetProps()` and manages selection state with `useWidgetState()`.
+
+## Props
+
+<ResponseField name="className" type="string">
+  Additional CSS classes to apply to the albums container.
+</ResponseField>
+
+## Data Structure
+
+### AlbumsData
+
+The component expects data in the following format via `useWidgetProps()`:
+
+```tsx
+interface AlbumsData {
+  albums: Album[]
+}
+
+interface Album {
+  id: string
+  title: string
+  cover: string
+  photos: Array<{
+    id: string
+    title: string
+    url: string
+  }>
+}
+```
+
+<ResponseField name="albums" type="Album[]" required>
+  Array of album objects to display.
+</ResponseField>
+
+<ResponseField name="albums[].id" type="string" required>
+  Unique identifier for the album.
+</ResponseField>
+
+<ResponseField name="albums[].title" type="string" required>
+  Album title displayed on the album card.
+</ResponseField>
+
+<ResponseField name="albums[].cover" type="string" required>
+  URL to the album cover image.
+</ResponseField>
+
+<ResponseField name="albums[].photos" type="Photo[]" required>
+  Array of photos in the album.
+</ResponseField>
+
+<ResponseField name="albums[].photos[].id" type="string" required>
+  Unique identifier for the photo.
+</ResponseField>
+
+<ResponseField name="albums[].photos[].title" type="string" required>
+  Photo title or caption.
+</ResponseField>
+
+<ResponseField name="albums[].photos[].url" type="string" required>
+  URL to the full-resolution photo.
+</ResponseField>
+
+## Display Modes
+
+The Albums component has two display modes:
+
+### Inline Mode (Default)
+
+Displays albums in a horizontal scrolling carousel with album cards showing the cover image and photo count.
+
+### Fullscreen Mode
+
+When a user selects an album, the component:
+1. Sets the selected album ID in widget state using `useWidgetState()`.
+2. Requests fullscreen mode via `useWidgetAPI()`.
+3. Displays a fullscreen photo viewer with:
+   - Film strip navigation (desktop only).
+   - Large centered photo display.
+   - Automatic selection reset when switching albums.
+
+## State Management
+
+The component uses `useWidgetState` to persist the selected album across sessions:
+
+```tsx
+interface AlbumsState {
+  selectedAlbumId?: string | null
+}
+```
+
+## Subcomponents
+
+### AlbumCard
+
+Individual album card displayed in the carousel.
+
+<ResponseField name="album" type="Album" required>
+  Album object to display.
+</ResponseField>
+
+<ResponseField name="onSelect" type="(album: Album) => void">
+  Callback function when the album is selected.
+</ResponseField>
+
+<ResponseField name="className" type="string">
+  Additional CSS classes.
+</ResponseField>
+
+### FullscreenViewer
+
+Fullscreen photo viewer with film strip navigation.
+
+<ResponseField name="album" type="Album" required>
+  Album to display in fullscreen mode.
+</ResponseField>
+
+<ResponseField name="className" type="string">
+  Additional CSS classes.
+</ResponseField>
+
+### FilmStrip
+
+Vertical thumbnail strip for photo navigation (desktop only).
+
+<ResponseField name="album" type="Album" required>
+  Album containing photos to display.
+</ResponseField>
+
+<ResponseField name="selectedIndex" type="number" required>
+  Currently selected photo index.
+</ResponseField>
+
+<ResponseField name="onSelect" type="(index: number) => void">
+  Callback when a photo is selected.
+</ResponseField>
+
+<ResponseField name="className" type="string">
+  Additional CSS classes.
+</ResponseField>
+
+## Example
+
+```tsx
+import { useWidgetProps } from 'sunpeak';
+import { Albums } from './components/album/albums';
+
+function AlbumsWidget() {
+  // Data automatically provided via useWidgetProps inside Albums component
+  return <Albums />;
+}
+```
+
+Example data structure:
+
+```tsx
+const albumsData = {
+  albums: [
+    {
+      id: '1',
+      title: 'Summer Vacation',
+      cover: 'https://example.com/cover1.jpg',
+      photos: [
+        {
+          id: 'p1',
+          title: 'Beach sunset',
+          url: 'https://example.com/photo1.jpg'
+        },
+        {
+          id: 'p2',
+          title: 'Ocean view',
+          url: 'https://example.com/photo2.jpg'
+        }
+      ]
+    },
+    {
+      id: '2',
+      title: 'City Life',
+      cover: 'https://example.com/cover2.jpg',
+      photos: [
+        {
+          id: 'p3',
+          title: 'Downtown',
+          url: 'https://example.com/photo3.jpg'
+        }
+      ]
+    }
+  ]
+};
+```
+
+## Features
+
+- **Carousel Display**: Horizontal scrolling carousel for album browsing.
+- **Fullscreen Viewing**: Automatic fullscreen mode when album is selected.
+- **Film Strip Navigation**: Vertical thumbnail strip on desktop for quick photo navigation.
+- **Persistent State**: Selected album persists across sessions.
+- **Responsive Design**: Adapts to mobile and desktop viewports.
+- **Lazy Loading**: Images load only when needed.

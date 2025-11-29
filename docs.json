@@ -55,8 +55,17 @@
         "tab": "API Reference",
         "groups": [
           {
+            "group": "Simulations",
+            "pages": [
+              "api-reference/simulations/simulation",
+              "api-reference/simulations/chatgpt-simulator",
+              "api-reference/simulations/run-mcp-server"
+            ]
+          },
+          {
             "group": "Component Library",
             "pages": [
+              "api-reference/components/albums",
               "api-reference/components/card",
               "api-reference/components/carousel"
             ]
@@ -64,28 +73,20 @@
           {
             "group": "Hooks",
             "pages": [
-              "api-reference/hooks/use-theme",
               "api-reference/hooks/use-display-mode",
-              "api-reference/hooks/use-widget-state",
+              "api-reference/hooks/use-is-mobile",
               "api-reference/hooks/use-locale",
               "api-reference/hooks/use-max-height",
-              "api-reference/hooks/use-is-mobile",
               "api-reference/hooks/use-safe-area",
-              "api-reference/hooks/use-user-agent",
-              "api-reference/hooks/use-view",
+              "api-reference/hooks/use-theme",
               "api-reference/hooks/use-tool-input",
               "api-reference/hooks/use-tool-response-metadata",
-              "api-reference/hooks/use-widget-props",
+              "api-reference/hooks/use-user-agent",
+              "api-reference/hooks/use-view",
+              "api-reference/hooks/use-widget-api",
               "api-reference/hooks/use-widget-global",
-              "api-reference/hooks/use-widget-api"
-            ]
-          },
-          {
-            "group": "Simulations",
-            "pages": [
-              "api-reference/simulations/simulation",
-              "api-reference/simulations/chatgpt-simulator",
-              "api-reference/simulations/mcp-server"
+              "api-reference/hooks/use-widget-props",
+              "api-reference/hooks/use-widget-state"
             ]
           }
         ]
