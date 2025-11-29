@@ -12,25 +12,25 @@ description: "Deploy your ChatGPT widget to production"
     ```
 
     This creates:
-    - Minified and optimized JavaScript
-    - CSS with unused styles removed
-    - Static assets with hashed filenames
-    - Source maps for debugging
+    - Minified and optimized JavaScript.
+    - CSS with unused styles removed.
+    - Static assets with hashed filenames.
+    - Source maps for debugging.
 
-    Output directory: `dist/chatgpt/`
+    Output directory: `dist/chatgpt/`.
   </Step>
 
   <Step title="Deploy your widget UI">
     Deploy the built widget to any static hosting service:
 
     <CardGroup cols={3}>
-      <Card title="Vercel" icon="triangle">
+      <Card horizontal title="Vercel" icon="triangle">
         Zero-config static hosting
       </Card>
-      <Card title="Netlify" icon="diamond">
+      <Card horizontal title="Netlify" icon="diamond">
         Simple drag-and-drop deployment
       </Card>
-      <Card title="Cloudflare Pages" icon="cloud">
+      <Card horizontal title="Cloudflare Pages" icon="cloud">
         Fast global CDN
       </Card>
     </CardGroup>
@@ -49,9 +49,9 @@ description: "Deploy your ChatGPT widget to production"
     Create your own production MCP server that references your deployed UI as a resource.
 
     Your MCP server should:
-    - Define the tools your widget needs
-    - Return your widget UI URL as an MCP resource when tools are invoked
-    - Handle any backend logic or API calls
+    - Define the tools your widget needs.
+    - Return your widget UI URL as an MCP resource when tools are invoked.
+    - Handle any backend logic or API calls.
 
     Example MCP server configuration:
 
@@ -81,12 +81,12 @@ description: "Deploy your ChatGPT widget to production"
   <Step title="Configure ChatGPT">
     Connect your production MCP server to ChatGPT:
 
-    1. Open ChatGPT in developer mode
-    2. Navigate to `User > Settings > Apps & Connectors > Create`
+    1. Open ChatGPT in developer mode.
+    2. Navigate to `User > Settings > Apps & Connectors > Create`.
     3. Enter your MCP server URL with the `/mcp` path:
        ```
        https://your-mcp-server.vercel.app/mcp
        ```
-    4. Test by sending `show app` to ChatGPT
+    4. Test by sending `show counter` to ChatGPT.
   </Step>
 </Steps>

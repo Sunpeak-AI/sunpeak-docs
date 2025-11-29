@@ -21,18 +21,35 @@ function useWidgetAPI(): WidgetAPI | null
 
 ## Returns
 
-The API object with methods, or `null` if not available.
+<ResponseField name="return" type="WidgetAPI | null">
+  The API object with methods, or `null` if not available.
+</ResponseField>
 
 ## API Methods
 
-The returned API object includes:
+<ResponseField name="callTool" type="(name: string, args: unknown) => Promise<unknown>">
+  Invoke an MCP tool.
+</ResponseField>
 
-- `callTool(name, args)` - Invoke an MCP tool
-- `sendFollowUpMessage({ prompt })` - Send a follow-up message to the chat
-- `openExternal({ href })` - Open an external URL
-- `requestDisplayMode({ mode })` - Request a display mode change
-- `requestModal({ mode, params })` - Request modal view
-- `notifyIntrinsicHeight(height)` - Notify the platform of content height
+<ResponseField name="sendFollowUpMessage" type="({ prompt }: { prompt: string }) => void">
+  Send a follow-up message to the chat.
+</ResponseField>
+
+<ResponseField name="openExternal" type="({ href }: { href: string }) => void">
+  Open an external URL.
+</ResponseField>
+
+<ResponseField name="requestDisplayMode" type="({ mode }: { mode: DisplayMode }) => void">
+  Request a display mode change.
+</ResponseField>
+
+<ResponseField name="requestModal" type="({ mode, params }: { mode: string, params?: Record<string, unknown> }) => void">
+  Request modal view.
+</ResponseField>
+
+<ResponseField name="notifyIntrinsicHeight" type="(height: number) => void">
+  Notify the platform of content height.
+</ResponseField>
 
 ## Usage
 

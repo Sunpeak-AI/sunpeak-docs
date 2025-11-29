@@ -3,19 +3,24 @@ title: "Platform Testing"
 description: "Run your simulations in ChatGPT with MCP"
 ---
 
+<img
+  src="https://sunpeak.ai/images/chatgpt-counter.png"
+  alt="ChatGPT production screenshot"
+/>
+
 ## Overview
 
-The MCP (Model Context Protocol) server lets you serve your widgets to ChatGPT. Once your MCP server is running, ChatGPT can discover and render your widgets.
+The MCP (Model Context Protocol) server lets you serve your simulations to ChatGPT.
+Once your MCP server is running, ChatGPT can discover and render your App.
 
 sunpeak includes an MCP server implementation that lets your render your App out-of-the-box.
 
 ## What is MCP?
 
-MCP is the protocol ChatGPT uses to communicate with widget servers. It handles:
+MCP is the protocol ChatGPT uses to communicate with your servers. It handles:
 
-- Widget registration and discovery
-- Runtime API communication
-- Tool invocation and state synchronization
+- Resource & Tool registration and discovery.
+- Tool invocation and state synchronization.
 
 <Info>
 Learn more in the [Model Context Protocol documentation](https://modelcontextprotocol.io/).
@@ -23,24 +28,35 @@ Learn more in the [Model Context Protocol documentation](https://modelcontextpro
 
 ## Quick Start
 
+If you set up your project via the sunpeak Starter Kit, the simulator is already set up!
+Simply run it with:
+
 <Steps>
-  <Step title="Build your app">
-    Build your app first.
-
-    ```bash
-    pnpm build
-    ```
-    <Warning>
-      You must rebuild you application for later changes to take effect.
-    </Warning>
-  </Step>
-
   <Step title="Start the MCP server">
     Start the MCP server on port 6766:
 
-    ```bash
-    pnpm mcp
-    ```
+    <Tabs>
+      <Tab title="pnpm">
+        ```bash
+        pnpm mcp
+        ```
+      </Tab>
+      <Tab title="npm">
+        ```bash
+        npm run mcp
+        ```
+      </Tab>
+      <Tab title="yarn">
+        ```bash
+        yarn mcp
+        ```
+      </Tab>
+    </Tabs>
+
+    This serves your built `Resource`s out of your `dist/` directory.
+
+    If you are using the sunpeak starter kit, it will also watch your
+    `src/` directory and re-build automatically on relevant file changes.
   </Step>
 
   <Step title="Run a tunnel">
@@ -50,28 +66,38 @@ Learn more in the [Model Context Protocol documentation](https://modelcontextpro
     ngrok http 6766
     ```
 
-    Copy the forwarding URL (e.g., `https://abc123.ngrok.io`)
+    Copy the forwarding URL (e.g., `https://abc123.ngrok.io`).
   </Step>
 
   <Step title="Connect to ChatGPT">
     Open ChatGPT **in developer mode** and connect your app:
 
-    1. Go to `User > Settings > Apps & Connectors > Create`
-    2. Enter your tunnel URL with the `/mcp` path: `https://abc123.ngrok.io/mcp`
-    3. Complete the connection flow
+    1. Go to `User > Settings > Apps & Connectors > Create`.
+    2. Enter your tunnel URL with the `/mcp` path: `https://abc123.ngrok.io/mcp`.
+    3. Complete the connection flow.
   </Step>
 
   <Step title="Test your widget">
-    Send `show app` to ChatGPT to see your widget in action!
+    Send `show counter` or whatever you named your `Tool` in your `Simulation` to ChatGPT to see your simulation in action!
 
     <Warning>
-      ChatGPT caches UIs aggressively. Your changes usually require you to **Refresh** your app from the same settings modal as the previous step.
+      ChatGPT caches UIs aggressively. The sunpeak MCP server will serve your resources
+      at unique URIs every time they are refreshed in ChatGPT to cache-bust.
+      You need to manually **Refresh** your app from the same settings modal
+      as the previous step after every change to your built package.
     </Warning>
   </Step>
 </Steps>
 
+<Note>
+To configure the MCP server manually, see [Add to Existing Project](/add-to-existing-project).
+</Note>
+
 ## Dive Deeper
 
-<Card title="MCP API" icon="server" href="/api-reference/mcp/configuration">
-  Complete sunpeak server configuration reference
+<Card horizontal title="Simulation API" icon="code" href="/api-reference/simulations/simulation">
+  Complete simulation documentation.
+</Card>
+<Card horizontal title="runMCPServer API Reference" icon="code" href="/api-reference/simulations/mcp-server">
+  Complete sunpeak server configuration reference.
 </Card>

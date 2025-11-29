@@ -18,18 +18,15 @@ you can integrate the sunpeak library directly without using the starter kit.
 
 Your existing project needs:
 
-<CardGroup cols={2}>
-  <Card title="React" icon="react">
+<CardGroup cols={3}>
+  <Card horizontal title="React" icon="react">
     Version 18 or 19
   </Card>
-  <Card title="React DOM" icon="react">
-    Version 18 or 19
-  </Card>
-  <Card title="Node.js" icon="node-js">
+  <Card horizontal title="Node.js" icon="node-js">
     Version 20 or higher
   </Card>
-  <Card title="Build Tool" icon="wrench">
-    Vite recommended (Webpack/Parcel also work)
+  <Card horizontal title="Build Tool" icon="wrench">
+    Vite recommended
   </Card>
 </CardGroup>
 
@@ -147,7 +144,7 @@ Your existing project needs:
     <CreateSimulation />
   </Step>
 
-  <Step title="Wire up your simulation">
+  <Step title="Wire up the simulator">
     Create an entrypoint file (like `dev/main.tsx`) where you want to run your simulator:
 
     ```tsx
@@ -177,12 +174,6 @@ Your existing project needs:
     },
     ```
 
-    <Warning>
-    Only use the simulator in development. For production, export your component directly.
-    </Warning>
-  </Step>
-
-  <Step title="Run your simulation">
     Run your local development server with your new simulation entrypoint:
 
     <Tabs>
@@ -202,6 +193,70 @@ Your existing project needs:
         ```
       </Tab>
     </Tabs>
+
+    <Warning>
+    Only use the simulator in development. For production, export your component directly.
+    </Warning>
+  </Step>
+
+  <Step title="Wire up the MCP server">
+    Create an MCP server file (like `mcp/server.ts`) to serve your built widgets to ChatGPT:
+
+    ```typescript
+    import { runMCPServer } from 'sunpeak/mcp';
+    import path from 'path';
+    import { fileURLToPath } from 'url';
+    import { exampleSimulation } from '../src/simulations/example-simulation';
+
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+    // Add distPath to your simulation for the MCP server
+    const simulations = [{
+      ...exampleSimulation,
+      distPath: path.resolve(__dirname, '../dist/chatgpt/example.js'),
+    }];
+
+    runMCPServer({
+      name: 'My App',
+      version: '0.1.0',
+      simulations,
+      port: 6766,
+    });
+    ```
+
+    Add scripts to build and run your MCP server (`package.json`):
+    ```json
+    "scripts": {
+      // ...
+      "build": "vite build",
+      "mcp": "node mcp/server.ts"
+    },
+    ```
+
+    Build your app and start the MCP server:
+
+    <Tabs>
+      <Tab title="pnpm">
+        ```bash
+        pnpm build
+        pnpm mcp
+        ```
+      </Tab>
+      <Tab title="npm">
+        ```bash
+        npm run build
+        npm run mcp
+        ```
+      </Tab>
+      <Tab title="yarn">
+        ```bash
+        yarn build
+        yarn mcp
+        ```
+      </Tab>
+    </Tabs>
+
+    Then use a tunnel (like ngrok) to expose your server to ChatGPT. See [Platform Testing](/library/platform-testing) for details.
   </Step>
 </Steps>
 

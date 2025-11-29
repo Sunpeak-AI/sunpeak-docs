@@ -24,12 +24,14 @@ function useWidgetGlobal<K extends keyof WidgetGlobals>(
 ## Parameters
 
 <ResponseField name="key" type="string" required>
-  The global property key to read (e.g., `'theme'`, `'locale'`, `'maxHeight'`)
+  The global property key to read (e.g., `'theme'`, `'locale'`, `'maxHeight'`).
 </ResponseField>
 
 ## Returns
 
-The current value of the global property, or `null` if not available. Automatically updates when the value changes.
+<ResponseField name="return" type="WidgetGlobals[K] | null">
+  The current value of the global property, or `null` if not available. Automatically updates when the value changes.
+</ResponseField>
 
 ## Usage
 

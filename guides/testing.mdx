@@ -10,19 +10,19 @@ sunpeak projects come pre-configured with testing tools and validation commands.
 ## Available Commands
 
 <ResponseField name="pnpm test" type="command">
-  Run unit tests with Vitest
+  Run unit tests with Vitest.
 </ResponseField>
 
 <ResponseField name="pnpm lint" type="command">
-  Run ESLint and Prettier to check code style
+  Run ESLint and Prettier to check code style.
 </ResponseField>
 
 <ResponseField name="pnpm typecheck" type="command">
-  Check TypeScript types without building
+  Check TypeScript types without building.
 </ResponseField>
 
 <ResponseField name="pnpm validate" type="command">
-  Run all validation commands (lint, typecheck, test)
+  Run all validation commands (lint, typecheck, test).
 </ResponseField>
 
 ## Testing Setup
@@ -33,11 +33,11 @@ sunpeak uses [Vitest](https://vitest.dev/), a fast unit testing framework built 
 
 The test environment includes:
 
-- **jsdom**: Browser-like environment for React component testing
-- **@testing-library/react**: For rendering and testing components
-- **@testing-library/jest-dom**: Additional matchers for assertions
-- **Global test utilities**: `describe`, `it`, `expect`, `beforeEach`, `afterEach`
-- **Browser API mocks**: `matchMedia`, `IntersectionObserver`, `ResizeObserver`
+- **jsdom**: Browser-like environment for React component testing.
+- **@testing-library/react**: For rendering and testing components.
+- **@testing-library/jest-dom**: Additional matchers for assertions.
+- **Global test utilities**: `describe`, `it`, `expect`, `beforeEach`, `afterEach`.
+- **Browser API mocks**: `matchMedia`, `IntersectionObserver`, `ResizeObserver`.
 
 All configuration is in `src/test/setup.ts`.
 
@@ -139,6 +139,6 @@ This runs lint, typecheck, and test in sequence. Great for pre-commit checks.
 
 ## Dive Deeper
 
-<Card title="Vitest Docs" icon="book" href="https://vitest.dev/">
-  Learn more about Vitest
+<Card horizontal title="Vitest Docs" icon="book" href="https://vitest.dev/">
+  Learn more about Vitest.
 </Card>

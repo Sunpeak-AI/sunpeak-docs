@@ -21,19 +21,21 @@ function useUserAgent(): UserAgent | null
 
 ## Returns
 
-A `UserAgent` object, or `null` if not available:
+<ResponseField name="return" type="UserAgent | null">
+  A `UserAgent` object, or `null` if not available.
 
-```tsx
-{
-  device: {
-    type: 'mobile' | 'tablet' | 'desktop' | 'unknown'
-  },
-  capabilities: {
-    hover: boolean,  // Whether device supports hover
-    touch: boolean   // Whether device supports touch
+  ```tsx
+  {
+    device: {
+      type: 'mobile' | 'tablet' | 'desktop' | 'unknown'
+    },
+    capabilities: {
+      hover: boolean,  // Whether device supports hover.
+      touch: boolean   // Whether device supports touch.
+    }
   }
-}
-```
+  ```
+</ResponseField>
 
 ## Usage
 

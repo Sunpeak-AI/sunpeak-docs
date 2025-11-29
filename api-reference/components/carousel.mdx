@@ -26,47 +26,31 @@ import { Card } from './components/card';
 
 ## Props
 
-### `children`
+<ResponseField name="children" type="React.ReactNode">
+  The carousel items to display. Typically `Card` components, but can be any React nodes.
+</ResponseField>
 
-- **Type:** `React.ReactNode`
-- **Optional:** Yes
-- **Description:** The carousel items to display. Typically `Card` components, but can be any React nodes.
+<ResponseField name="gap" type="number" default="16">
+  Gap between carousel items in pixels.
+</ResponseField>
 
-### `gap`
+<ResponseField name="showArrows" type="boolean" default="true">
+  Whether to show navigation arrows (Previous/Next buttons). Arrows only appear when there are more items to scroll.
+</ResponseField>
 
-- **Type:** `number`
-- **Optional:** Yes
-- **Default:** `16`
-- **Description:** Gap between carousel items in pixels.
+<ResponseField name="showEdgeGradients" type="boolean" default="true">
+  Whether to show gradient overlays at the left/right edges to indicate more content. Gradients appear when scrolling is possible in that direction.
+</ResponseField>
 
-### `showArrows`
+<ResponseField name="cardWidth" type="number | { inline?: number; fullscreen?: number }" default="220">
+  Width of each carousel item in pixels. Can be:
+  - A single number for consistent width.
+  - An object with `inline` and/or `fullscreen` properties to set different widths based on display mode.
+</ResponseField>
 
-- **Type:** `boolean`
-- **Optional:** Yes
-- **Default:** `true`
-- **Description:** Whether to show navigation arrows (Previous/Next buttons). Arrows only appear when there are more items to scroll.
-
-### `showEdgeGradients`
-
-- **Type:** `boolean`
-- **Optional:** Yes
-- **Default:** `true`
-- **Description:** Whether to show gradient overlays at the left/right edges to indicate more content. Gradients appear when scrolling is possible in that direction.
-
-### `cardWidth`
-
-- **Type:** `number | { inline?: number; fullscreen?: number }`
-- **Optional:** Yes
-- **Default:** `220`
-- **Description:** Width of each carousel item in pixels. Can be:
-  - A single number for consistent width
-  - An object with `inline` and/or `fullscreen` properties to set different widths based on display mode
-
-### `className`
-
-- **Type:** `string`
-- **Optional:** Yes
-- **Description:** Additional CSS classes to apply to the carousel container.
+<ResponseField name="className" type="string">
+  Additional CSS classes to apply to the carousel container.
+</ResponseField>
 
 ## State Management
 

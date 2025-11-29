@@ -29,88 +29,61 @@ import { Card } from './components/card';
 
 ## Props
 
-### `children`
+<ResponseField name="children" type="React.ReactNode">
+  The main content/description displayed in the card body. Limited to 2 lines with ellipsis overflow.
+</ResponseField>
 
-- **Type:** `React.ReactNode`
-- **Optional:** Yes
-- **Description:** The main content/description displayed in the card body. Limited to 2 lines with ellipsis overflow.
+<ResponseField name="image" type="string">
+  URL or path to the image displayed at the top of the card.
+</ResponseField>
 
-### `image`
+<ResponseField name="imageAlt" type="string">
+  Alt text for the image for accessibility.
+</ResponseField>
 
-- **Type:** `string`
-- **Optional:** Yes
-- **Description:** URL or path to the image displayed at the top of the card.
+<ResponseField name="imageMaxWidth" type="number" default="400">
+  Maximum width of the image in pixels.
+</ResponseField>
 
-### `imageAlt`
+<ResponseField name="imageMaxHeight" type="number" default="400">
+  Maximum height of the image in pixels.
+</ResponseField>
 
-- **Type:** `string`
-- **Optional:** Yes
-- **Description:** Alt text for the image for accessibility.
+<ResponseField name="header" type="React.ReactNode">
+  The card header/title. Displays with medium font weight and truncates with ellipsis if too long.
+</ResponseField>
 
-### `imageMaxWidth`
+<ResponseField name="metadata" type="React.ReactNode">
+  Secondary metadata displayed below the header (e.g., ratings, location, price).
+</ResponseField>
 
-- **Type:** `number`
-- **Optional:** Yes
-- **Default:** `400`
-- **Description:** Maximum width of the image in pixels.
+<ResponseField name="button1" type="OpenAIButtonProps">
+  Configuration for the first action button.
 
-### `imageMaxHeight`
+  ```tsx
+  interface OpenAIButtonProps {
+    isPrimary?: boolean;
+    onClick: () => void;
+    children: React.ReactNode;
+  }
+  ```
+</ResponseField>
 
-- **Type:** `number`
-- **Optional:** Yes
-- **Default:** `400`
-- **Description:** Maximum height of the image in pixels.
+<ResponseField name="button2" type="OpenAIButtonProps">
+  Configuration for the second action button.
+</ResponseField>
 
-### `header`
+<ResponseField name="variant" type="'default' | 'bordered' | 'elevated'" default="default">
+  Visual style variant of the card:
+  - `default`: Subtle border with surface background.
+  - `bordered`: Thicker border with surface background.
+  - `elevated`: Subtle border with surface background and shadow.
+</ResponseField>
 
-- **Type:** `React.ReactNode`
-- **Optional:** Yes
-- **Description:** The card header/title. Displays with medium font weight and truncates with ellipsis if too long.
+<ResponseField name="className" type="string">
+  Additional CSS classes to apply to the card container.
+</ResponseField>
 
-### `metadata`
-
-- **Type:** `React.ReactNode`
-- **Optional:** Yes
-- **Description:** Secondary metadata displayed below the header (e.g., ratings, location, price).
-
-### `button1`
-
-- **Type:** `OpenAIButtonProps`
-- **Optional:** Yes
-- **Description:** Configuration for the first action button.
-
-```tsx
-interface OpenAIButtonProps {
-  isPrimary?: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}
-```
-
-### `button2`
-
-- **Type:** `OpenAIButtonProps`
-- **Optional:** Yes
-- **Description:** Configuration for the second action button.
-
-### `variant`
-
-- **Type:** `"default" | "bordered" | "elevated"`
-- **Optional:** Yes
-- **Default:** `"default"`
-- **Description:** Visual style variant of the card.
-  - `default`: Subtle border with surface background
-  - `bordered`: Thicker border with surface background
-  - `elevated`: Subtle border with surface background and shadow
-
-### `className`
-
-- **Type:** `string`
-- **Optional:** Yes
-- **Description:** Additional CSS classes to apply to the card container.
-
-### `onClick`
-
-- **Type:** `(e: React.MouseEvent<HTMLDivElement>) => void`
-- **Optional:** Yes
-- **Description:** Click handler for the entire card. Button clicks are prevented from bubbling to this handler.
+<ResponseField name="onClick" type="(e: React.MouseEvent<HTMLDivElement>) => void">
+  Click handler for the entire card. Button clicks are prevented from bubbling to this handler.
+</ResponseField>

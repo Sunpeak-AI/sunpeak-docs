@@ -3,9 +3,13 @@ title: "Local Testing"
 description: "Test your App manually & automatically."
 ---
 
+import CreateSimulation from '/snippets/create-simulation.mdx';
+import ChatGPTSimulator from '/snippets/chatgpt-simulator.mdx';
+import RunMCPServer from '/snippets/run-mcp-server.mdx';
+
 ## Overview
 
-The ChatGPT Simulator is a local development environment that replicates ChatGPT's widget runtime. It lets you build and test your widgets instantly without deploying to production.
+The ChatGPT Simulator is a local development environment that replicates ChatGPT's widget runtime.
 
 <img
   src="https://sunpeak.ai/images/chatgpt-simulator.png"
@@ -14,43 +18,92 @@ The ChatGPT Simulator is a local development environment that replicates ChatGPT
 
 ## Why Use the Simulator?
 
-<CardGroup cols={2}>
-  <Card title="Instant Feedback" icon="rotate">
-    See changes immediately with hot module replacement. No more constantly reloading ChatGPT.
-  </Card>
-  <Card title="Visualize Design Variations" icon="palette">
-    Toggle between light/dark themes, mobile/tablet/desktop views, and other platform states.
-  </Card>
-  <Card title="Testing" icon="flask">
-    Perform manual and automated tests locally. Create CI/CD integration and regression tests.
-  </Card>
-  <Card title="No Deployment Needed" icon="desktop">
-    Develop locally without setting up MCP servers.
-  </Card>
-</CardGroup>
+<Card horizontal title="Instant Feedback" icon="rotate">
+  See changes immediately with hot module replacement. No more constantly reloading ChatGPT.
+</Card>
+<Card horizontal title="Visualize Design Variations" icon="palette">
+  Toggle between light/dark themes, mobile/tablet/desktop views, and other platform states.
+</Card>
+<Card horizontal title="Testing" icon="flask">
+  Perform manual and automated tests locally. Create CI/CD integration and regression tests.
+</Card>
+<Card horizontal title="No Deployment Needed" icon="desktop">
+  Develop locally without setting up MCP servers.
+</Card>
 
 ## Quick Start
 
-<Info>
 If you set up your project via the sunpeak Starter Kit, the simulator is already set up!
-</Info>
+Simply run it with:
 
-To learn how to manually configure the simulator, see [Add to Existing Project](/add-to-existing-project).
+<Tabs>
+  <Tab title="pnpm">
+    ```bash
+    pnpm dev
+    ```
+  </Tab>
+  <Tab title="npm">
+    ```bash
+    npm run dev
+    ```
+  </Tab>
+  <Tab title="yarn">
+    ```bash
+    yarn dev
+    ```
+  </Tab>
+</Tabs>
 
-## What Gets Simulated
+<Note>
+To configure the simulator manually, see [Add to Existing Project](/add-to-existing-project).
+</Note>
 
-The simulator provides a complete ChatGPT-like environment including:
+## Simulations
 
-- **Runtime APIs**: Full access to `window.openai` including theme, display mode, and state management
-- **UI Environment**: ChatGPT's chat interface, message bubbles, and widget containers
-- **User Interactions**: All standard interactions like clicks, form submissions, and navigation
+The core sunpeak testing object is the `Simulation`, typically kept in the `src/simulations` directory.
 
-<Warning>
-The simulator is for development only. For production testing with real ChatGPT, use the [MCP Server](/library/platform-testing).
-</Warning>
+<Tip>
+Fun fact: Some science fiction authors believe we live in a sunpeak simulation.
+</Tip>
+
+Simulations consist of:
+  1. An MCP Resource (your UI & UI metadata).
+  2. An MCP Tool (metadata about the behavior you are simulating).
+  3. An MCP CallTool (mock data passed to your UI).
+  4. Simulation metadata, including platform state (dark mode, fullscreen, etc.).
+
+You can find the full Simulation API Reference [here](/api-reference/simulations/simulation).
+
+### Simulation Example
+
+<CreateSimulation />
+
+
+Simulations can be passed into:
+
+<AccordionGroup>
+  <Accordion title="ChatGPTSimulator - for local testing">
+    The `ChatGPTSimulator` component provides a local development environment that replicates ChatGPT's widget runtime.
+
+    <ChatGPTSimulator />
+
+    [View ChatGPTSimulator API Reference](/api-reference/simulations/chatgpt-simulator)
+  </Accordion>
+
+  <Accordion title="runMCPServer - for platform testing">
+    The `runMCPServer` function serves your simulations to ChatGPT via the Model Context Protocol.
+
+    <RunMCPServer />
+
+    [View MCP Server API Reference](/api-reference/simulations/mcp-server)
+  </Accordion>
+</AccordionGroup>
 
 ## Dive Deeper
 
-<Card title="ChatGPTSimulator API" icon="code" href="/api-reference/mcp/chatgpt-simulator">
-  Full component documentation and configuration options
+<Card horizontal title="Simulation API" icon="code" href="/api-reference/simulations/simulation">
+  Complete simulation documentation.
+</Card>
+<Card horizontal title="ChatGPTSimulator API" icon="code" href="/api-reference/simulations/chatgpt-simulator">
+  Full component documentation and configuration options.
 </Card>

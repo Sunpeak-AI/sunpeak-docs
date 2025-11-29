@@ -22,12 +22,14 @@ function useToolInput<T = Record<string, unknown>>(): T | null
 ## Parameters
 
 <ResponseField name="T" type="type parameter">
-  Optional TypeScript type for the input parameters
+  Optional TypeScript type for the input parameters.
 </ResponseField>
 
 ## Returns
 
-The tool input parameters object, or `null` if not available.
+<ResponseField name="return" type="T | null">
+  The tool input parameters object, or `null` if not available.
+</ResponseField>
 
 ## Usage
 

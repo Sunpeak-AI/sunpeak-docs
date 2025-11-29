@@ -25,18 +25,22 @@ function useWidgetState<T>(
 ## Parameters
 
 <ResponseField name="key" type="string" required>
-  Unique identifier for the state value
+  Unique identifier for the state value.
 </ResponseField>
 
 <ResponseField name="initialValue" type="T" required>
-  Default value if no persisted state exists
+  Default value if no persisted state exists.
 </ResponseField>
 
 ## Returns
 
-Returns a tuple similar to `useState`:
-- `[0]`: Current state value
-- `[1]`: Function to update the state
+<ResponseField name="[0]" type="T">
+  Current state value.
+</ResponseField>
+
+<ResponseField name="[1]" type="(value: T) => void">
+  Function to update the state.
+</ResponseField>
 
 ## Usage
 

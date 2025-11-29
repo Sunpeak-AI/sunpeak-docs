@@ -24,16 +24,18 @@ function useWidgetProps<T = Record<string, unknown>>(
 ## Parameters
 
 <ResponseField name="defaultState" type="T | (() => T)">
-  Optional default value or function that returns default value
+  Optional default value or function that returns default value.
 </ResponseField>
 
 <ResponseField name="T" type="type parameter">
-  TypeScript type for the props
+  TypeScript type for the props.
 </ResponseField>
 
 ## Returns
 
-The tool output as props, or the default value if not available.
+<ResponseField name="return" type="T">
+  The tool output as props, or the default value if not available.
+</ResponseField>
 
 ## Usage
 

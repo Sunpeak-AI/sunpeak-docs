@@ -1,0 +1,89 @@
+---
+title: "MCP Server"
+description: "Configure the sunpeak MCP server"
+---
+
+import RunMCPServer from '/snippets/run-mcp-server.mdx';
+
+## Overview
+
+The sunpeak MCP server serves your built widget to ChatGPT via the Model Context Protocol. It's designed for local development and testing.
+
+## Basic Usage
+
+<RunMCPServer />
+
+## Configuration Options
+
+### MCPServerConfig
+
+<ResponseField name="name" type="string" default="sunpeak-app">
+  MCP server name.
+</ResponseField>
+
+<ResponseField name="version" type="string" default="0.1.0">
+  MCP server version.
+</ResponseField>
+
+<ResponseField name="port" type="number" default="6766">
+  Server port (can also be set via `PORT` environment variable).
+</ResponseField>
+
+<ResponseField name="simulations" type="SimulationWithDist[]" required>
+  Array of simulations with `distPath` for each built widget. Each simulation must include:
+  - `distPath` (string, required) - Path to the built widget JavaScript file.
+  - `tool` (Tool, required) - MCP Tool definition from your simulation.
+  - `resource` (Resource, required) - MCP Resource definition from your simulation.
+  - `toolCall` (SimulationCallToolResult, optional) - Mock CallTool response data.
+
+  See [Simulation API Reference](/api-reference/simulations/simulation) for details.
+</ResponseField>
+
+## Server Endpoints
+
+The MCP server exposes these endpoints:
+
+- **GET `/mcp`** - SSE stream for MCP communication.
+- **POST `/mcp/messages`** - Message endpoint for client requests.
+
+## Tools and Resources
+
+The server automatically creates MCP Tools and Resources from your simulations:
+
+1. **MCP Tools** - One per simulation, using the `tool` definition from each simulation.
+2. **MCP Resources** - One per simulation, containing the built widget HTML/JavaScript from each `distPath`.
+
+When a tool is called, it returns the `toolCall.structuredContent` from that simulation, which your widget can access via `useWidgetProps()`.
+
+## Mock Data
+
+The `toolCall.structuredContent` from your simulation provides mock data for local testing. Your widget can access this data:
+
+```typescript
+// In your widget
+import { useWidgetProps } from 'sunpeak';
+
+interface PlacesData {
+  places: Array<{
+    id: string;
+    name: string;
+    rating: number;
+  }>;
+}
+
+function MyWidget() {
+  const data = useWidgetProps<PlacesData>();
+
+  return (
+    <div>
+      {data.places.map(place => (
+        <div key={place.id}>{place.name}</div>
+      ))}
+    </div>
+  );
+}
+```
+
+<Warning>
+This server is for **local development only**. For production, create your own MCP server that returns your widget URL as a resource. See the [Deployment Guide](/guides/deployment).
+</Warning>

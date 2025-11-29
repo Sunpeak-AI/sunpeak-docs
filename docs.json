@@ -24,9 +24,9 @@
           {
             "group": "sunpeak Library",
             "pages": [
-              "library/runtime-apis",
               "library/local-testing",
-              "library/platform-testing"
+              "library/platform-testing",
+              "library/runtime-apis"
             ]
           },
           {
@@ -81,10 +81,11 @@
             ]
           },
           {
-            "group": "Servers",
+            "group": "Simulations",
             "pages": [
-              "api-reference/mcp/chatgpt-simulator",
-              "api-reference/mcp/configuration"
+              "api-reference/simulations/simulation",
+              "api-reference/simulations/chatgpt-simulator",
+              "api-reference/simulations/mcp-server"
             ]
           }
         ]

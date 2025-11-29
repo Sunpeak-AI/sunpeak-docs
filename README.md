@@ -18,6 +18,19 @@ mint dev
 
 View your local preview at `http://localhost:3000`.
 
+## Style Guide
+
+Less is more, aim for brevity and clarity. Include simple examples, but only in places where an example makes a subject significantly clearer.
+
+End sentences, descriptions, comments, etc. with a period, except where ending with a colon.
+
+For icons on links, use the link icon for external resources, the page icon for a
+page on the documentation tab, and the code icon for a page on the API Reference tab.
+
+Keep page names and file names in sync.
+
+Follow the same general styles and page structures as other pages in the same group.
+
 ## Contributing
 
 We welcome your contributions!
