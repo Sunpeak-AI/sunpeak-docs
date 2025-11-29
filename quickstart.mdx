@@ -3,45 +3,115 @@ title: "Quickstart"
 description: "Create your first ChatGPT App UI with sunpeak in just a few minutes."
 ---
 
-import QuickstartExample from '/snippets/quickstart-example.mdx';
-
 ## New projects
 
 <Steps>
   <Step title="Create a project">
-    **Requirements:** Node.js 20+, pnpm 10+
+    **Requirements:** Node.js 20+
 
-    ```bash
-    pnpm dlx sunpeak new
-    ```
+    <Tabs>
+      <Tab title="pnpm">
+        ```bash
+        pnpm dlx sunpeak new
+        ```
+      </Tab>
+      <Tab title="npm">
+        ```bash
+        npx sunpeak new
+        ```
+      </Tab>
+      <Tab title="yarn">
+        ```bash
+        yarn dlx sunpeak new
+        ```
+      </Tab>
+    </Tabs>
 
     You will be prompted to name your project. We'll choose `my-app` for now.
   </Step>
 
   <Step title="Install dependencies">
-    Navigate to your project directory and install dependenceies:
+    Navigate to your project directory and install dependencies:
 
-    ```bash
-    cd my-app
-    pnpm install
-    ```
+    <Tabs>
+      <Tab title="pnpm">
+        ```bash
+        cd my-app
+        pnpm install
+        ```
+      </Tab>
+      <Tab title="npm">
+        ```bash
+        cd my-app
+        npm install
+        ```
+      </Tab>
+      <Tab title="yarn">
+        ```bash
+        cd my-app
+        yarn install
+        ```
+      </Tab>
+    </Tabs>
   </Step>
-  <Step title="Run the development server">
-    ```bash
-    pnpm dev
-    ```
+  <Step title="Develop locally">
+    Run the development server to use your local simulator:
+
+    <Tabs>
+      <Tab title="pnpm">
+        ```bash
+        pnpm dev
+        ```
+      </Tab>
+      <Tab title="npm">
+        ```bash
+        npm run dev
+        ```
+      </Tab>
+      <Tab title="yarn">
+        ```bash
+        yarn dev
+        ```
+      </Tab>
+    </Tabs>
 
     Open `http://localhost:6767` to see the ChatGPT simulator running your app.
 
     <Tip>The simulator updates automatically as you edit your components!</Tip>
   </Step>
 
-  <Step title="Build your first component">
-    Edit `src/components/apps/App.tsx` to create your first ChatGPT widget:
+  <Step title="Develop in ChatGPT">
+    Run the MCP server and a tunnel to allow ChatGPT to connect to it:
 
-    <QuickstartExample file="quickstart-example.mdx" />
+    <Tabs>
+      <Tab title="pnpm">
+        ```bash
+        pnpm mcp
 
-    Save the file and watch your changes appear instantly in the simulator.
+        # In another terminal, run a tunnel. For example:
+        ngrok http 6766
+        ```
+      </Tab>
+      <Tab title="npm">
+        ```bash
+        npm run mcp
+
+        # In another terminal, run a tunnel. For example:
+        ngrok http 6766
+        ```
+      </Tab>
+      <Tab title="yarn">
+        ```bash
+        yarn mcp
+
+        # In another terminal, run a tunnel. For example:
+        ngrok http 6766
+        ```
+      </Tab>
+    </Tabs>
+
+    You can then connect to the tunnel `Forwarding URL` at the `/mcp` path (e.g. `https://your-random-subdomain.ngrok-free.dev/mcp`) from ChatGPT
+    **in developer mode**: `User > Settings > Apps & Connectors > Create`
   </Step>
 </Steps>
 

@@ -3,12 +3,15 @@ title: "Add to Existing Project"
 description: "Integrate sunpeak into your existing React application"
 ---
 
+import CreateSimulation from '/snippets/create-simulation.mdx';
+
 ## Overview
 
-If you already have a React project and want to add ChatGPT widget capabilities, you can integrate the sunpeak library directly.
+If you already have a React project and want to use sunpeak for runtime APIs or testing,
+you can integrate the sunpeak library directly without using the starter kit.
 
 <Info>
-**Starting from scratch?** Use the [Quickstart](/quickstart) guide to create a new project with the sunpeak Starter Kit.
+**Starting from scratch?** Use [Quickstart](/quickstart) for the recommended MCP App creation experience.
 </Info>
 
 ## Prerequisites
@@ -53,16 +56,33 @@ Your existing project needs:
         ```
       </Tab>
     </Tabs>
+
+    If you only want to use sunpeak simulation and testing functionality (without the runtime APIs),
+    you can add sunpeak to `devDependencies` instead.
   </Step>
 
-  <Step title="Install Tailwind CSS 4">
+  <Step title="Install styles (Tailwind)">
     sunpeak requires Tailwind CSS 4. If you don't have it installed:
 
-    ```bash
-    pnpm add -D tailwindcss@next @tailwindcss/vite@next
-    ```
+    <Tabs>
+      <Tab title="pnpm">
+        ```bash
+        pnpm add -D tailwindcss@next @tailwindcss/vite@next
+        ```
+      </Tab>
+      <Tab title="npm">
+        ```bash
+        npm install --save-dev tailwindcss@next @tailwindcss/vite@next
+        ```
+      </Tab>
+      <Tab title="yarn">
+        ```bash
+        yarn add -D tailwindcss@next @tailwindcss/vite@next
+        ```
+      </Tab>
+    </Tabs>
 
-    Configure Tailwind in your build config:
+    Configure Tailwind in your build config, if it isn't set up already:
 
     <Tabs>
       <Tab title="Vite">
@@ -103,23 +123,58 @@ Your existing project needs:
         ```
       </Tab>
     </Tabs>
+
+    Import Tailwind and ChatGPT styles to your CSS entrypoint:
+
+    ```css
+    @import "tailwindcss";
+    @import "@openai/apps-sdk-ui/css";
+
+    /* Scan simulator source files for Tailwind classes */
+    @source "./**/*.{ts,tsx}";
+
+    /* Required for Tailwind to find class references in Apps SDK UI components. */
+    @source "../node_modules/@openai/apps-sdk-ui";
+
+    /* Configure dark mode to use data-theme attribute (OpenAI SDK standard) */
+    @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+```
   </Step>
 
-  <Step title="Wrap with ChatGPT Simulator">
-    For local development, wrap your widget with the ChatGPT Simulator:
+  <Step title="Create a simulation">
+    Create a simulation configuration file (e.g., `src/simulations/example-simulation.ts`):
+
+    <CreateSimulation />
+  </Step>
+
+  <Step title="Wire up your simulation">
+    Create an entrypoint file (like `dev/main.tsx`) where you want to run your simulator.
 
     ```tsx
-    import 'sunpeak/style.css'; // Required to style the simulator.
     import { ChatGPTSimulator } from 'sunpeak';
-    import { MyWidget } from './MyWidget';
+    import { exampleSimulation } from '../src/simulations/example-simulation';
+    import { MyComponent } from '../src/components/MyComponent';
 
-    function App() {
-      return (
-        <ChatGPTSimulator>
-          <MyWidget />
-        </ChatGPTSimulator>
-      );
-    }
+    createRoot(document.getElementById('root')!).render(
+      <StrictMode>
+        <ChatGPTSimulator
+          simulations={[{
+            ...exampleSimulation,
+            resourceComponent: MyComponent
+          }]}
+          appName="Sunpeak App"
+          appIcon="🌄"
+        />
+      </StrictMode>
+    );
+    ```
+
+    Add a script to run your simulation dev server (`package.json`):
+    ```json
+    "scripts": {
+      // ...
+      "dev": "vite --port ${PORT:-6767}"
+    },
     ```
 
     <Warning>
@@ -127,51 +182,33 @@ Your existing project needs:
     </Warning>
   </Step>
 
-  <Step title="Build your widget">
-    Build your widget with sunpeak APIs.
+  <Step title="Run your simulation">
+    Run your local development server with your new simulation entrypoint:
+
+    <Tabs>
+      <Tab title="pnpm">
+        ```bash
+        pnpm dev
+        ```
+      </Tab>
+      <Tab title="npm">
+        ```bash
+        npm run dev
+        ```
+      </Tab>
+      <Tab title="yarn">
+        ```bash
+        yarn dev
+        ```
+      </Tab>
+    </Tabs>
   </Step>
 </Steps>
 
-## Configuration Options
-
-### TypeScript
-
-If using TypeScript, sunpeak types are included. Update your `tsconfig.json` if needed:
-
-```json
-{
-  "compilerOptions": {
-    "moduleResolution": "bundler",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "jsx": "react-jsx"
-  }
-}
-```
-
-### Tailwind Configuration
-
-Add to your CSS entrypoint:
-
-```css
-@import "tailwindcss";
-@import "@openai/apps-sdk-ui/css";
-
-/* Scan simulator source files for Tailwind classes */
-@source "./**/*.{ts,tsx}";
-
-/* Required for Tailwind to find class references in Apps SDK UI components. */
-@source "../node_modules/@openai/apps-sdk-ui";
-
-/* Configure dark mode to use data-theme attribute (OpenAI SDK standard) */
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
-```
-
 ## Need the Full Starter Kit?
 
-If you want the complete development setup with pre-built components, build tools, and testing framework, create a new project instead.
+Often, it's easier to just copy your existing components into a new project initiated with the sunpeak starter kit.
 
-See the [Quickstart](/quickstart) guide for details.
+The kit comes with pre-built components, build tools, and testing framework.
 
-<Card title="Multi-Platform APIs" icon="cube" href="/library/multi-platform-apis">
-  Start using sunpeak multi-platform APIs
-</Card>
+See [Quickstart](/quickstart) to get started.

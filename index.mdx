@@ -6,7 +6,7 @@ description: "Quickstart, build, and test your ChatGPT App locally with the sunp
 import QuickstartExample from '/snippets/quickstart-example.mdx';
 
 <img
-  src="/images/chatgpt-simulator.png"
+  src="https://sunpeak.ai/images/chatgpt-simulator.png"
   alt="ChatGPT simulator screenshot"
 />
 
@@ -14,25 +14,27 @@ import QuickstartExample from '/snippets/quickstart-example.mdx';
 
 sunpeak is an SDK for MCP Apps. With sunpeak, you can quickly build and ship OpenAI ChatGPT Apps, all from your local machine.
 
-sunpeak consists of two main parts:
-
-### The sunpeak Starter Kit
-
-A pre-configured Starter Kit (`pnpm dlx sunpeak new`) that includes:
-
-- **UI Components** - Production-ready components following ChatGPT design guidelines, built on OpenAI's apps-sdk-ui.
-- **Complete Setup** - Build tools, testing framework, and development environment
+sunpeak consists of two main parts: a library and a starter kit.
 
 ### The sunpeak Library
 
-An npm package (`sunpeak`) for running & testing MCP Apps:
+A React npm package (`sunpeak`) for running & testing MCP Apps:
 
-- **Multi-Platform APIs** - Runtime hooks & APIs architected to support future genAI offerings (Gemini, Claude, etc.)
-- **ChatGPT Simulator** - Test your widgets locally with instant feedback, easily trigger advanced ChatGPT functionality
-- **MCP Server** - Deploy your local widgets to production ChatGPT
+- **Runtime APIs** - Strongly typed multi-platform APIs for interacting with ChatGPT, architected to support future genAI offerings (Gemini, Claude, etc.).
+- **Local Testing** - Create simulations in the ChatGPT Simulator to test your UIs locally—manually or automatically.
+- **Platform Testing** - Run your simulations in the real ChatGPT using a pre-packaged MCP server.
+
+The sunpeak library can be used for any MCP App project, not just those built with the starter kit.
+
+### The sunpeak Starter Kit
+
+An MCP App starter kit (`pnpm dlx sunpeak new`) that includes:
+
+- **UI Components** - Production-ready components following ChatGPT design guidelines, built on OpenAI's apps-sdk-ui
+- **Complete Setup** - Build tools, testing framework, and development environment
 
 ## Quick Example
 
-Build beautiful ChatGPT widgets with just a few lines of code:
+Build and run beautiful ChatGPT widgets with just a few lines of code:
 
 <QuickstartExample file="quickstart-example.mdx" />

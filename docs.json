@@ -22,18 +22,18 @@
             ]
           },
           {
+            "group": "sunpeak Library",
+            "pages": [
+              "library/runtime-apis",
+              "library/chatgpt-simulator",
+              "library/mcp-server"
+            ]
+          },
+          {
             "group": "Starter Kit",
             "pages": [
               "template/project-structure",
               "template/ui-components"
-            ]
-          },
-          {
-            "group": "sunpeak Library",
-            "pages": [
-              "library/multi-platform-apis",
-              "library/chatgpt-simulator",
-              "library/mcp-server"
             ]
           },
           {
