@@ -5,7 +5,10 @@ description: "Testing and validation in sunpeak projects."
 
 ## Overview
 
-sunpeak projects come pre-configured with testing tools and validation commands. The starter kit includes Vitest for unit testing and several npm scripts for code quality checks.
+sunpeak projects come pre-configured with testing tools and validation commands.
+The starter kit includes Vitest for unit testing and several npm scripts for code quality checks.
+
+**TL;DR**: Run `pnpm validate` every time before you ship.
 
 ## Available Commands
 
@@ -40,64 +43,6 @@ The test environment includes:
 - **Browser API mocks**: `matchMedia`, `IntersectionObserver`, `ResizeObserver`.
 
 All configuration is in `src/test/setup.ts`.
-
-## Running Tests
-
-Run all tests:
-
-```bash
-pnpm test
-```
-
-Run tests in watch mode during development:
-
-```bash
-pnpm test --watch
-```
-
-Run tests with coverage:
-
-```bash
-pnpm test --coverage
-```
-
-## Code Quality
-
-Beyond unit tests, sunpeak includes tools for code quality:
-
-### Linting
-
-ESLint and Prettier check code style and catch common issues:
-
-```bash
-pnpm lint
-```
-
-This automatically fixes many issues. Check without fixing:
-
-```bash
-pnpm lint --no-fix
-```
-
-### Type Checking
-
-TypeScript type checking catches type errors:
-
-```bash
-pnpm typecheck
-```
-
-This runs faster than a full build and only checks types.
-
-### Validation
-
-Run all checks at once:
-
-```bash
-pnpm validate
-```
-
-This runs lint, typecheck, and test in sequence. Great for pre-commit checks.
 
 ## Testing Best Practices
 
@@ -139,6 +84,6 @@ This runs lint, typecheck, and test in sequence. Great for pre-commit checks.
 
 ## Dive Deeper
 
-<Card horizontal title="Vitest Docs" icon="book" href="https://vitest.dev/">
+<Card horizontal title="Vitest Docs" icon="link" href="https://vitest.dev/">
   Learn more about Vitest.
 </Card>

@@ -57,11 +57,11 @@ import { Card } from './components/card';
   Secondary metadata displayed below the header (e.g., ratings, location, price).
 </ResponseField>
 
-<ResponseField name="button1" type="OpenAIButtonProps">
+<ResponseField name="button1" type="CardButtonProps">
   Configuration for the first action button.
 
   ```tsx
-  interface OpenAIButtonProps {
+  interface CardButtonProps {
     isPrimary?: boolean;
     onClick: () => void;
     children: React.ReactNode;
@@ -69,7 +69,7 @@ import { Card } from './components/card';
   ```
 </ResponseField>
 
-<ResponseField name="button2" type="OpenAIButtonProps">
+<ResponseField name="button2" type="CardButtonProps">
   Configuration for the second action button.
 </ResponseField>
 

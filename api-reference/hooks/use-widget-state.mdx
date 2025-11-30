@@ -1,11 +1,11 @@
 ---
 title: "useWidgetState"
-description: "Hook for managing persistent widget state."
+description: "Hook for managing persistent UI state."
 ---
 
 ## Overview
 
-The `useWidgetState` hook provides persistent state management across ChatGPT sessions.
+The `useWidgetState` hook provides persistent UI state management across ChatGPT sessions.
 
 ## Import
 
@@ -17,19 +17,14 @@ import { useWidgetState } from 'sunpeak';
 
 ```tsx
 function useWidgetState<T>(
-  key: string,
-  initialValue: T
-): [T, (value: T) => void]
+  defaultState: T | (() => T)
+): [T, (state: T | ((prevState: T) => T)) => void]
 ```
 
 ## Parameters
 
-<ResponseField name="key" type="string" required>
-  Unique identifier for the state value.
-</ResponseField>
-
-<ResponseField name="initialValue" type="T" required>
-  Default value if no persisted state exists.
+<ResponseField name="defaultState" type="T | (() => T)" required>
+  Default value or function that returns default value. Used if no persisted state exists.
 </ResponseField>
 
 ## Returns
@@ -38,8 +33,8 @@ function useWidgetState<T>(
   Current state value.
 </ResponseField>
 
-<ResponseField name="[1]" type="(value: T) => void">
-  Function to update the state.
+<ResponseField name="[1]" type="(state: T | ((prevState: T) => T)) => void">
+  Function to update the state. Can accept a new state value or a function that receives the previous state and returns the new state.
 </ResponseField>
 
 ## Usage

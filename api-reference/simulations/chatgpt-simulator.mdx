@@ -19,3 +19,22 @@ import { ChatGPTSimulator } from 'sunpeak';
 ## Basic Usage
 
 <ChatGPTSimulator />
+
+## Props
+
+<ResponseField name="simulations" type="Simulation[]">
+  Array of simulations to display in the simulator. See
+  [Simulation API Reference](/api-reference/simulations/simulation) for details.
+</ResponseField>
+
+<ResponseField name="appName" type="string" default="Sunpeak App">
+  Name of the app displayed in the simulator UI.
+</ResponseField>
+
+<ResponseField name="appIcon" type="string">
+  Optional icon (emoji) displayed in the simulator UI.
+</ResponseField>
+
+<ResponseField name="children" type="React.ReactNode">
+  Optional children to render when no simulations are selected.
+</ResponseField>

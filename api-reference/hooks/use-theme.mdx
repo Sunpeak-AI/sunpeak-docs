@@ -16,13 +16,13 @@ import { useTheme } from 'sunpeak';
 ## Signature
 
 ```tsx
-function useTheme(): 'light' | 'dark'
+function useTheme(): 'light' | 'dark' | null
 ```
 
 ## Returns
 
-<ResponseField name="return" type="'light' | 'dark'">
-  The current ChatGPT theme.
+<ResponseField name="return" type="'light' | 'dark' | null">
+  The current ChatGPT theme, or `null` if not available.
 </ResponseField>
 
 ## Usage

@@ -7,7 +7,12 @@ import CreateSimulation from '/snippets/create-simulation.mdx';
 
 ## Overview
 
-`Simulation` is a TypeScript interface that packages a React component with its MCP (Model Context Protocol) metadata and example data. Each simulation represents a complete tool experience in the simulator and MCP server, combining the component, tool definition, resource definition, and mock call data.
+`Simulation` is a TypeScript interface that packages a React component with its MCP
+(Model Context Protocol) metadata and example data.
+
+Each simulation represents a complete
+tool experience in the simulator and MCP server, combining the component, tool definition,
+resource definition, and mock tool call data.
 
 Simulations are used for local testing with the ChatGPT Simulator and for configuring MCP servers.
 
@@ -24,7 +29,8 @@ import type { Simulation } from 'sunpeak';
 ## Properties
 
 <ResponseField name="resourceComponent" type="React.ComponentType" required>
-  The React component to render in the simulator or MCP client. This component implements the UI for your tool.
+  The React component to render in the simulator (the MCP server renders the built component in `dist/`).
+  This component implements the UI for your tool.
 </ResponseField>
 
 <ResponseField name="userMessage" type="string">
@@ -44,23 +50,29 @@ import type { Simulation } from 'sunpeak';
   - `inputSchema`: JSON Schema for tool input validation.
   - `title`: Display name.
   - `annotations`: Tool behavior hints (e.g., `readOnlyHint`).
-  - `_meta`: Platform-specific metadata (e.g., OpenAI widget configuration).
+  - `_meta`: Platform-specific metadata. Not shown to the AI. For OpenAI/ChatGPT:
+    - `openai/outputTemplate` (string, required): Resource URI to display when tool is invoked (e.g., `ui://MyComponentResource`). Must match a resource URI.
+    - `openai/toolInvocation/invoking` (string): Status message shown while tool is executing (e.g., "Loading data...").
+    - `openai/toolInvocation/invoked` (string): Status message shown after tool completes (e.g., "Data loaded").
+    - `openai/widgetAccessible` (boolean): Whether the widget can be accessed/rendered in ChatGPT.
+    - `openai/resultCanProduceWidget` (boolean): Whether the tool result can produce a widget UI.
 </ResponseField>
 
 <ResponseField name="resource" type="Resource" required>
   Official MCP SDK Resource type used in the ListResources response. Defines the resource URI, name, and metadata.
 
   **Key properties:**
-  - `uri`: Resource URI (e.g., `ui://MyComponentResource`).
-  - `name`: Simulation identifier (used internally).
-  - `title`: Display label for the simulation.
+  - `uri`: Resource URI. Use `ui://` + your component name (e.g., `ui://MyComponentResource`).
+  - `name`: Name of the resource (machine).
+  - `title`: Name of the resource (human readable).
   - `description`: Human-readable description.
   - `mimeType`: Always `text/html+skybridge` for UI resources.
   - `_meta`: Additional metadata.
 </ResponseField>
 
 <ResponseField name="toolCall" type="SimulationCallToolResult">
-  Mock data for the MCP CallTool response. Used by the simulator to provide example structured content and metadata. See [SimulationCallToolResult](#simulationcalltoolresult-interface) below for details.
+  Mock data for the MCP CallTool response. Supplies `structuredContent` and `_meta` values to your Resource.
+  See [SimulationCallToolResult](#simulationcalltoolresult-interface) below for details.
 </ResponseField>
 
 ## Related Types
@@ -68,6 +80,8 @@ import type { Simulation } from 'sunpeak';
 ### SimulationGlobals Interface
 
 Configures the simulator environment with initial values for development and testing.
+These values are used to initialize the local simulator, but they are unused during
+platform testing (ChatGPT owns the global state).
 
 <ResponseField name="theme" type="Theme">
   Theme setting: `'light'` or `'dark'`.
@@ -105,7 +119,9 @@ Configures the simulator environment with initial values for development and tes
   Widget state data.
 </ResponseField>
 
-**Note:** `toolOutput` (`structuredContent`) and `toolResponseMetadata` (`_meta`) are set in `SimulationCallToolResult` instead of `SimulationGlobals`.
+**Note:** `toolOutput` (`structuredContent`) and `toolResponseMetadata` (`_meta`) are set in
+`SimulationCallToolResult` instead of `SimulationGlobals`. This is to better align with the MCP
+specification, and also to provide those values to the MCP server (`SimulationGlobals` are not).
 
 ### SimulationCallToolResult Interface
 
@@ -119,47 +135,7 @@ Subset of the MCP CallTool response used in simulations to provide mock structur
   Response metadata.
 </ResponseField>
 
-## Examples
-
-### Simple Counter Simulation
-
-```tsx
-export const counterSimulation: Simulation = {
-  resourceComponent: Counter,
-  userMessage: 'Help me count something',
-
-  tool: {
-    name: 'show-counter',
-    description: 'Show a simple counter tool',
-    inputSchema: { type: 'object', properties: {}, additionalProperties: false },
-    title: 'Show Counter',
-    annotations: { readOnlyHint: true },
-    _meta: {
-      'openai/outputTemplate': 'ui://CounterResource',
-      'openai/toolInvocation/invoking': 'Counting beans',
-      'openai/toolInvocation/invoked': 'Beans counted',
-      'openai/widgetAccessible': true,
-      'openai/resultCanProduceWidget': true,
-    },
-  },
-
-  resource: {
-    uri: 'ui://CounterResource',
-    name: 'counter',
-    title: 'Counter',
-    description: 'Show a simple counter tool widget markup',
-    mimeType: 'text/html+skybridge',
-    _meta: {},
-  },
-
-  toolCall: {
-    structuredContent: null,
-    _meta: {},
-  },
-};
-```
-
-### Simulation with Globals and Data
+## Example - Simulation with Globals and Data
 
 ```tsx
 export const albumsSimulation: Simulation = {

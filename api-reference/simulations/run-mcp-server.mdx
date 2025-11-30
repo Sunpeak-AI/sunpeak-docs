@@ -53,7 +53,9 @@ The server automatically creates MCP Tools and Resources from your simulations:
 1. **MCP Tools** - One per simulation, using the `tool` definition from each simulation.
 2. **MCP Resources** - One per simulation, containing the built widget HTML/JavaScript from each `distPath`.
 
-When a tool is called, it returns the `toolCall.structuredContent` from that simulation, which your widget can access via `useWidgetProps()`.
+When a tool is called, it returns the `toolCall.structuredContent` from that simulation,
+which your widget can access via `useWidgetProps()`. It also returns the `toolCall._meta`,
+which can be accessed through `useToolResponseMetadata()`.
 
 ## Mock Data
 
@@ -85,5 +87,7 @@ function MyWidget() {
 ```
 
 <Warning>
-This server is for **local development only**. For production, create your own MCP server that returns your widget URL as a resource. See the [Deployment Guide](/guides/deployment).
+This server is for **local development only**.
+For production, create your own MCP server that returns your published widget URL as a resource.
+See the [Deployment Guide](/guides/deployment).
 </Warning>
