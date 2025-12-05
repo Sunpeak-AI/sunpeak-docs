@@ -33,6 +33,18 @@ Your existing project needs:
 ## Installation Steps
 
 <Steps>
+  <Step title="Install the CLI">
+    Install the sunpeak CLI globally to use `sunpeak` commands:
+
+    ```bash
+    pnpm add -g sunpeak
+    ```
+
+    <Note>
+    You can also use `pnpm dlx sunpeak` instead of installing globally.
+    </Note>
+  </Step>
+
   <Step title="Install sunpeak">
     Add sunpeak to your project dependencies:
 
@@ -176,23 +188,9 @@ Your existing project needs:
 
     Run your local development server with your new simulation entrypoint:
 
-    <Tabs>
-      <Tab title="pnpm">
-        ```bash
-        pnpm dev
-        ```
-      </Tab>
-      <Tab title="npm">
-        ```bash
-        npm run dev
-        ```
-      </Tab>
-      <Tab title="yarn">
-        ```bash
-        yarn dev
-        ```
-      </Tab>
-    </Tabs>
+    ```bash
+    sunpeak dev
+    ```
 
     <Warning>
     Only use the simulator in development. For production, export your component directly.
@@ -235,26 +233,10 @@ Your existing project needs:
 
     Build your app and start the MCP server:
 
-    <Tabs>
-      <Tab title="pnpm">
-        ```bash
-        pnpm build
-        pnpm mcp
-        ```
-      </Tab>
-      <Tab title="npm">
-        ```bash
-        npm run build
-        npm run mcp
-        ```
-      </Tab>
-      <Tab title="yarn">
-        ```bash
-        yarn build
-        yarn mcp
-        ```
-      </Tab>
-    </Tabs>
+    ```bash
+    sunpeak build
+    sunpeak mcp
+    ```
 
     Then use a tunnel (like ngrok) to expose your server to ChatGPT. See [Platform Testing](/library/platform-testing) for details.
   </Step>
