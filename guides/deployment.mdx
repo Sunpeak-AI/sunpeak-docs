@@ -7,9 +7,23 @@ description: "Deploy your ChatGPT widget to production."
   <Step title="Build your widget for production">
     Create an optimized production build:
 
-    ```bash
-    sunpeak build
-    ```
+    <Tabs>
+      <Tab title="pnpm">
+        ```bash
+        pnpm build
+        ```
+      </Tab>
+      <Tab title="npm">
+        ```bash
+        npm run build
+        ```
+      </Tab>
+      <Tab title="yarn">
+        ```bash
+        yarn build
+        ```
+      </Tab>
+    </Tabs>
 
     This creates:
     - Minified and optimized JavaScript.
@@ -41,7 +55,7 @@ description: "Deploy your ChatGPT widget to production."
     ```
 
     <Info>
-    The included `sunpeak mcp` server is a **dummy server for local development only**. Do not use it in production.
+    The MCP server (`pnpm mcp`) is a **development server for local testing only**. Do not use it in production.
     </Info>
   </Step>
 

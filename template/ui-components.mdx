@@ -1,20 +1,20 @@
 ---
 title: "UI Components"
-description: "Production-ready components in the Starter Kit."
+description: "Production-ready components in the framework."
 ---
 
 import QuickstartExample from '/snippets/quickstart-example.mdx';
 
 ## Overview
 
-The sunpeak Starter Kit includes pre-built React components in your project's `src/components/` directory. These components are built on [@openai/apps-sdk-ui](https://github.com/openai/apps-sdk-ui) and follow ChatGPT's design guidelines.
+The sunpeak framework includes pre-built React components in your project's `src/components/` directory. These components are built on [@openai/apps-sdk-ui](https://github.com/openai/apps-sdk-ui) and follow ChatGPT's design guidelines.
 
 ## Resources
 
 Resources (from MCP) are top-level components that can be simulated or shipped to production.
 
 Resources are kept in the `src/components/resources/` directory.
-Every file in this directory ending with `-resource.tsx` will be built by `sunpeak build` to
+Every file in this directory ending with `-resource.tsx` will be automatically built to
 `dist/chatgpt/name.js`, where the output name will be whatever was prefixed to `-resource.tsx`.
 
 ## High-Level Components
@@ -60,7 +60,7 @@ All components follow (and are required to follow) ChatGPT's design guidelines:
 
 ## Low-Level Components
 
-Beyond the Starter Kit components, you can use any component from `@openai/apps-sdk-ui`:
+Beyond the framework components, you can use any component from `@openai/apps-sdk-ui`:
 
 ```tsx
 import { Button, Input, Select } from '@openai/apps-sdk-ui/components';

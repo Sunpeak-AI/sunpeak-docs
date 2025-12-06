@@ -1,0 +1,201 @@
+---
+title: "sunpeak test"
+description: "Run unit tests with Vitest."
+---
+
+## Overview
+
+The `sunpeak test` command runs your unit tests using Vitest, a fast, Vite-native testing framework designed for modern web applications.
+
+```bash
+sunpeak test
+```
+
+<Info>
+In a sunpeak project, run this command via your package manager: `pnpm test`, `npm run test`, or `yarn test`.
+</Info>
+
+## Features
+
+### Vite-Native Testing
+
+Vitest integrates seamlessly with Vite:
+
+- Uses the same Vite config and plugins
+- No separate build step needed
+- Instant feedback with watch mode
+- Fast test execution
+
+### Component Testing
+
+Test your MCP Resources and React components:
+
+```tsx
+import { render, screen } from '@testing-library/react';
+import { MyResource } from './MyResource';
+
+test('renders search button', () => {
+  render(<MyResource />);
+  expect(screen.getByText('Search')).toBeInTheDocument();
+});
+```
+
+### Watch Mode
+
+By default, tests run in watch mode during development:
+
+- Automatically reruns tests when files change
+- Only runs tests related to changed files
+- Interactive CLI for filtering tests
+
+## Usage
+
+<Tabs>
+  <Tab title="pnpm">
+    ```bash
+    pnpm test
+    ```
+  </Tab>
+  <Tab title="npm">
+    ```bash
+    npm run test
+    ```
+  </Tab>
+  <Tab title="yarn">
+    ```bash
+    yarn test
+    ```
+  </Tab>
+</Tabs>
+
+## Configuration Options
+
+### Run Once (CI Mode)
+
+For CI/CD pipelines, run tests once without watch mode:
+
+```bash
+sunpeak test --run
+```
+
+Or add a script to your `package.json`:
+
+```json
+{
+  "scripts": {
+    "test:ci": "sunpeak test --run"
+  }
+}
+```
+
+### Coverage
+
+Generate code coverage reports:
+
+```bash
+sunpeak test --coverage
+```
+
+This creates a coverage report showing which lines of code are tested.
+
+### Filter Tests
+
+Run specific test files or patterns:
+
+```bash
+# Run tests matching a pattern
+sunpeak test MyComponent
+
+# Run a specific test file
+sunpeak test src/components/MyComponent.test.tsx
+```
+
+### UI Mode
+
+Run tests with Vitest's interactive UI:
+
+```bash
+sunpeak test --ui
+```
+
+Opens a browser-based interface for exploring and debugging tests.
+
+## Test File Patterns
+
+Vitest automatically discovers test files matching these patterns:
+
+- `**/*.test.{ts,tsx,js,jsx}`
+- `**/*.spec.{ts,tsx,js,jsx}`
+- `**/__tests__/**/*.{ts,tsx,js,jsx}`
+
+## Example Test
+
+```tsx
+import { describe, test, expect } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import { MyResource } from './MyResource';
+
+describe('MyResource', () => {
+  test('renders correctly', () => {
+    render(<MyResource />);
+    expect(screen.getByRole('button')).toBeInTheDocument();
+  });
+
+  test('handles user interaction', async () => {
+    const { user } = render(<MyResource />);
+    await user.click(screen.getByRole('button'));
+    expect(screen.getByText('Clicked!')).toBeInTheDocument();
+  });
+});
+```
+
+## Testing Best Practices
+
+### Test MCP Resources
+
+Focus on testing your Resource components:
+
+- User interactions
+- Tool input handling
+- State management
+- Edge cases
+
+### Use React Testing Library
+
+The framework includes React Testing Library:
+
+```tsx
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+```
+
+This encourages testing from the user's perspective.
+
+### Mock External Dependencies
+
+Mock API calls and external services:
+
+```tsx
+import { vi } from 'vitest';
+
+vi.mock('./api', () => ({
+  fetchData: vi.fn(() => Promise.resolve({ data: 'test' }))
+}));
+```
+
+## Related Commands
+
+<CardGroup cols={2}>
+  <Card horizontal title="sunpeak dev" icon="code" href="/api-reference/cli/dev">
+    Develop with hot reload
+  </Card>
+  <Card horizontal title="sunpeak build" icon="hammer" href="/api-reference/cli/build">
+    Build for production
+  </Card>
+</CardGroup>
+
+## Related Documentation
+
+<Card horizontal title="Testing Guide" icon="flask" href="/guides/testing">
+  Learn more about testing your sunpeak apps
+</Card>

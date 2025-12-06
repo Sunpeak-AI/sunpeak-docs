@@ -1,0 +1,116 @@
+---
+title: "sunpeak dev"
+description: "Start the development server with ChatGPT simulator."
+---
+
+## Overview
+
+The `sunpeak dev` command starts a local development server with a built-in ChatGPT simulator, allowing you to develop and test your MCP Resources without connecting to ChatGPT.
+
+```bash
+sunpeak dev
+```
+
+<Info>
+In a sunpeak project, run this command via your package manager: `pnpm dev`, `npm run dev`, or `yarn dev`.
+</Info>
+
+## Features
+
+### Hot Module Reload (HMR)
+
+The dev server uses Vite's hot reload technology for instant feedback:
+
+- Component changes reflect immediately without full page refresh
+- State is preserved across updates when possible
+- CSS updates apply instantly
+
+### ChatGPT Simulator
+
+Access the simulator at `http://localhost:6767` to:
+
+- Test your MCP Resources in a ChatGPT-like environment
+- Simulate tool calls and responses
+- Preview your UI components with realistic styling
+- Iterate quickly without needing a tunnel or ChatGPT connection
+
+### Automatic Discovery
+
+The dev server automatically discovers and loads:
+
+- All simulations exported from `src/simulations/index.ts`
+- All MCP Resources from `src/components/resources/*-resource.tsx`
+
+No manual configuration or entry point files needed!
+
+## Configuration
+
+### Port
+
+Default port: `6767`
+
+To use a different port, modify your `package.json` script:
+
+```json
+{
+  "scripts": {
+    "dev": "sunpeak dev --port 3000"
+  }
+}
+```
+
+### Host
+
+To expose the server on your network:
+
+```json
+{
+  "scripts": {
+    "dev": "sunpeak dev --host"
+  }
+}
+```
+
+## Usage
+
+<Tabs>
+  <Tab title="pnpm">
+    ```bash
+    pnpm dev
+    ```
+  </Tab>
+  <Tab title="npm">
+    ```bash
+    npm run dev
+    ```
+  </Tab>
+  <Tab title="yarn">
+    ```bash
+    yarn dev
+    ```
+  </Tab>
+</Tabs>
+
+## When to Use
+
+Use `sunpeak dev` for:
+
+- Local component development
+- Rapid iteration with hot reload
+- Testing UI behavior in the ChatGPT simulator
+- Debugging without ChatGPT integration
+
+<Warning>
+The dev server is for development only. For production, use `sunpeak build` to create optimized bundles.
+</Warning>
+
+## Related Commands
+
+<CardGroup cols={2}>
+  <Card horizontal title="sunpeak build" icon="hammer" href="/api-reference/cli/build">
+    Build production bundles
+  </Card>
+  <Card horizontal title="sunpeak mcp" icon="server" href="/api-reference/cli/mcp">
+    Test with real ChatGPT
+  </Card>
+</CardGroup>

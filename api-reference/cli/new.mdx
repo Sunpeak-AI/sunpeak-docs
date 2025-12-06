@@ -1,0 +1,75 @@
+---
+title: "sunpeak new"
+description: "Create a new project with the sunpeak framework."
+---
+
+## Overview
+
+The `sunpeak new` command creates a new sunpeak project with a minimal, convention-based structure for building ChatGPT App UIs (MCP Resources).
+
+```bash
+pnpm dlx sunpeak new
+```
+
+<Tip>
+No global installation required! Use `npx`, `pnpm dlx`, or `yarn dlx` to run the command directly.
+</Tip>
+
+## Usage
+
+Create a new project with a specific name:
+
+<Tabs>
+  <Tab title="pnpm">
+    ```bash
+    pnpm dlx sunpeak new
+    ```
+  </Tab>
+  <Tab title="npm">
+    ```bash
+    npx sunpeak new
+    ```
+  </Tab>
+  <Tab title="yarn">
+    ```bash
+    yarn dlx sunpeak new
+    ```
+  </Tab>
+</Tabs>
+
+## What Gets Created
+
+The framework includes:
+
+- **Convention-based structure** - MCP Resources auto-discovered from `src/components/resources/*-resource.tsx`
+- **Simulations** - Auto-discovered from `src/simulations/index.ts`
+- **Pre-configured tooling** - Vite, TypeScript, Tailwind CSS 4, Vitest
+- **Development scripts** - Ready-to-use `dev`, `build`, `mcp`, and `test` commands
+- **Example components** - Sample MCP Resource to get started quickly
+
+## Project Structure
+
+```
+my-app/
+├── src/
+│   ├── components/
+│   │   └── resources/
+│   │       └── example-resource.tsx
+│   └── simulations/
+│       └── index.ts
+├── public/
+├── package.json
+└── tsconfig.json
+```
+
+## Next Steps
+
+After creating your project:
+
+1. Install dependencies: `pnpm install`
+2. Start the dev server: `pnpm dev`
+3. Open `http://localhost:6767` to see the ChatGPT simulator
+
+<Card horizontal title="Project Structure" icon="folder-tree" href="/template/project-structure">
+  Learn more about the project structure and available commands.
+</Card>

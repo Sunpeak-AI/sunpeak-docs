@@ -1,0 +1,135 @@
+---
+title: "sunpeak build"
+description: "Build optimized production bundles for deployment."
+---
+
+## Overview
+
+The `sunpeak build` command creates optimized, production-ready JavaScript bundles for your MCP Resources. Each Resource file is built as a separate, standalone bundle.
+
+```bash
+sunpeak build
+```
+
+<Info>
+In a sunpeak project, run this command via your package manager: `pnpm build`, `npm run build`, or `yarn build`.
+</Info>
+
+## Output
+
+The build process creates:
+
+- **Minified JavaScript** - Optimized and compressed for minimal file size
+- **CSS extraction** - Unused Tailwind styles removed automatically
+- **Asset optimization** - Static assets with hashed filenames for caching
+- **Source maps** - For debugging production issues
+
+### Output Directory
+
+```
+dist/
+└── chatgpt/
+    ├── example.js
+    ├── example.css
+    └── assets/
+        └── [hashed-files]
+```
+
+Each MCP Resource from `src/components/resources/*-resource.tsx` is built to `dist/chatgpt/[name].js`.
+
+## Automatic Discovery
+
+The build automatically discovers and builds all files matching the pattern:
+
+```
+src/components/resources/*-resource.tsx
+```
+
+For example:
+- `search-resource.tsx` → `dist/chatgpt/search.js`
+- `calendar-resource.tsx` → `dist/chatgpt/calendar.js`
+- `dashboard-resource.tsx` → `dist/chatgpt/dashboard.js`
+
+<Note>
+No entry point configuration needed! The framework handles discovery automatically.
+</Note>
+
+## Build Optimizations
+
+### Tree Shaking
+
+Unused code is automatically removed from the bundle:
+
+```tsx
+// Only the imported components are included in the bundle
+import { Card, Button } from 'sunpeak';
+```
+
+### Code Splitting
+
+Each Resource is built as a separate bundle:
+
+- Reduces initial load time
+- Allows independent updates
+- Improves caching
+
+### CSS Purging
+
+Tailwind CSS automatically removes unused utility classes:
+
+- Only classes actually used in your components are included
+- Significantly reduces CSS file size
+- No manual configuration required
+
+## Usage
+
+<Tabs>
+  <Tab title="pnpm">
+    ```bash
+    pnpm build
+    ```
+  </Tab>
+  <Tab title="npm">
+    ```bash
+    npm run build
+    ```
+  </Tab>
+  <Tab title="yarn">
+    ```bash
+    yarn build
+    ```
+  </Tab>
+</Tabs>
+
+## Configuration Options
+
+### Custom Output Directory
+
+By default, bundles are output to `dist/chatgpt/`. To customize this, you can configure Vite in your project.
+
+### Build Mode
+
+The build runs in production mode by default, with optimizations enabled. For debugging production builds, use:
+
+```bash
+sunpeak build --sourcemap
+```
+
+## Deployment
+
+After building, deploy the `dist/chatgpt/` directory to any static hosting service:
+
+<Card horizontal title="Deployment Guide" icon="rocket" href="/guides/deployment">
+  Learn how to deploy your built widgets to production.
+</Card>
+
+## Related Commands
+
+<CardGroup cols={2}>
+  <Card horizontal title="sunpeak dev" icon="code" href="/api-reference/cli/dev">
+    Develop with hot reload
+  </Card>
+  <Card horizontal title="sunpeak mcp" icon="server" href="/api-reference/cli/mcp">
+    Test with ChatGPT locally
+  </Card>
+</CardGroup>

@@ -5,66 +5,78 @@ description: "Understanding your sunpeak project structure."
 
 ## Overview
 
-When you create a new project with `pnpm dlx sunpeak new`, the sunpeak Starter Kit gives you a complete project scaffold with everything needed for ChatGPT widget development.
+When you create a new project with `pnpm dlx sunpeak new`, the sunpeak framework gives you a minimal, convention-based project structure with everything needed for ChatGPT widget development.
 
 ## Key Files & Directories
 
-- `dev/main.tsx` - ChatGPT simulator setup. Entrypoint for `sunpeak dev`.
-- `mcp/server.ts` - Simple MCP server for running simulations in the real ChatGPT. Entrypoint for `sunpeak mcp`.
 - `src/components/resources/` - Directory containing all your MCP Resources (ChatGPT App UIs).
-    Every file in this directory ending with `-resource.tsx` will be built by `sunpeak build` to
+    Every file in this directory ending with `-resource.tsx` will be automatically built by the framework to
     `dist/chatgpt/name.js`, where the output name will be whatever was prefixed to `-resource.tsx`.
-- `src/simulations/` - Directory containing all your sunpeak simulations. Every simulation added to
-    `SIMULATIONS` in `template/src/simulations/index.ts` will be wired into the `ChatGPTSimulator`
-    and `runMCPServer`.
+- `src/simulations/` - Directory containing all your sunpeak simulations. Every simulation exported in
+    `SIMULATIONS` from `src/simulations/index.ts` will be automatically discovered by the dev server and MCP server.
+- `public/` - Static assets (favicon, images, etc.) served directly.
+- `.sunpeak/` - Internal framework bootstrap files (managed by sunpeak, don't edit).
 
-## CLI Commands
+<Note>
+No entry point files needed! The framework automatically discovers your simulations and resources using conventions.
+</Note>
 
-<ResponseField name="sunpeak build" type="command">
-  Build optimized production bundles, one for each Resource.
-  Builds a one-file bundle for each resource in the `src/components/resources/` directory.
-</ResponseField>
+## Available Commands
 
-<ResponseField name="sunpeak dev" type="command">
+Inside your project, use these npm scripts:
+
+<ResponseField name="pnpm dev" type="command">
   Start development server with ChatGPT simulator at `http://localhost:6767`.
+  Uses Vite's hot reload for instant feedback as you edit components.
 </ResponseField>
 
-<ResponseField name="sunpeak mcp" type="command">
-  Start MCP server for ChatGPT testing. Also watches your `src/` directory
-  and re-builds automatically on relevant file changes.
+<ResponseField name="pnpm build" type="command">
+  Build optimized production bundles, one for each Resource.
+  Automatically discovers and builds all files matching `*-resource.tsx` in `src/components/resources/`.
 </ResponseField>
 
-<ResponseField name="sunpeak lint" type="command">
-  Run linter (ESLint & Prettier).
+<ResponseField name="pnpm mcp" type="command">
+  Start MCP server for ChatGPT testing on port 6766. Watches your `src/` directory
+  and automatically rebuilds on file changes.
 </ResponseField>
 
-<ResponseField name="sunpeak typecheck" type="command">
-  Check TypeScript types without building.
+<ResponseField name="pnpm test" type="command">
+  Run unit tests with Vitest.
 </ResponseField>
 
-<ResponseField name="sunpeak test" type="command">
-  Run unit tests.
-</ResponseField>
+<Note>
+All commands run the local `sunpeak` CLI from `node_modules/.bin` - no global install required!
+You can customize tooling (linting, formatting, type-checking) by adding them to your `package.json` as needed.
+</Note>
 
-<ResponseField name="sunpeak validate" type="command">
-  Run and validate all of the above commands.
-</ResponseField>
+## Included Tools
 
-## Pre-Configured Tools
+The template includes minimal, essential tooling:
 
 ### Vite
 
-Fast build tool with hot-reload (HMR) for instant development feedback. Configured via `vite` files.
+Fast build tool with hot-reload (HMR) for instant development feedback. The framework owns the dev server configuration - just run `pnpm dev`.
 
 ### Tailwind CSS 4
 
-Utility-first CSS framework for rapid UI development. Configured via Vite plugin & CSS import.
+Utility-first CSS framework for rapid UI development. Pre-configured via Vite plugin.
 Required for [@openai/apps-sdk-ui](https://github.com/openai/apps-sdk-ui), which is also configured out-of-the-box.
 
 ### TypeScript
 
-Type safety. Configured via `tsconfig` files.
+Type safety with TypeScript 5. Configured via `tsconfig.json`.
 
-#### Vitest (Unit Tests)
+### Vitest (Unit Tests)
 
-Vite-native testing framework. Configured via `vitest.config.ts`.
+Vite-native testing framework for component testing. Run with `pnpm test`.
+
+### Add Your Own Tooling
+
+The template is intentionally minimal. Add your preferred tools as needed:
+- **Linting**: ESLint
+- **Formatting**: Prettier
+- **Type checking**: Run `tsc --noEmit` as a script
+
+<Card horizontal title="sunpeak CLI API Reference" icon="code" href="/api-reference/cli/new">
+  All sunpeak CLI commands and configurations.
+</Card>

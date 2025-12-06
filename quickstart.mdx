@@ -6,45 +6,32 @@ description: "Create your first ChatGPT App UI with sunpeak."
 ## New projects
 
 <Steps>
-  <Step title="Install the CLI">
+  <Step title="Create a project">
     **Requirements:** Node.js 20+
 
-    Install the sunpeak CLI globally to use `sunpeak` commands:
+    Create a new project with one command (no install needed):
 
     <Tabs>
       <Tab title="pnpm">
         ```bash
-        pnpm add -g sunpeak
+        pnpm dlx sunpeak new my-app
         ```
       </Tab>
       <Tab title="npm">
         ```bash
-        npm install -g sunpeak
+        npx sunpeak new my-app
         ```
       </Tab>
       <Tab title="yarn">
         ```bash
-        yarn global add sunpeak
+        yarn dlx sunpeak new my-app
         ```
       </Tab>
     </Tabs>
-
-    <Note>
-    You can also use `pnpm dlx sunpeak` instead of installing globally.
-    </Note>
-  </Step>
-
-  <Step title="Create a project">
-
-    ```bash
-    sunpeak new
-    ```
-
-    You will be prompted to name your project. We'll choose `my-app` for now.
   </Step>
 
   <Step title="Install dependencies">
-    Navigate to your project directory and install dependencies:
+    Navigate to your project and install dependencies:
 
     <Tabs>
       <Tab title="pnpm">
@@ -67,12 +54,27 @@ description: "Create your first ChatGPT App UI with sunpeak."
       </Tab>
     </Tabs>
   </Step>
+
   <Step title="Develop locally">
     Run the development server to use your local simulator:
 
-    ```bash
-    sunpeak dev
-    ```
+    <Tabs>
+      <Tab title="pnpm">
+        ```bash
+        pnpm dev
+        ```
+      </Tab>
+      <Tab title="npm">
+        ```bash
+        npm run dev
+        ```
+      </Tab>
+      <Tab title="yarn">
+        ```bash
+        yarn dev
+        ```
+      </Tab>
+    </Tabs>
 
     Open `http://localhost:6767` to see the ChatGPT simulator running your app.
 
@@ -82,12 +84,32 @@ description: "Create your first ChatGPT App UI with sunpeak."
   <Step title="Develop in ChatGPT">
     Run the MCP server and a tunnel to allow ChatGPT to connect to it:
 
-    ```bash
-    sunpeak mcp
+    <Tabs>
+      <Tab title="pnpm">
+        ```bash
+        pnpm mcp
 
-    # In another terminal, run a tunnel. For example:
-    ngrok http 6766
-    ```
+        # In another terminal, run a tunnel. For example:
+        ngrok http 6766
+        ```
+      </Tab>
+      <Tab title="npm">
+        ```bash
+        npm run mcp
+
+        # In another terminal, run a tunnel. For example:
+        ngrok http 6766
+        ```
+      </Tab>
+      <Tab title="yarn">
+        ```bash
+        yarn mcp
+
+        # In another terminal, run a tunnel. For example:
+        ngrok http 6766
+        ```
+      </Tab>
+    </Tabs>
 
     You can then connect to the tunnel `Forwarding URL` at the `/mcp` path (e.g. `https://your-random-subdomain.ngrok-free.dev/mcp`) from ChatGPT
     **in developer mode**: `User > Settings > Apps & Connectors > Create`.

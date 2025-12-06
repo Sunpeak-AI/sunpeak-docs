@@ -8,7 +8,7 @@ import CreateSimulation from '/snippets/create-simulation.mdx';
 ## Overview
 
 If you already have a React project and want to use sunpeak for runtime APIs or testing,
-you can integrate the sunpeak library directly without using the starter kit.
+you can integrate the sunpeak library directly without using the framework.
 
 <Info>
 **Starting from scratch?** Use [Quickstart](/quickstart) for the recommended MCP App creation experience.
@@ -33,18 +33,6 @@ Your existing project needs:
 ## Installation Steps
 
 <Steps>
-  <Step title="Install the CLI">
-    Install the sunpeak CLI globally to use `sunpeak` commands:
-
-    ```bash
-    pnpm add -g sunpeak
-    ```
-
-    <Note>
-    You can also use `pnpm dlx sunpeak` instead of installing globally.
-    </Note>
-  </Step>
-
   <Step title="Install sunpeak">
     Add sunpeak to your project dependencies:
 
@@ -182,15 +170,29 @@ Your existing project needs:
     ```json
     "scripts": {
       // ...
-      "dev": "vite --port ${PORT:-6767}"
+      "dev": "vite --port 6767"
     },
     ```
 
     Run your local development server with your new simulation entrypoint:
 
-    ```bash
-    sunpeak dev
-    ```
+    <Tabs>
+      <Tab title="pnpm">
+        ```bash
+        pnpm dev
+        ```
+      </Tab>
+      <Tab title="npm">
+        ```bash
+        npm run dev
+        ```
+      </Tab>
+      <Tab title="yarn">
+        ```bash
+        yarn dev
+        ```
+      </Tab>
+    </Tabs>
 
     <Warning>
     Only use the simulator in development. For production, export your component directly.
@@ -227,25 +229,41 @@ Your existing project needs:
     "scripts": {
       // ...
       "build": "vite build",
-      "mcp": "node mcp/server.ts"
+      "mcp": "tsx mcp/server.ts"
     },
     ```
 
     Build your app and start the MCP server:
 
-    ```bash
-    sunpeak build
-    sunpeak mcp
-    ```
+    <Tabs>
+      <Tab title="pnpm">
+        ```bash
+        pnpm build
+        pnpm mcp
+        ```
+      </Tab>
+      <Tab title="npm">
+        ```bash
+        npm run build
+        npm run mcp
+        ```
+      </Tab>
+      <Tab title="yarn">
+        ```bash
+        yarn build
+        yarn mcp
+        ```
+      </Tab>
+    </Tabs>
 
     Then use a tunnel (like ngrok) to expose your server to ChatGPT. See [Platform Testing](/library/platform-testing) for details.
   </Step>
 </Steps>
 
-## Need the Full Starter Kit?
+## Need the Full Framework?
 
-Often, it's easier to just copy your existing components into a new project initiated with the sunpeak starter kit.
+Often, it's easier to just copy your existing components into a new project initiated with the sunpeak framework.
 
-The kit comes with pre-built components, build tools, and testing framework.
+The framework comes pre-configured for local and platform testing with pre-built components.
 
 See [Quickstart](/quickstart) to get started.

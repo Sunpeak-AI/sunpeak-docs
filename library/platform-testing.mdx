@@ -28,21 +28,34 @@ Learn more in the [Model Context Protocol documentation](https://modelcontextpro
 
 ## Quick Start
 
-If you set up your project via the sunpeak Starter Kit, the simulator is already set up!
+If you set up your project via the sunpeak framework, the simulator is already set up!
 Simply run it with:
 
 <Steps>
   <Step title="Start the MCP server">
     Start the MCP server on port 6766:
 
-    ```bash
-    sunpeak mcp
-    ```
+    <Tabs>
+      <Tab title="pnpm">
+        ```bash
+        pnpm mcp
+        ```
+      </Tab>
+      <Tab title="npm">
+        ```bash
+        npm run mcp
+        ```
+      </Tab>
+      <Tab title="yarn">
+        ```bash
+        yarn mcp
+        ```
+      </Tab>
+    </Tabs>
 
     This serves your built `Resource`s out of your `dist/` directory.
 
-    If you are using the sunpeak starter kit, it will also watch your
-    `src/` directory and re-build automatically on relevant file changes.
+    It also watches your `src/` directory and automatically rebuilds on file changes.
   </Step>
 
   <Step title="Run a tunnel">

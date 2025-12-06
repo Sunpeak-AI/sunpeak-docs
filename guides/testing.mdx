@@ -5,28 +5,42 @@ description: "Testing and validation in sunpeak projects."
 
 ## Overview
 
-sunpeak projects come pre-configured with testing tools and validation commands.
-The starter kit includes Vitest for unit testing and several CLI commands for code quality checks.
+sunpeak projects include Vitest for unit testing out of the box. The template is intentionally minimal - you can add additional tooling (linting, type-checking, formatting) as your project needs evolve.
 
-**TL;DR**: Run `sunpeak validate` every time before you ship.
+**TL;DR**: Run `pnpm test` to verify your components before shipping.
 
-## Available Commands
+## Testing Command
 
-<ResponseField name="sunpeak test" type="command">
+<ResponseField name="pnpm test" type="command">
   Run unit tests with Vitest.
 </ResponseField>
 
-<ResponseField name="sunpeak lint" type="command">
-  Run ESLint and Prettier to check code style.
-</ResponseField>
+## Additional Quality Tools (Optional)
 
-<ResponseField name="sunpeak typecheck" type="command">
-  Check TypeScript types without building.
-</ResponseField>
+The template doesn't prescribe tooling beyond testing. Add what you need:
 
-<ResponseField name="sunpeak validate" type="command">
-  Run all validation commands (lint, typecheck, test).
-</ResponseField>
+<AccordionGroup>
+  <Accordion title="Linting (ESLint)">
+    ```bash
+    pnpm add -D eslint @typescript-eslint/eslint-plugin
+    ```
+    Add `"lint": "eslint . --ext .ts,.tsx"` to package.json scripts.
+  </Accordion>
+
+  <Accordion title="Type Checking">
+    TypeScript is already installed. Add to package.json scripts:
+    ```json
+    "typecheck": "tsc --noEmit"
+    ```
+  </Accordion>
+
+  <Accordion title="Formatting (Prettier)">
+    ```bash
+    pnpm add -D prettier
+    ```
+    Add `"format": "prettier --write ."` to package.json scripts.
+  </Accordion>
+</AccordionGroup>
 
 ## Testing Setup
 

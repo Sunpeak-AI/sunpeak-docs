@@ -24,13 +24,13 @@
           {
             "group": "sunpeak Library",
             "pages": [
+              "library/runtime-apis",
               "library/local-testing",
-              "library/platform-testing",
-              "library/runtime-apis"
+              "library/platform-testing"
             ]
           },
           {
-            "group": "Starter Kit",
+            "group": "sunpeak Framework",
             "pages": [
               "template/project-structure",
               "template/ui-components"
@@ -54,6 +54,16 @@
       {
         "tab": "API Reference",
         "groups": [
+          {
+            "group": "CLI",
+            "pages": [
+              "api-reference/cli/new",
+              "api-reference/cli/dev",
+              "api-reference/cli/build",
+              "api-reference/cli/mcp",
+              "api-reference/cli/test"
+            ]
+          },
           {
             "group": "Simulations",
             "pages": [
