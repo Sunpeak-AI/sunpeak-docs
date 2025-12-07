@@ -25,14 +25,14 @@
             "group": "sunpeak Library",
             "pages": [
               "library/runtime-apis",
-              "library/local-testing",
-              "library/platform-testing"
+              "library/chatgpt-simulator",
+              "library/mcp-server"
             ]
           },
           {
             "group": "sunpeak Framework",
             "pages": [
-              "template/project-structure",
+              "template/project-scaffold",
               "template/ui-components"
             ]
           },

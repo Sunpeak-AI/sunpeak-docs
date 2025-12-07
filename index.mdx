@@ -7,7 +7,7 @@ import QuickstartExample from '/snippets/quickstart-example.mdx';
 
 <Info>
 **Definitions**: A ChatGPT App is an MCP App. The UI of a ChatGPT App is an MCP Resource.
-We will use these terms interchangeably. More on MCP [here](library/platform-testing).
+We will use these terms interchangeably. More on MCP [here](library/mcp-server).
 </Info>
 
 <video
@@ -28,21 +28,21 @@ sunpeak consists of a library and a framework.
 
 ### The sunpeak Library
 
-A React npm package (`sunpeak`) for running & testing MCP Apps:
+An npm package for running & testing MCP Apps. This standalone library contains:
 
-- **Runtime APIs** - Strongly typed multi-platform APIs for interacting with ChatGPT, architected to support future genAI offerings (Gemini, Claude, etc.).
-- **Local Testing** - Create simulations in the ChatGPT Simulator to test your UIs locally—manually or automatically.
-- **Platform Testing** - Run your simulations in the real ChatGPT using a pre-packaged MCP server.
+- **Runtime APIs** - Strongly typed, multi-platform APIs for interacting with the ChatGPT runtime, architected to support future platforms (Gemini, Claude).
+- **ChatGPT Simulator** - React component replicating ChatGPT's runtime.
+- **MCP Server** - Mock data MCP server for testing local Resources in the real ChatGPT.
 
 The sunpeak library can be used for any MCP App project, not just those built with the framework.
 
 ### The sunpeak Framework
 
-An MCP App framework (`pnpm dlx sunpeak new`) that includes:
+An end-to-end framework MCP Apps, from quickstart to shipped. This templated npm package includes:
 
-- **Minimal Setup** - Just your app code with framework conventions handling the rest.
-- **UI Components** - Production-ready components following ChatGPT design guidelines, built on OpenAI's apps-sdk-ui.
-- **CLI Utility** - Command-line utilities for using the framework.
+- **Project Scaffold** - Complete development setup with build, test, and mcp tooling.
+- **UI Components** - Production-ready components following ChatGPT design guidelines and using OpenAI apps-sdk-ui React components.
+- **CLI Utility** - Commands for working with the sunpeak framework.
 
 ## Quick Example
 
