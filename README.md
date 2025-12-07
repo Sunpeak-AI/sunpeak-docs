@@ -1,6 +1,6 @@
 # sunpeak Documentation
 
-Official documentation for [sunpeak](https://github.com/Sunpeak-AI/sunpeak) - The ChatGPT Apps SDK.
+Official documentation for [sunpeak](https://github.com/Sunpeak-AI/sunpeak) - The ChatGPT Apps framework.
 
 ## Local Development
 
