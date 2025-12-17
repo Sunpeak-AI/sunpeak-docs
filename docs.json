@@ -60,8 +60,7 @@
               "api-reference/cli/new",
               "api-reference/cli/dev",
               "api-reference/cli/build",
-              "api-reference/cli/mcp",
-              "api-reference/cli/test"
+              "api-reference/cli/mcp"
             ]
           },
           {
@@ -73,11 +72,12 @@
             ]
           },
           {
-            "group": "Component Library",
+            "group": "Resource Library",
             "pages": [
-              "api-reference/components/albums",
-              "api-reference/components/card",
-              "api-reference/components/carousel"
+              "api-reference/resources/albums",
+              "api-reference/resources/carousel",
+              "api-reference/resources/counter",
+              "api-reference/resources/map"
             ]
           },
           {

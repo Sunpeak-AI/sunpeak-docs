@@ -29,20 +29,18 @@ The build process creates:
 ```
 dist/
 └── chatgpt/
-    ├── example.js
-    ├── example.css
-    └── assets/
-        └── [hashed-files]
+    ├── resource1.js
+    └── resource2.js
 ```
 
-Each MCP Resource from `src/components/resources/*-resource.tsx` is built to `dist/chatgpt/[name].js`.
+Each MCP Resource from `src/resources/*-resource.tsx` is built to `dist/chatgpt/[name].js`.
 
 ## Automatic Discovery
 
 The build automatically discovers and builds all files matching the pattern:
 
 ```
-src/components/resources/*-resource.tsx
+src/resources/*-resource.tsx
 ```
 
 For example:
@@ -100,20 +98,6 @@ Tailwind CSS automatically removes unused utility classes:
     ```
   </Tab>
 </Tabs>
-
-## Configuration Options
-
-### Custom Output Directory
-
-By default, bundles are output to `dist/chatgpt/`. To customize this, you can configure Vite in your project.
-
-### Build Mode
-
-The build runs in production mode by default, with optimizations enabled. For debugging production builds, use:
-
-```bash
-sunpeak build --sourcemap
-```
 
 ## Deployment
 

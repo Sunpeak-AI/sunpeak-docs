@@ -9,7 +9,7 @@ When you create a new project with `pnpm dlx sunpeak new`, the sunpeak framework
 
 ## Key Files & Directories
 
-- `src/components/resources/` - Directory containing all your MCP Resources (ChatGPT App UIs).
+- `src/resources/` - Directory containing all your MCP Resources (ChatGPT App UIs).
     Every file in this directory ending with `-resource.tsx` will be automatically built by the framework to
     `dist/chatgpt/name.js`, where the output name will be whatever was prefixed to `-resource.tsx`.
 - `src/simulations/` - Directory containing all your sunpeak simulations. Every simulation exported in
@@ -32,7 +32,7 @@ Inside your project, use these npm scripts:
 
 <ResponseField name="pnpm build" type="command">
   Build optimized production bundles, one for each Resource.
-  Automatically discovers and builds all files matching `*-resource.tsx` in `src/components/resources/`.
+  Automatically discovers and builds all files matching `*-resource.tsx` in `src/resources/`.
 </ResponseField>
 
 <ResponseField name="pnpm mcp" type="command">

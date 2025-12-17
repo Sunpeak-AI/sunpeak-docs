@@ -1,0 +1,77 @@
+---
+title: "Counter"
+description: "A simple counter demonstration showing persistent state management with useWidgetState."
+---
+
+## Overview
+
+`Counter` is a production-ready counter resource included in the sunpeak framework. It provides a simple increment/decrement counter that persists its state across sessions, demonstrating the core state management capabilities of sunpeak widgets.
+
+The counter uses `useWidgetState()` to persist the count value and automatically adapts to touch devices with larger button sizes.
+
+## State Management
+
+The counter uses `useWidgetState` to persist the count value across sessions:
+
+```tsx
+interface CounterState {
+  count?: number
+}
+```
+
+The count is initialized to `0` if not set, and all changes are automatically persisted using the widget state system.
+
+## Features
+
+### Responsive Button Sizing
+
+The counter detects touch capabilities using `useUserAgent()` and automatically adjusts button sizes for easier interaction on touch devices.
+
+### Safe Area Support
+
+The counter respects device safe areas using `useSafeArea()` to ensure proper padding on devices with notches or rounded corners.
+
+### Height Constraints
+
+Uses `useMaxHeight()` to adapt to available screen space and prevent overflow.
+
+## Operations
+
+### Increment
+
+Increases the count by 1 when the "+" button is clicked.
+
+```tsx
+const increment = () => {
+  setWidgetState({ count: count + 1 });
+};
+```
+
+### Decrement
+
+Decreases the count by 1 when the "−" button is clicked.
+
+```tsx
+const decrement = () => {
+  setWidgetState({ count: count - 1 });
+};
+```
+
+### Reset
+
+Resets the count back to 0 when the "Reset" button is clicked.
+
+```tsx
+const reset = () => {
+  setWidgetState({ count: 0 });
+};
+```
+
+## Common Use Cases
+
+While the counter itself is a demonstration widget, the patterns it showcases are useful for:
+
+- Building widgets that need to track user interactions across sessions
+- Understanding how to use `useWidgetState` for simple state management
+- Learning how to adapt UI based on device capabilities
+- Implementing safe area and max height constraints

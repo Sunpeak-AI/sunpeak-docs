@@ -7,28 +7,30 @@ import QuickstartExample from '/snippets/quickstart-example.mdx';
 
 ## Overview
 
-The sunpeak framework includes pre-built React components in your project's `src/components/` directory. These components are built on [@openai/apps-sdk-ui](https://github.com/openai/apps-sdk-ui) and follow ChatGPT's design guidelines.
+The sunpeak framework includes pre-built MCP resources consisting of React components in your project's
+`src/resources/` and `src/components/` directories, respectively.
+
+These components are built on [@openai/apps-sdk-ui](https://github.com/openai/apps-sdk-ui)
+and follow ChatGPT's design guidelines.
 
 ## Resources
 
 Resources (from MCP) are top-level components that can be simulated or shipped to production.
 
-Resources are kept in the `src/components/resources/` directory.
+Resources are kept in the `src/resources/` directory.
 Every file in this directory ending with `-resource.tsx` will be automatically built to
 `dist/chatgpt/name.js`, where the output name will be whatever was prefixed to `-resource.tsx`.
 
-## High-Level Components
-
-sunpeak comes with some pre-packaged high level components built out of the low-level components
-described below.
-
-- **[Albums](/api-reference/components/albums)** - A photo album viewer with carousel display and fullscreen viewing capability.
-- **[Card](/api-reference/components/card)** - A versatile card for displaying rich content with images, headers, metadata, and action buttons.
-- **[Carousel](/api-reference/components/carousel)** - A horizontal scrolling carousel for displaying multiple cards with navigation arrows and smooth transitions.
+See the [Resource Library API Reference](/api-reference/resources/albums) for
+all pre-packaged sunpeak resources.
 
 ### Quick Example
 
 <QuickstartExample file="quickstart-example.mdx" />
+
+## High-Level Components
+
+Sunpeak resources are built out of higher-level components in the `src/components/` directory.
 
 ### Customization
 
@@ -68,6 +70,6 @@ import { Button, Input, Select } from '@openai/apps-sdk-ui/components';
 
 See the [OpenAI apps-sdk-ui documentation](https://openai.github.io/apps-sdk-ui/) for the full low-level component library.
 
-<Card horizontal title="Component Library API Reference" icon="code" href="/api-reference/components/albums">
+<Card horizontal title="Component Library API Reference" icon="code" href="/api-reference/resources/albums">
   All components provided by sunpeak.
 </Card>
