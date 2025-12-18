@@ -12,6 +12,8 @@ When you create a new project with `pnpm dlx sunpeak new`, the sunpeak framework
 - `src/resources/` - Directory containing all your MCP Resources (ChatGPT App UIs).
     Every file in this directory ending with `-resource.tsx` will be automatically built by the framework to
     `dist/chatgpt/name.js`, where the output name will be whatever was prefixed to `-resource.tsx`.
+    Each resource **must** have a companion `-resource.meta.ts` file containing server-safe metadata (uri, name, title, description, mimeType).
+    These meta files are imported by simulations and exported by the build.
 - `src/simulations/` - Directory containing all your sunpeak simulations. Every simulation exported in
     `SIMULATIONS` from `src/simulations/index.ts` will be automatically discovered by the dev server and MCP server.
 - `public/` - Static assets (favicon, images, etc.) served directly.

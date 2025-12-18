@@ -1,4 +1,27 @@
+First, create a resource meta file with server-safe metadata:
+
 ```ts
+// src/resources/example-resource.meta.ts
+import { defaultWidgetMeta } from '../simulations/widget-config';
+
+export const exampleResourceMeta = {
+  uri: 'ui://ExampleResource',
+  name: 'example',
+  title: 'Example',
+  description: 'My example component',
+  mimeType: 'text/html+skybridge',
+  _meta: {
+    ...defaultWidgetMeta,
+  },
+} as const;
+```
+
+Then, create the simulation that imports the resource metadata:
+
+```ts
+// src/simulations/example-simulation.ts
+import { exampleResourceMeta } from '../resources/example-resource.meta';
+
 export const exampleSimulation = {
   userMessage: 'Show me an example', // Stylistic, no functional purpose.
 
@@ -10,7 +33,7 @@ export const exampleSimulation = {
     title: 'Show Example',
     annotations: { readOnlyHint: true },
     _meta: {
-      'openai/outputTemplate': 'ui://MyComponentResource',
+      'openai/outputTemplate': 'ui://ExampleResource',
       'openai/toolInvocation/invoking': 'Loading example',
       'openai/toolInvocation/invoked': 'Example loaded',
       'openai/widgetAccessible': true,
@@ -18,15 +41,8 @@ export const exampleSimulation = {
     },
   },
 
-  // MCP Resource protocol.
-  resource: {
-    uri: 'ui://MyComponentResource',
-    name: 'example',
-    title: 'Example',
-    description: 'My example component',
-    mimeType: 'text/html+skybridge',
-    _meta: {},
-  },
+  // MCP Resource protocol - imported from resource meta file.
+  resource: exampleResourceMeta,
 
   // MCP CallTool protocol.
   toolCall: {

@@ -61,13 +61,21 @@ import type { Simulation } from 'sunpeak';
 <ResponseField name="resource" type="Resource" required>
   Official MCP SDK Resource type used in the ListResources response. Defines the resource URI, name, and metadata.
 
+  **Required:** Resource metadata must be defined in a separate `-resource.meta.ts` file in the `resources`
+  directory. You can either duplicate those values here or import the meta file and put it into your simulation.
+  This keeps metadata server-safe (no React/CSS imports), allows the build to export it, and enables deployment.
+
   **Key properties:**
   - `uri`: Resource URI. Use `ui://` + your component name (e.g., `ui://MyComponentResource`).
   - `name`: Name of the resource (machine).
   - `title`: Name of the resource (human readable).
   - `description`: Human-readable description.
   - `mimeType`: Always `text/html+skybridge` for UI resources.
-  - `_meta`: Additional metadata.
+  - `_meta`: Additional metadata. Use `defaultWidgetMeta` from `widget-config.ts` and override as needed:
+    - `openai/widgetDomain` (string): The domain where your widget should link via the "Open in App" button (e.g., `https://yourdomain.com`).
+    - `openai/widgetCSP` (object): Content Security Policy configuration for your widget:
+      - `connect_domains` (string[]): Domains your widget can make API requests to (e.g., `['https://api.yourdomain.com']`).
+      - `resource_domains` (string[]): Domains your widget can load images and other resources from (e.g., `['https://cdn.yourdomain.com', 'https://images.unsplash.com']`).
 </ResponseField>
 
 <ResponseField name="toolCall" type="SimulationCallToolResult">
@@ -135,9 +143,34 @@ Subset of the MCP CallTool response used in simulations to provide mock structur
   Response metadata.
 </ResponseField>
 
+## Example - Resource Meta File
+
+Each resource requires a companion `.meta.ts` file containing server-safe metadata:
+
+```ts
+// src/resources/albums-resource.meta.ts
+import { defaultWidgetMeta } from '../simulations/widget-config';
+
+export const albumsResourceMeta = {
+  uri: 'ui://AlbumsResource',
+  name: 'albums',
+  title: 'Albums',
+  description: 'Show photo albums widget markup',
+  mimeType: 'text/html+skybridge',
+  _meta: {
+    ...defaultWidgetMeta,
+  },
+} as const;
+```
+
 ## Example - Simulation with Globals and Data
 
+The simulation imports the resource metadata from the meta file:
+
 ```tsx
+// src/simulations/albums-simulation.ts
+import { albumsResourceMeta } from '../resources/albums-resource.meta';
+
 export const albumsSimulation: Simulation = {
   resourceComponent: Albums,
   userMessage: 'Show me some albums',
@@ -167,14 +200,8 @@ export const albumsSimulation: Simulation = {
     },
   },
 
-  resource: {
-    uri: 'ui://AlbumsResource',
-    name: 'albums',
-    title: 'Albums',
-    description: 'Album collection widget',
-    mimeType: 'text/html+skybridge',
-    _meta: {},
-  },
+  // Imported from resource meta file
+  resource: albumsResourceMeta,
 
   toolCall: {
     structuredContent: {
