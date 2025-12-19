@@ -1,0 +1,156 @@
+---
+title: "sunpeak push"
+description: "Push built resources to the Sunpeak repository."
+---
+
+## Overview
+
+The `sunpeak push` command uploads your built MCP Resources to the Sunpeak repository, making them available for deployment and version management.
+
+```bash
+sunpeak push [file] [options]
+```
+
+<Warning>
+You must be logged in to use this command. Run `sunpeak login` first.
+</Warning>
+
+## Prerequisites
+
+Before pushing:
+
+1. **Login** - Run `sunpeak login` to authenticate
+2. **Build** - Run `sunpeak build` to create production bundles
+
+## How It Works
+
+The push command:
+
+1. Finds all built resources in `dist/`
+2. Reads metadata from `*.meta.json` files (name, title, description, mimeType)
+3. Uploads each resource to the Sunpeak repository
+4. Sunpeak assigns a unique URI to each resource to invalidate the ChatGPT cache
+5. Optionally assigns a tag for version management
+
+<Info>
+**Resource names must be unique within a repository.** If you push a resource with a name that already exists, it will update the existing resource. The resource name is derived from the `name` field in your `.meta.json` file.
+</Info>
+
+```bash
+$ sunpeak push
+Pushing 2 resource(s) to repository "myorg/my-app"...
+
+✓ Pushed search (id: abc123)
+✓ Pushed dashboard (id: def456)
+
+✓ Successfully pushed 2 resource(s).
+```
+
+## Arguments
+
+| Argument | Description |
+|----------|-------------|
+| `file` | Optional JS file to push (e.g., `dist/carousel.js`). If not provided, pushes all resources from `dist/` |
+
+## Options
+
+| Option | Short | Description |
+|--------|-------|-------------|
+| `--repository <owner/repo>` | `-r` | Repository name (defaults to git remote origin) |
+| `--tag <name>` | `-t` | Tag to assign to pushed resources (can be specified multiple times) |
+| `--help` | `-h` | Show help message |
+
+## Usage Examples
+
+### Push All Resources
+
+Push all resources from the `dist/` directory:
+
+```bash
+sunpeak push
+```
+
+### Push a Single Resource
+
+Push a specific resource file:
+
+```bash
+sunpeak push dist/carousel.js
+```
+
+### Push with Tag
+
+Tag resources for versioning or environment management:
+
+```bash
+sunpeak push --tag v1.0.0
+```
+
+```bash
+sunpeak push --tag staging
+```
+
+### Push with Multiple Tags
+
+Apply multiple tags in a single push:
+
+```bash
+sunpeak push --tag v1.0.0 --tag latest
+```
+
+### Specify Repository
+
+Override the repository name (useful for CI/CD or monorepos):
+
+```bash
+sunpeak push --repository myorg/my-app
+```
+
+### Combined Options
+
+```bash
+sunpeak push -r myorg/my-app -t staging
+```
+
+## Repository Detection
+
+By default, the repository name is detected from your git remote:
+
+```bash
+# Detected from git remote origin URL:
+# - https://github.com/myorg/my-app.git → myorg/my-app
+# - git@github.com:myorg/my-app.git → myorg/my-app
+```
+
+If no git remote is found, you must specify the repository explicitly with `--repository`.
+
+## Resource Discovery
+
+The command discovers resources by finding all `.js` files in the dist directory:
+
+```
+dist/
+├── search.js           # Resource: search
+├── search.meta.json    # Metadata for search resource
+├── dashboard.js        # Resource: dashboard
+└── dashboard.meta.json # Metadata for dashboard resource
+```
+
+Each resource needs a corresponding `.meta.json` file containing metadata like name, title, and description. URIs are assigned by Sunpeak when you push.
+
+## Related Commands
+
+<CardGroup cols={2}>
+  <Card horizontal title="sunpeak build" icon="hammer" href="/api-reference/cli/build">
+    Build resources before pushing
+  </Card>
+  <Card horizontal title="sunpeak deploy" icon="rocket" href="/api-reference/cli/deploy">
+    Deploy to production
+  </Card>
+  <Card horizontal title="sunpeak pull" icon="arrow-down-to-bracket" href="/api-reference/cli/pull">
+    Pull resources from Sunpeak
+  </Card>
+  <Card horizontal title="sunpeak login" icon="right-to-bracket" href="/api-reference/cli/login">
+    Authenticate with Sunpeak
+  </Card>
+</CardGroup>

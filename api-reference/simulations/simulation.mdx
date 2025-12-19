@@ -51,7 +51,6 @@ import type { Simulation } from 'sunpeak';
   - `title`: Display name.
   - `annotations`: Tool behavior hints (e.g., `readOnlyHint`).
   - `_meta`: Platform-specific metadata. Not shown to the AI. For OpenAI/ChatGPT:
-    - `openai/outputTemplate` (string, required): Resource URI to display when tool is invoked (e.g., `ui://MyComponentResource`). Must match a resource URI.
     - `openai/toolInvocation/invoking` (string): Status message shown while tool is executing (e.g., "Loading data...").
     - `openai/toolInvocation/invoked` (string): Status message shown after tool completes (e.g., "Data loaded").
     - `openai/widgetAccessible` (boolean): Whether the widget can be accessed/rendered in ChatGPT.
@@ -59,15 +58,14 @@ import type { Simulation } from 'sunpeak';
 </ResponseField>
 
 <ResponseField name="resource" type="Resource" required>
-  Official MCP SDK Resource type used in the ListResources response. Defines the resource URI, name, and metadata.
+  Official MCP SDK Resource type used in the ListResources response. Defines the resource name, description, and other metadata.
 
   **Required:** Resource metadata must be defined in a separate `-resource.meta.ts` file in the `resources`
   directory. You can either duplicate those values here or import the meta file and put it into your simulation.
   This keeps metadata server-safe (no React/CSS imports), allows the build to export it, and enables deployment.
 
   **Key properties:**
-  - `uri`: Resource URI. Use `ui://` + your component name (e.g., `ui://MyComponentResource`).
-  - `name`: Name of the resource (machine).
+  - `name`: Name of the resource (machine). **Must be unique within a repository.**
   - `title`: Name of the resource (human readable).
   - `description`: Human-readable description.
   - `mimeType`: Always `text/html+skybridge` for UI resources.
@@ -152,7 +150,7 @@ Each resource requires a companion `.meta.ts` file containing server-safe metada
 import { defaultWidgetMeta } from '../simulations/widget-config';
 
 export const albumsResourceMeta = {
-  uri: 'ui://AlbumsResource',
+  // name must be unique within your repository
   name: 'albums',
   title: 'Albums',
   description: 'Show photo albums widget markup',
@@ -194,7 +192,6 @@ export const albumsSimulation: Simulation = {
     title: 'Show Albums',
     annotations: { readOnlyHint: true },
     _meta: {
-      'openai/outputTemplate': 'ui://AlbumsResource',
       'openai/widgetAccessible': true,
       'openai/resultCanProduceWidget': true,
     },

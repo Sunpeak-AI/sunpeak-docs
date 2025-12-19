@@ -3,6 +3,91 @@ title: "Deployment"
 description: "Deploy your ChatGPT widget to production."
 ---
 
+## Deploy to Sunpeak
+
+The easiest way to deploy your widget is using the Sunpeak CLI.
+
+<Steps>
+  <Step title="Login to Sunpeak">
+    Authenticate with your Sunpeak account:
+
+    ```bash
+    sunpeak login
+    ```
+
+    This opens your browser for authentication. You only need to do this once.
+  </Step>
+
+  <Step title="Build and deploy">
+    Build your widget and deploy to production:
+
+    <Tabs>
+      <Tab title="pnpm">
+        ```bash
+        pnpm build
+        sunpeak deploy
+        ```
+      </Tab>
+      <Tab title="npm">
+        ```bash
+        npm run build
+        sunpeak deploy
+        ```
+      </Tab>
+      <Tab title="yarn">
+        ```bash
+        yarn build
+        sunpeak deploy
+        ```
+      </Tab>
+    </Tabs>
+
+    The `deploy` command pushes your built resources with the `prod` tag,
+    so that they can be easily pulled and served by your production MCP server.
+  </Step>
+</Steps>
+
+<Tip>
+Add a release script to your `package.json` for one-command deploys:
+
+```json
+{
+  "scripts": {
+    "release": "sunpeak build && sunpeak deploy"
+  }
+}
+```
+</Tip>
+
+### Version Management
+
+Use tags to manage different versions of your resources:
+
+```bash
+# Push and tag all resources as staging
+sunpeak push --tag staging
+
+# Push and tag all resources as version 1.2.0
+sunpeak push --tag v1.2.0
+
+# Push with multiple tags
+sunpeak push --tag v1.2.0 --tag latest
+
+# Push a single resource
+sunpeak push dist/search.js --tag v1.2.0
+```
+
+<Info>
+Resource names must be unique within a repository. URIs are assigned automatically by Sunpeak when you push—you'll see them when you pull resources back.
+</Info>
+
+---
+
+## Manual Deployment
+
+Alternatively, you can deploy your widget manually to any static hosting service
+or directly into your production MCP server.
+
 <Steps>
   <Step title="Build your widget for production">
     Create an optimized production build:

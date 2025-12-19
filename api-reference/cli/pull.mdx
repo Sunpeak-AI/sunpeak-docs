@@ -1,0 +1,161 @@
+---
+title: "sunpeak pull"
+description: "Pull a resource from the Sunpeak repository by tag."
+---
+
+## Overview
+
+The `sunpeak pull` command downloads a specific version of a resource from the Sunpeak repository using its tag. This is useful for retrieving production builds, rolling back to previous versions, or syncing resources across environments.
+
+```bash
+sunpeak pull --tag prod
+```
+
+<Warning>
+You must be logged in to use this command. Run `sunpeak login` first.
+</Warning>
+
+## How It Works
+
+The pull command:
+
+1. Looks up a resource by tag and repository
+2. Downloads the JavaScript bundle
+3. Saves the resource and metadata to the output directory
+
+```bash
+$ sunpeak pull --tag prod
+Pulling resource from repository "myorg/my-app" with tag "prod"...
+
+Found resource: search
+  Title: Search Widget
+  URI: ui://search-he1z2hmh10
+  Tags: prod, v1.2.0
+  Created: 2024-01-15T10:30:00Z
+
+Downloading JS file...
+✓ Saved search.js
+✓ Saved search.meta.json
+
+✓ Successfully pulled resource to dist
+```
+
+## Options
+
+| Option | Short | Description |
+|--------|-------|-------------|
+| `--tag <name>` | `-t` | Tag name to pull (required) |
+| `--repository <owner/repo>` | `-r` | Repository name (defaults to git remote origin) |
+| `--output <path>` | `-o` | Output directory (defaults to `dist`) |
+| `--help` | `-h` | Show help message |
+
+## Usage Examples
+
+### Pull Production Resource
+
+```bash
+sunpeak pull --tag prod
+```
+
+### Pull Specific Version
+
+```bash
+sunpeak pull --tag v1.0.0
+```
+
+### Pull from Specific Repository
+
+```bash
+sunpeak pull --repository myorg/my-app --tag staging
+```
+
+### Custom Output Directory
+
+```bash
+sunpeak pull --tag prod --output ./builds
+```
+
+### Short Form
+
+```bash
+sunpeak pull -t prod -r myorg/my-app
+```
+
+## Output Files
+
+The pull command creates two files for each resource:
+
+```
+dist/
+├── search.js           # The JavaScript bundle
+└── search.meta.json    # Resource metadata
+```
+
+The metadata file contains:
+
+```json
+{
+  "uri": "ui://search-he1z2hmh10",
+  "name": "search",
+  "title": "Search Widget",
+  "description": "A search interface",
+  "mimeType": "text/html+skybridge",
+  "_meta": {
+    "openai/widgetDomain": "example.com",
+    "openai/widgetCSP": {
+      "connect_domains": ["api.example.com"],
+      "resource_domains": ["cdn.example.com"]
+    }
+  }
+}
+```
+
+<Info>
+The `uri` field is assigned by Sunpeak and included in pulled resources for reference.
+</Info>
+
+## Use Cases
+
+### Rollback to Previous Version
+
+```bash
+# Pull a known-good version
+sunpeak pull --tag v1.0.0
+
+# Deploy it
+sunpeak deploy
+```
+
+### Sync Across Environments
+
+```bash
+# Pull from staging
+sunpeak pull --tag staging
+
+# Push to production
+sunpeak push --tag prod
+```
+
+### Inspect Production Build
+
+```bash
+# Download current production build
+sunpeak pull --tag prod --output ./review
+```
+
+## Related Commands
+
+<CardGroup cols={2}>
+  <Card horizontal title="sunpeak push" icon="arrow-up-from-bracket" href="/api-reference/cli/push">
+    Push resources to Sunpeak
+  </Card>
+  <Card horizontal title="sunpeak deploy" icon="rocket" href="/api-reference/cli/deploy">
+    Deploy to production
+  </Card>
+  <Card horizontal title="sunpeak build" icon="hammer" href="/api-reference/cli/build">
+    Build resources locally
+  </Card>
+  <Card horizontal title="sunpeak login" icon="right-to-bracket" href="/api-reference/cli/login">
+    Authenticate with Sunpeak
+  </Card>
+</CardGroup>

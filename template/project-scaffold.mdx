@@ -12,7 +12,7 @@ When you create a new project with `pnpm dlx sunpeak new`, the sunpeak framework
 - `src/resources/` - Directory containing all your MCP Resources (ChatGPT App UIs).
     Every file in this directory ending with `-resource.tsx` will be automatically built by the framework to
     `dist/chatgpt/name.js`, where the output name will be whatever was prefixed to `-resource.tsx`.
-    Each resource **must** have a companion `-resource.meta.ts` file containing server-safe metadata (uri, name, title, description, mimeType).
+    Each resource **must** have a companion `-resource.meta.ts` file containing server-safe metadata (name, title, description, mimeType).
     These meta files are imported by simulations and exported by the build.
 - `src/simulations/` - Directory containing all your sunpeak simulations. Every simulation exported in
     `SIMULATIONS` from `src/simulations/index.ts` will be automatically discovered by the dev server and MCP server.
@@ -44,6 +44,28 @@ Inside your project, use these npm scripts:
 
 <ResponseField name="pnpm test" type="command">
   Run unit tests with Vitest.
+</ResponseField>
+
+### Deployment Commands
+
+<ResponseField name="sunpeak login" type="command">
+  Authenticate with your Sunpeak account. Required before pushing or pulling resources.
+</ResponseField>
+
+<ResponseField name="sunpeak logout" type="command">
+  Log out from Sunpeak and clear stored credentials.
+</ResponseField>
+
+<ResponseField name="sunpeak push" type="command">
+  Push built resources to the Sunpeak repository. Optionally tag with `--tag`.
+</ResponseField>
+
+<ResponseField name="sunpeak pull --tag <name>" type="command">
+  Pull a specific version of a resource by tag from the Sunpeak repository.
+</ResponseField>
+
+<ResponseField name="sunpeak deploy" type="command">
+  Deploy resources to production. Equivalent to `sunpeak push --tag prod`.
 </ResponseField>
 
 <Note>
