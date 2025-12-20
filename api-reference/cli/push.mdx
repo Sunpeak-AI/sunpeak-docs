@@ -29,11 +29,10 @@ The push command:
 1. Finds all built resources in `dist/`
 2. Reads metadata from `*.json` files (name, title, description, mimeType)
 3. Uploads each resource to the Sunpeak repository
-4. Sunpeak assigns a unique URI to each resource to invalidate the ChatGPT cache
-5. Optionally assigns a tag for version management
+4. Optionally assigns a tag for version management
 
 <Info>
-**Resource names must be unique within a repository.** If you push a resource with a name that already exists, it will update the existing resource. The resource name is derived from the `name` field in your `.json` file.
+**Resource names must be unique within a repository.** If you push a resource with a name that already exists, it will update the existing resource. The resource name is the `name` field in your `.json` file.
 </Info>
 
 ```bash

@@ -9,7 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Add distPath to each simulation for the MCP server.
 const simulations = Object.entries(SIMULATIONS).map(([simulationKey, simulation]) => ({
   ...simulation,
-  distPath: path.resolve(__dirname, `../dist/chatgpt/${simulationKey}.js`),
+  distPath: path.resolve(__dirname, `../dist/${simulationKey}.js`),
 }));
 
 runMCPServer({

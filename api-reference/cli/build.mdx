@@ -28,12 +28,13 @@ The build process creates:
 
 ```
 dist/
-└── chatgpt/
-    ├── resource1.js
-    └── resource2.js
+├── search.js      # Built resource bundle
+├── search.json    # Resource metadata with generated URI
+├── calendar.js
+└── calendar.json
 ```
 
-Each MCP Resource from `src/resources/*-resource.tsx` is built to `dist/chatgpt/[name].js`.
+Each MCP Resource from `src/resources/*-resource.tsx` is built to `dist/[name].js`, with a corresponding `[name].json` metadata file.
 
 ## Automatic Discovery
 
@@ -44,9 +45,25 @@ src/resources/*-resource.tsx
 ```
 
 For example:
-- `search-resource.tsx` → `dist/chatgpt/search.js`
-- `calendar-resource.tsx` → `dist/chatgpt/calendar.js`
-- `dashboard-resource.tsx` → `dist/chatgpt/dashboard.js`
+- `search-resource.tsx` + `search-resource.json` → `dist/search.js` + `dist/search.json`
+- `calendar-resource.tsx` + `calendar-resource.json` → `dist/calendar.js` + `dist/calendar.json`
+
+### Metadata JSON Files
+
+The build copies each source `*-resource.json` file to the dist directory and adds a generated `uri` field:
+
+```json
+{
+  "name": "search",
+  "title": "Search Widget",
+  "description": "A search interface",
+  "mimeType": "text/html+skybridge",
+  "uri": "ui://search-mjdoy6rs",
+  "_meta": { ... }
+}
+```
+
+The `uri` is generated using the resource name and a build timestamp for cache invalidation.
 
 <Note>
 No entry point configuration needed! The framework handles discovery automatically.
@@ -101,7 +118,7 @@ Tailwind CSS automatically removes unused utility classes:
 
 ## Deployment
 
-After building, deploy the `dist/chatgpt/` directory to any static hosting service:
+After building, deploy the `dist/` directory to any static hosting service:
 
 <Card horizontal title="Deployment Guide" icon="rocket" href="/guides/deployment">
   Learn how to deploy your built widgets to production.

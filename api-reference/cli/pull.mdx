@@ -29,7 +29,7 @@ Pulling resource from repository "myorg/my-app" with tag "prod"...
 
 Found resource: search
   Title: Search Widget
-  URI: ui://search-he1z2hmh10
+  URI: ui://search-mjdoy6rs
   Tags: prod, v1.2.0
   Created: 2024-01-15T10:30:00Z
 
@@ -46,7 +46,7 @@ Downloading JS file...
 |--------|-------|-------------|
 | `--tag <name>` | `-t` | Tag name to pull (required) |
 | `--repository <owner/repo>` | `-r` | Repository name (defaults to git remote origin) |
-| `--output <path>` | `-o` | Output directory (defaults to `dist`) |
+| `--output <path>` | `-o` | Output directory (defaults to current directory) |
 | `--help` | `-h` | Show help message |
 
 ## Usage Examples
@@ -95,7 +95,7 @@ The metadata file contains:
 
 ```json
 {
-  "uri": "ui://search-he1z2hmh10",
+  "uri": "ui://search-mjdoy6rs",
   "name": "search",
   "title": "Search Widget",
   "description": "A search interface",
@@ -109,10 +109,6 @@ The metadata file contains:
   }
 }
 ```
-
-<Info>
-The `uri` field is assigned by Sunpeak and included in pulled resources for reference.
-</Info>
 
 ## Use Cases
 
