@@ -27,13 +27,13 @@ Before pushing:
 The push command:
 
 1. Finds all built resources in `dist/`
-2. Reads metadata from `*.meta.json` files (name, title, description, mimeType)
+2. Reads metadata from `*.json` files (name, title, description, mimeType)
 3. Uploads each resource to the Sunpeak repository
 4. Sunpeak assigns a unique URI to each resource to invalidate the ChatGPT cache
 5. Optionally assigns a tag for version management
 
 <Info>
-**Resource names must be unique within a repository.** If you push a resource with a name that already exists, it will update the existing resource. The resource name is derived from the `name` field in your `.meta.json` file.
+**Resource names must be unique within a repository.** If you push a resource with a name that already exists, it will update the existing resource. The resource name is derived from the `name` field in your `.json` file.
 </Info>
 
 ```bash
@@ -130,13 +130,13 @@ The command discovers resources by finding all `.js` files in the dist directory
 
 ```
 dist/
-├── search.js           # Resource: search
-├── search.meta.json    # Metadata for search resource
-├── dashboard.js        # Resource: dashboard
-└── dashboard.meta.json # Metadata for dashboard resource
+├── search.js       # Resource: search
+├── search.json     # Metadata for search resource
+├── dashboard.js    # Resource: dashboard
+└── dashboard.json  # Metadata for dashboard resource
 ```
 
-Each resource needs a corresponding `.meta.json` file containing metadata like name, title, and description. URIs are assigned by Sunpeak when you push.
+Each resource needs a corresponding `.json` file containing metadata like name, title, and description. URIs are assigned by Sunpeak when you push.
 
 ## Related Commands
 

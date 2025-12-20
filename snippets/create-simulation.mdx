@@ -1,26 +1,27 @@
-First, create a resource meta file with server-safe metadata:
+First, create a resource JSON file with metadata:
 
-```ts
-// src/resources/example-resource.meta.ts
-import { defaultWidgetMeta } from '../simulations/widget-config';
-
-export const exampleResourceMeta = {
-  // name must be unique within your repository
-  name: 'example',
-  title: 'Example',
-  description: 'My example component',
-  mimeType: 'text/html+skybridge',
-  _meta: {
-    ...defaultWidgetMeta,
-  },
-} as const;
+```json
+// src/resources/example-resource.json
+{
+  "name": "example",
+  "title": "Example",
+  "description": "My example component",
+  "mimeType": "text/html+skybridge",
+  "_meta": {
+    "openai/widgetDomain": "example.com",
+    "openai/widgetCSP": {
+      "connect_domains": [],
+      "resource_domains": []
+    }
+  }
+}
 ```
 
 Then, create the simulation that imports the resource metadata:
 
 ```ts
 // src/simulations/example-simulation.ts
-import { exampleResourceMeta } from '../resources/example-resource.meta';
+import exampleResourceMeta from '../resources/example-resource.json';
 
 export const exampleSimulation = {
   userMessage: 'Show me an example', // Stylistic, no functional purpose.

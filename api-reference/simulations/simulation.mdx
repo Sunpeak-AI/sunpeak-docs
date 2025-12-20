@@ -60,8 +60,8 @@ import type { Simulation } from 'sunpeak';
 <ResponseField name="resource" type="Resource" required>
   Official MCP SDK Resource type used in the ListResources response. Defines the resource name, description, and other metadata.
 
-  **Required:** Resource metadata must be defined in a separate `-resource.meta.ts` file in the `resources`
-  directory. You can either duplicate those values here or import the meta file and put it into your simulation.
+  **Required:** Resource metadata must be defined in a separate `-resource.json` file in the `resources`
+  directory. You can either duplicate those values here or import the JSON file and put it into your simulation.
   This keeps metadata server-safe (no React/CSS imports), allows the build to export it, and enables deployment.
 
   **Key properties:**
@@ -141,33 +141,34 @@ Subset of the MCP CallTool response used in simulations to provide mock structur
   Response metadata.
 </ResponseField>
 
-## Example - Resource Meta File
+## Example - Resource JSON File
 
-Each resource requires a companion `.meta.ts` file containing server-safe metadata:
+Each resource requires a companion `.json` file containing metadata:
 
-```ts
-// src/resources/albums-resource.meta.ts
-import { defaultWidgetMeta } from '../simulations/widget-config';
-
-export const albumsResourceMeta = {
-  // name must be unique within your repository
-  name: 'albums',
-  title: 'Albums',
-  description: 'Show photo albums widget markup',
-  mimeType: 'text/html+skybridge',
-  _meta: {
-    ...defaultWidgetMeta,
-  },
-} as const;
+```json
+// src/resources/albums-resource.json
+{
+  "name": "albums",
+  "title": "Albums",
+  "description": "Show photo albums widget markup",
+  "mimeType": "text/html+skybridge",
+  "_meta": {
+    "openai/widgetDomain": "example.com",
+    "openai/widgetCSP": {
+      "connect_domains": [],
+      "resource_domains": []
+    }
+  }
+}
 ```
 
 ## Example - Simulation with Globals and Data
 
-The simulation imports the resource metadata from the meta file:
+The simulation imports the resource metadata from the JSON file:
 
 ```tsx
 // src/simulations/albums-simulation.ts
-import { albumsResourceMeta } from '../resources/albums-resource.meta';
+import albumsResourceMeta from '../resources/albums-resource.json';
 
 export const albumsSimulation: Simulation = {
   resourceComponent: Albums,
