@@ -1,84 +1,93 @@
 ---
 title: "sunpeak pull"
-description: "Pull a resource from the Sunpeak repository by tag."
+description: "Pull resources from the Sunpeak repository by tag."
 ---
 
 ## Overview
 
-The `sunpeak pull` command downloads a specific version of a resource from the Sunpeak repository using its tag. This is useful for retrieving production builds, rolling back to previous versions, or syncing resources across environments.
+The `sunpeak pull` command downloads resources from the Sunpeak repository using a tag. This is useful for retrieving production builds, rolling back to previous versions, or syncing resources across environments.
 
 ```bash
-sunpeak pull --tag prod
+sunpeak pull -r myorg/my-app -t prod
 ```
 
 <Warning>
 You must be logged in to use this command. Run `sunpeak login` first.
 </Warning>
 
+<Info>
+The `--repository` option is required because `sunpeak pull` is typically run from your MCP server directory, not from the source repository.
+</Info>
+
 ## How It Works
 
 The pull command:
 
-1. Looks up a resource by tag and repository
-2. Downloads the JavaScript bundle
-3. Saves the resource and metadata to the output directory
+1. Looks up resources by tag and repository (optionally filtered by name)
+2. Downloads the JavaScript bundle for each resource
+3. Saves the resources and metadata to the output directory
 
 ```bash
-$ sunpeak pull --tag prod
-Pulling resource from repository "myorg/my-app" with tag "prod"...
+$ sunpeak pull -r myorg/my-app -t prod
+Pulling resources from repository "myorg/my-app" with tag "prod"...
 
-Found resource: search
+Found 2 resource(s):
+
+Resource: search
   Title: Search Widget
   URI: ui://search-mjdoy6rs
   Tags: prod, v1.2.0
   Created: 2024-01-15T10:30:00Z
+  Downloading JS file...
+  ✓ Saved search.js
+  ✓ Saved search.json
 
-Downloading JS file...
-✓ Saved search.js
-✓ Saved search.json
+Resource: dashboard
+  Title: Dashboard Widget
+  URI: ui://dashboard-abc123
+  Tags: prod
+  Created: 2024-01-15T11:00:00Z
+  Downloading JS file...
+  ✓ Saved dashboard.js
+  ✓ Saved dashboard.json
 
-✓ Successfully pulled resource to dist
+✓ Successfully pulled 2 resource(s) to .
 ```
 
 ## Options
 
 | Option | Short | Description |
 |--------|-------|-------------|
+| `--repository <owner/repo>` | `-r` | Repository name (required) |
 | `--tag <name>` | `-t` | Tag name to pull (required) |
-| `--repository <owner/repo>` | `-r` | Repository name (defaults to git remote origin) |
+| `--name <name>` | `-n` | Resource name to filter by (optional) |
 | `--output <path>` | `-o` | Output directory (defaults to current directory) |
 | `--help` | `-h` | Show help message |
 
 ## Usage Examples
 
-### Pull Production Resource
+### Pull All Resources with Tag
 
 ```bash
-sunpeak pull --tag prod
+sunpeak pull -r myorg/my-app -t prod
+```
+
+### Pull Specific Resource by Name
+
+```bash
+sunpeak pull -r myorg/my-app -t prod -n counter
 ```
 
 ### Pull Specific Version
 
 ```bash
-sunpeak pull --tag v1.0.0
-```
-
-### Pull from Specific Repository
-
-```bash
-sunpeak pull --repository myorg/my-app --tag staging
+sunpeak pull -r myorg/my-app -t v1.0.0
 ```
 
 ### Custom Output Directory
 
 ```bash
-sunpeak pull --tag prod --output ./builds
-```
-
-### Short Form
-
-```bash
-sunpeak pull -t prod -r myorg/my-app
+sunpeak pull -r myorg/my-app -t prod -o ./builds
 ```
 
 ## Output Files
@@ -116,7 +125,7 @@ The metadata file contains:
 
 ```bash
 # Pull a known-good version
-sunpeak pull --tag v1.0.0
+sunpeak pull -r myorg/my-app -t v1.0.0
 
 # Deploy it
 sunpeak deploy
@@ -126,7 +135,7 @@ sunpeak deploy
 
 ```bash
 # Pull from staging
-sunpeak pull --tag staging
+sunpeak pull -r myorg/my-app -t staging
 
 # Push to production
 sunpeak push --tag prod
@@ -136,7 +145,14 @@ sunpeak push --tag prod
 
 ```bash
 # Download current production build
-sunpeak pull --tag prod --output ./review
+sunpeak pull -r myorg/my-app -t prod -o ./review
+```
+
+### Pull a Single Resource
+
+```bash
+# Pull only the "search" resource from production
+sunpeak pull -r myorg/my-app -t prod -n search
 ```
 
 ## Related Commands
