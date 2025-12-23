@@ -5,7 +5,7 @@ description: "Deploy your ChatGPT widget to production."
 
 ## Deploy to Sunpeak
 
-The easiest way to deploy your widget is using the Sunpeak CLI.
+Deploy your widget using the Sunpeak CLI.
 
 <Steps>
   <Step title="Login to Sunpeak">
@@ -78,114 +78,92 @@ sunpeak push dist/search.js --tag v1.2.0
 ```
 
 <Info>
-Resource names must be unique within a repository. URIs are assigned automatically by Sunpeak when you push—you'll see them when you pull resources back.
+Resource names must be unique within a repository. If you push a resource with a name that already exists, it will update the existing resource.
 </Info>
 
 ---
 
-## Manual Deployment
+## Production MCP Server
 
-Alternatively, you can deploy your widget manually to any static hosting service
-or directly into your production MCP server.
+Your production MCP server pulls resources from Sunpeak at startup using `sunpeak pull`. This ensures your server always serves the latest deployed version.
 
-<Steps>
-  <Step title="Build your widget for production">
-    Create an optimized production build:
+### Pulling Resources at Startup
 
-    <Tabs>
-      <Tab title="pnpm">
-        ```bash
-        pnpm build
-        ```
-      </Tab>
-      <Tab title="npm">
-        ```bash
-        npm run build
-        ```
-      </Tab>
-      <Tab title="yarn">
-        ```bash
-        yarn build
-        ```
-      </Tab>
-    </Tabs>
+Run `sunpeak pull` before starting your MCP server to download your production resources:
 
-    This creates:
-    - Minified and optimized JavaScript.
-    - CSS with unused styles removed.
-    - Static assets with hashed filenames.
-    - Source maps for debugging.
+```bash
+sunpeak pull -r myorg/my-app -t prod -o ./resources
+```
 
-    Output directory: `dist/`.
-  </Step>
+This downloads all resources tagged `prod` to the `./resources` directory:
 
-  <Step title="Deploy your widget UI">
-    Deploy the built widget to any static hosting service:
+```
+resources/
+├── search.js      # JavaScript bundle
+├── search.json    # Resource metadata (includes URI)
+├── dashboard.js
+└── dashboard.json
+```
 
-    <CardGroup cols={3}>
-      <Card horizontal title="Vercel" icon="triangle">
-        Zero-config static hosting
-      </Card>
-      <Card horizontal title="Netlify" icon="diamond">
-        Simple drag-and-drop deployment
-      </Card>
-      <Card horizontal title="Cloudflare Pages" icon="cloud">
-        Fast global CDN
-      </Card>
-    </CardGroup>
+### Example Startup Script
 
-    Upload the `dist/` directory to your chosen platform. You'll get a public URL like:
-    ```
-    https://your-widget.vercel.app
-    ```
+Add a startup script to your production MCP server's `package.json`:
 
-    <Info>
-    The MCP server (`pnpm mcp`) is a **development server for local testing only**. Do not use it in production.
-    </Info>
-  </Step>
+```json
+{
+  "scripts": {
+    "start": "sunpeak pull -r myorg/my-app -t prod -o ./resources && node server.js"
+  }
+}
+```
 
-  <Step title="Create a production MCP server">
-    Create your own production MCP server that references your deployed UI as a resource.
+Or use a shell script for more control:
 
-    Your MCP server should:
-    - Define the tools your widget needs.
-    - Return your widget UI URL as an MCP resource when tools are invoked.
-    - Handle any backend logic or API calls.
+```bash
+#!/bin/bash
+# start.sh
 
-    Example MCP server configuration:
+# Pull latest production resources
+sunpeak pull -r myorg/my-app -t prod -o ./resources
 
-    ```typescript
-    // Your production MCP server
-    const server = createMCPServer({
-      tools: [
-        {
-          name: 'show-my-widget',
-          description: 'Display my custom widget',
-          handler: async () => {
-            return {
-              resource: {
-                url: 'https://your-widget.vercel.app',
-                type: 'ui'
-              }
-            };
-          }
-        }
-      ]
-    });
-    ```
+# Start the MCP server
+node server.js
+```
 
-    Deploy this MCP server to a Node.js hosting service (Vercel, Railway, etc.).
-  </Step>
+<Info>
+Your production server needs Sunpeak credentials. Run `sunpeak login` on the server, or set the `SUNPEAK_ACCESS_TOKEN` environment variable with a valid token.
+</Info>
 
-  <Step title="Configure ChatGPT">
-    Connect your production MCP server to ChatGPT:
+### Serving Pulled Resources
 
-    1. Open ChatGPT in developer mode.
-    2. Navigate to `User > Settings > Apps & Connectors > Create`.
-    3. Enter your MCP server URL with the `/mcp` path:
-       ```
-       https://your-mcp-server.vercel.app/mcp
-       ```
-    4. Test by sending `show my widget` (or whatever you set as the name of your tool) to ChatGPT.
-  </Step>
-</Steps>
+Your MCP server reads the pulled `.js` and `.json` files to serve resources. The metadata JSON contains the resource URI and other properties needed by ChatGPT:
+
+```typescript
+import { readFileSync, readdirSync } from 'fs';
+import { join } from 'path';
+
+// Load all resources from the pulled directory
+const resourceDir = './resources';
+const files = readdirSync(resourceDir).filter(f => f.endsWith('.json'));
+
+const resources = files.map(jsonFile => {
+  const name = jsonFile.replace('.json', '');
+  const meta = JSON.parse(readFileSync(join(resourceDir, jsonFile), 'utf-8'));
+  const js = readFileSync(join(resourceDir, `${name}.js`), 'utf-8');
+  return { name, meta, js };
+});
+```
+
+---
+
+## Configure ChatGPT
+
+Connect your production MCP server to ChatGPT:
+
+1. Open ChatGPT in developer mode.
+2. Navigate to `User > Settings > Apps & Connectors > Create`.
+3. Enter your MCP server URL with the `/mcp` path:
+   ```
+   https://your-mcp-server.example.com/mcp
+   ```
+4. Test by invoking one of your tools in ChatGPT.

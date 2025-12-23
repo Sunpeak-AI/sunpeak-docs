@@ -135,7 +135,7 @@ dist/
 └── dashboard.json  # Metadata for dashboard resource
 ```
 
-Each resource needs a corresponding `.json` file containing metadata like name, title, and description. URIs are assigned by Sunpeak when you push.
+Each resource needs a corresponding `.json` file containing metadata like name, title, description, and uri. URIs are generated during `sunpeak build`—if a resource is missing its URI, push will fail with an error.
 
 ## Related Commands
 
