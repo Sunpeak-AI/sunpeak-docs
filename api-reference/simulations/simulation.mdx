@@ -44,7 +44,7 @@ import type { Simulation } from 'sunpeak';
 <ResponseField name="tool" type="Tool" required>
   Official MCP SDK Tool type used in the ListTools response. Defines the tool's name, description, input schema, and metadata including OpenAI-specific annotations.
 
-  **Key properties:**
+  **Key properties**:
   - `name`: Unique identifier for the tool.
   - `description`: Human-readable description.
   - `inputSchema`: JSON Schema for tool input validation.
@@ -60,11 +60,11 @@ import type { Simulation } from 'sunpeak';
 <ResponseField name="resource" type="Resource" required>
   Official MCP SDK Resource type used in the ListResources response. Defines the resource name, description, and other metadata.
 
-  **Required:** Resource metadata must be defined in a separate `-resource.json` file in the `resources`
+  **Required**: Resource metadata must be defined in a separate `-resource.json` file in the `resources`
   directory. You can either duplicate those values here or import the JSON file and put it into your simulation.
   This keeps metadata server-safe (no React/CSS imports), allows the build to export it, and enables deployment.
 
-  **Key properties:**
+  **Key properties**:
   - `name`: Name of the resource (machine). **Must be unique within a repository.**
   - `title`: Name of the resource (human readable).
   - `description`: Human-readable description.
@@ -125,7 +125,7 @@ platform testing (ChatGPT owns the global state).
   Widget state data.
 </ResponseField>
 
-**Note:** `toolOutput` (`structuredContent`) and `toolResponseMetadata` (`_meta`) are set in
+**Note**: `toolOutput` (`structuredContent`) and `toolResponseMetadata` (`_meta`) are set in
 `SimulationCallToolResult` instead of `SimulationGlobals`. This is to better align with the MCP
 specification, and also to provide those values to the MCP server (`SimulationGlobals` are not).
 
