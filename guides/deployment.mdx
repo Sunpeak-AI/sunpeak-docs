@@ -21,26 +21,10 @@ Deploy your widget using the Sunpeak CLI.
   <Step title="Build and deploy">
     Build your widget and deploy to production:
 
-    <Tabs>
-      <Tab title="pnpm">
-        ```bash
-        pnpm build
-        sunpeak deploy
-        ```
-      </Tab>
-      <Tab title="npm">
-        ```bash
-        npm run build
-        sunpeak deploy
-        ```
-      </Tab>
-      <Tab title="yarn">
-        ```bash
-        yarn build
-        sunpeak deploy
-        ```
-      </Tab>
-    </Tabs>
+    ```bash
+    sunpeak build
+    sunpeak deploy
+    ```
 
     The `deploy` command pushes your built resources with the `prod` tag,
     so that they can be easily pulled and served by your production MCP server.

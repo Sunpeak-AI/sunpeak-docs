@@ -58,23 +58,9 @@ description: "Create your first ChatGPT App UI with sunpeak."
   <Step title="Develop locally">
     Run the development server to use your local simulator:
 
-    <Tabs>
-      <Tab title="pnpm">
-        ```bash
-        pnpm dev
-        ```
-      </Tab>
-      <Tab title="npm">
-        ```bash
-        npm run dev
-        ```
-      </Tab>
-      <Tab title="yarn">
-        ```bash
-        yarn dev
-        ```
-      </Tab>
-    </Tabs>
+    ```bash
+    sunpeak dev
+    ```
 
     Open `http://localhost:6767` to see the ChatGPT simulator running your app.
 
@@ -84,32 +70,12 @@ description: "Create your first ChatGPT App UI with sunpeak."
   <Step title="Develop in ChatGPT">
     Run the MCP server and a tunnel to allow ChatGPT to connect to it:
 
-    <Tabs>
-      <Tab title="pnpm">
-        ```bash
-        pnpm mcp
+    ```bash
+    sunpeak mcp
 
-        # In another terminal, run a tunnel. For example:
-        ngrok http 6766
-        ```
-      </Tab>
-      <Tab title="npm">
-        ```bash
-        npm run mcp
-
-        # In another terminal, run a tunnel. For example:
-        ngrok http 6766
-        ```
-      </Tab>
-      <Tab title="yarn">
-        ```bash
-        yarn mcp
-
-        # In another terminal, run a tunnel. For example:
-        ngrok http 6766
-        ```
-      </Tab>
-    </Tabs>
+    # In another terminal, run a tunnel. For example:
+    ngrok http 6766
+    ```
 
     You can then connect to the tunnel `Forwarding URL` at the `/mcp` path (e.g. `https://your-random-subdomain.ngrok-free.dev/mcp`) from ChatGPT
     **in developer mode**: `User > Settings > Apps & Connectors > Create`.

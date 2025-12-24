@@ -23,63 +23,13 @@ When you create a new project with `pnpm dlx sunpeak new`, the sunpeak framework
 No entry point files needed! The framework automatically discovers your simulations and resources using conventions.
 </Note>
 
-## Available Commands
-
-Inside your project, use these npm scripts:
-
-<ResponseField name="pnpm dev" type="command">
-  Start development server with ChatGPT simulator at `http://localhost:6767`.
-  Uses Vite's hot reload for instant feedback as you edit components.
-</ResponseField>
-
-<ResponseField name="pnpm build" type="command">
-  Build optimized production bundles, one for each Resource.
-  Automatically discovers and builds all files matching `*-resource.tsx` in `src/resources/`.
-</ResponseField>
-
-<ResponseField name="pnpm mcp" type="command">
-  Start MCP server for ChatGPT testing on port 6766. Watches your `src/` directory
-  and automatically rebuilds on file changes.
-</ResponseField>
-
-<ResponseField name="pnpm test" type="command">
-  Run unit tests with Vitest.
-</ResponseField>
-
-### Deployment Commands
-
-<ResponseField name="sunpeak login" type="command">
-  Authenticate with your Sunpeak account. Required before pushing or pulling resources.
-</ResponseField>
-
-<ResponseField name="sunpeak logout" type="command">
-  Log out from Sunpeak and clear stored credentials.
-</ResponseField>
-
-<ResponseField name="sunpeak push" type="command">
-  Push built resources to the Sunpeak repository. Optionally tag with `--tag`.
-</ResponseField>
-
-<ResponseField name="sunpeak pull -r <repo> -t <tag>" type="command">
-  Pull resources by tag from the Sunpeak repository. Repository is required. Use `-n <name>` to filter by resource name.
-</ResponseField>
-
-<ResponseField name="sunpeak deploy" type="command">
-  Deploy resources to production. Equivalent to `sunpeak push --tag prod`.
-</ResponseField>
-
-<Note>
-All commands run the local `sunpeak` CLI from `node_modules/.bin` - no global install required!
-You can customize tooling (linting, formatting, type-checking) by adding them to your `package.json` as needed.
-</Note>
-
 ## Included Tools
 
 The template includes minimal, essential tooling:
 
 ### Vite
 
-Fast build tool with hot-reload (HMR) for instant development feedback. The framework owns the dev server configuration - just run `pnpm dev`.
+Fast build tool with hot-reload (HMR) for instant development feedback. The framework owns the dev server configuration - just run `sunpeak dev`.
 
 ### Tailwind CSS 4
 
