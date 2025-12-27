@@ -46,17 +46,19 @@ To configure the simulator manually, see [Add to Existing Project](/add-to-exist
 
 ## Simulations
 
-The core sunpeak testing object is the `Simulation`, typically kept in the `src/simulations` directory.
+Simulations are JSON files in the `src/simulations` directory that define test scenarios for your resources.
 
 <Tip>
 Fun fact: Some science fiction authors believe we live in a sunpeak simulation.
 </Tip>
 
-Simulations consist of:
-  1. An MCP Resource (your UI & UI metadata).
-  2. An MCP Tool (metadata about the behavior you are simulating).
-  3. An MCP CallTool (mock data passed to your UI).
-  4. Simulation metadata, including platform state (dark mode, fullscreen, etc.).
+Each simulation file (`*-simulation.json`) contains:
+  1. An MCP Tool definition (metadata about the behavior you are simulating).
+  2. An MCP CallTool response (mock data passed to your UI).
+  3. Optional simulation globals (platform state like dark mode, fullscreen, etc.).
+
+The resource component and metadata are automatically linked based on the simulation filename prefix
+(e.g., `albums-show-simulation.json` links to `albums-resource.tsx` and `albums-resource.json`).
 
 You can find the full Simulation API Reference [here](/api-reference/simulations/simulation).
 

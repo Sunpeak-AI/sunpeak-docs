@@ -1,9 +1,26 @@
+For projects using the sunpeak framework, simulations are auto-discovered. Just run:
+
+```bash
+sunpeak dev
+```
+
+For custom setups, you can manually configure the simulator:
+
 ```tsx
 import { ChatGPTSimulator } from 'sunpeak';
-import { SIMULATIONS } from './simulations';
+import { MyComponent } from './components/MyComponent';
+import exampleResource from './resources/example-resource.json';
+import exampleSimulation from './simulations/example-show-simulation.json';
+
+// Combine simulation with resource and component
+const simulations = [{
+  ...exampleSimulation,
+  resource: exampleResource,
+  resourceComponent: MyComponent,
+}];
 
 <ChatGPTSimulator
-  simulations={Object.values(SIMULATIONS)}
+  simulations={simulations}
   appName="My App"
   appIcon="🌄"
 />

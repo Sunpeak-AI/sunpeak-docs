@@ -1,37 +1,43 @@
 ---
 title: "Simulation"
-description: "Type definition for packaging components with MCP metadata and example data for testing and development."
+description: "JSON files that define MCP metadata and example data for testing and development."
 ---
 
 import CreateSimulation from '/snippets/create-simulation.mdx';
 
 ## Overview
 
-`Simulation` is a TypeScript interface that packages a React component with its MCP
-(Model Context Protocol) metadata and example data.
+Simulations are JSON files that define MCP (Model Context Protocol) metadata and example data
+for testing your resources in the ChatGPT Simulator and MCP server.
 
-Each simulation represents a complete
-tool experience in the simulator and MCP server, combining the component, tool definition,
-resource definition, and mock tool call data.
+Each simulation represents a complete tool experience, combining the tool definition,
+mock tool call data, and optional simulator configuration. The resource component and
+resource metadata are automatically discovered based on file naming conventions.
 
-Simulations are used for local testing with the ChatGPT Simulator and for configuring MCP servers.
+## File Naming Convention
 
-## Import
+Simulation files follow the pattern:
 
-```tsx
-import type { Simulation } from 'sunpeak';
 ```
+src/simulations/{resource}-{tool}-simulation.json
+```
+
+For example:
+- `albums-show-simulation.json` - linked to `albums-resource.tsx` and `albums-resource.json`
+- `counter-increment-simulation.json` - linked to `counter-resource.tsx` and `counter-resource.json`
+- `map-search-simulation.json` - linked to `map-resource.tsx` and `map-resource.json`
+
+The `{resource}` prefix determines which resource files are automatically linked:
+- **Component**: `src/resources/{resource}-resource.tsx`
+- **Metadata**: `src/resources/{resource}-resource.json`
+
+You can have multiple simulations per resource (e.g., `albums-show-simulation.json` and `albums-edit-simulation.json`).
 
 ## Basic Usage
 
 <CreateSimulation />
 
 ## Properties
-
-<ResponseField name="resourceComponent" type="React.ComponentType" required>
-  The React component to render in the simulator (the MCP server renders the built component in `dist/`).
-  This component implements the UI for your tool.
-</ResponseField>
 
 <ResponseField name="userMessage" type="string">
   A decorative message shown in the simulator interface. Has no functional purpose and is used only for UI presentation.
@@ -57,29 +63,25 @@ import type { Simulation } from 'sunpeak';
     - `openai/resultCanProduceWidget` (boolean): Whether the tool result can produce a widget UI.
 </ResponseField>
 
-<ResponseField name="resource" type="Resource" required>
-  Official MCP SDK Resource type used in the ListResources response. Defines the resource name, description, and other metadata.
-
-  **Required**: Resource metadata must be defined in a separate `-resource.json` file in the `resources`
-  directory. You can either duplicate those values here or import the JSON file and put it into your simulation.
-  This keeps metadata server-safe (no React/CSS imports), allows the build to export it, and enables deployment.
-
-  **Key properties**:
-  - `name`: Name of the resource (machine). **Must be unique within a repository.**
-  - `title`: Name of the resource (human readable).
-  - `description`: Human-readable description.
-  - `mimeType`: Always `text/html+skybridge` for UI resources.
-  - `_meta`: Additional metadata. Use `defaultWidgetMeta` from `widget-config.ts` and override as needed:
-    - `openai/widgetDomain` (string): The domain where your widget should link via the "Open in App" button (e.g., `https://yourdomain.com`).
-    - `openai/widgetCSP` (object): Content Security Policy configuration for your widget:
-      - `connect_domains` (string[]): Domains your widget can make API requests to (e.g., `['https://api.yourdomain.com']`).
-      - `resource_domains` (string[]): Domains your widget can load images and other resources from (e.g., `['https://cdn.yourdomain.com', 'https://images.unsplash.com']`).
-</ResponseField>
-
 <ResponseField name="toolCall" type="SimulationCallToolResult">
   Mock data for the MCP CallTool response. Supplies `structuredContent` and `_meta` values to your Resource.
   See [SimulationCallToolResult](#simulationcalltoolresult-interface) below for details.
 </ResponseField>
+
+## Auto-Discovery
+
+Sunpeak automatically discovers and links simulations to resources based on file naming:
+
+1. **Simulation files** are discovered via glob pattern: `src/simulations/*-simulation.json`
+2. **Resource matching** uses the longest prefix match. For `albums-show-simulation.json`:
+   - Extracts key: `albums-show`
+   - Finds resource: `albums` (matches `albums-resource.tsx` and `albums-resource.json`)
+3. **No manual imports** needed - everything is wired automatically
+
+This means you never need to:
+- Import resource metadata into simulations
+- Specify `resource` in the simulation (auto-linked)
+- Maintain an index file of simulations
 
 ## Related Types
 
@@ -134,11 +136,11 @@ specification, and also to provide those values to the MCP server (`SimulationGl
 Subset of the MCP CallTool response used in simulations to provide mock structured content and metadata.
 
 <ResponseField name="structuredContent" type="Record<string, unknown> | null">
-  Tool output data.
+  Tool output data passed to your resource component via `useWidgetProps()`.
 </ResponseField>
 
 <ResponseField name="_meta" type="Record<string, unknown>">
-  Response metadata.
+  Response metadata passed to your resource component via `useToolResponseMetadata()`.
 </ResponseField>
 
 ## Example - Resource JSON File
@@ -153,62 +155,99 @@ Each resource requires a companion `.json` file containing metadata:
   "description": "Show photo albums widget markup",
   "mimeType": "text/html+skybridge",
   "_meta": {
-    "openai/widgetDomain": "example.com",
+    "openai/widgetDomain": "https://example.com",
     "openai/widgetCSP": {
       "connect_domains": [],
-      "resource_domains": []
+      "resource_domains": ["https://*.oaistatic.com"]
     }
   }
 }
 ```
 
-## Example - Simulation with Globals and Data
+## Example - Simulation JSON File
 
-The simulation imports the resource metadata from the JSON file:
+Simulations are pure JSON files. The resource is automatically linked based on the filename prefix:
 
-```tsx
-// src/simulations/albums-simulation.ts
-import albumsResourceMeta from '../resources/albums-resource.json';
-
-export const albumsSimulation: Simulation = {
-  resourceComponent: Albums,
-  userMessage: 'Show me some albums',
-
-  simulationGlobals: {
-    theme: 'dark',
-    displayMode: 'full',
-    locale: 'en-US',
-  },
-
-  tool: {
-    name: 'show-albums',
-    description: 'Display a collection of albums',
-    inputSchema: {
-      type: 'object',
-      properties: {
-        genre: { type: 'string' }
-      },
-      additionalProperties: false
+```json
+// src/simulations/albums-show-simulation.json
+{
+  "userMessage": "Show me some albums",
+  "tool": {
+    "name": "show-albums",
+    "description": "Display a collection of photo albums",
+    "inputSchema": {
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
     },
-    title: 'Show Albums',
-    annotations: { readOnlyHint: true },
-    _meta: {
-      'openai/widgetAccessible': true,
-      'openai/resultCanProduceWidget': true,
-    },
+    "title": "Show Albums",
+    "annotations": { "readOnlyHint": true },
+    "_meta": {
+      "openai/toolInvocation/invoking": "Loading albums",
+      "openai/toolInvocation/invoked": "Albums loaded",
+      "openai/widgetAccessible": true,
+      "openai/resultCanProduceWidget": true
+    }
   },
-
-  // Imported from resource meta file
-  resource: albumsResourceMeta,
-
-  toolCall: {
-    structuredContent: {
-      albums: [
-        { title: 'Album 1', artist: 'Artist 1' },
-        { title: 'Album 2', artist: 'Artist 2' },
+  "toolCall": {
+    "structuredContent": {
+      "albums": [
+        {
+          "id": "summer-escape",
+          "title": "Summer Vacation",
+          "cover": "https://example.com/cover.jpg",
+          "photos": [
+            { "id": "1", "title": "Beach", "url": "https://example.com/beach.jpg" }
+          ]
+        }
       ]
     },
-    _meta: { count: 2 },
-  },
-};
+    "_meta": {}
+  }
+}
 ```
+
+## Example - Simulation with Globals
+
+You can include `simulationGlobals` to configure the simulator environment:
+
+```json
+// src/simulations/counter-show-simulation.json
+{
+  "userMessage": "Help me count something",
+  "simulationGlobals": {
+    "theme": "dark",
+    "displayMode": "pip",
+    "locale": "en-US",
+    "maxHeight": 400
+  },
+  "tool": {
+    "name": "show-counter",
+    "description": "Show a simple counter",
+    "inputSchema": { "type": "object", "properties": {}, "additionalProperties": false },
+    "title": "Show Counter",
+    "annotations": { "readOnlyHint": true },
+    "_meta": {
+      "openai/widgetAccessible": true,
+      "openai/resultCanProduceWidget": true
+    }
+  },
+  "toolCall": {
+    "structuredContent": null,
+    "_meta": {}
+  }
+}
+```
+
+## Multiple Simulations Per Resource
+
+You can create multiple simulations for the same resource to test different scenarios:
+
+```
+src/simulations/
+  albums-show-simulation.json      # Default view
+  albums-empty-simulation.json     # Empty state
+  albums-error-simulation.json     # Error state
+```
+
+Each simulation can have different `toolCall.structuredContent` to test various data scenarios.

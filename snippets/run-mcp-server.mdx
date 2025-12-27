@@ -1,16 +1,27 @@
+For projects using the sunpeak framework, the MCP server automatically discovers simulations.
+Just run:
+
+```bash
+sunpeak mcp
+```
+
+For custom setups, you can manually configure the MCP server:
+
 ```typescript
 import { runMCPServer } from 'sunpeak/mcp';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { SIMULATIONS } from '../src/simulations';
+import exampleResource from '../src/resources/example-resource.json';
+import exampleSimulation from '../src/simulations/example-show-simulation.json';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Add distPath to each simulation for the MCP server.
-const simulations = Object.entries(SIMULATIONS).map(([simulationKey, simulation]) => ({
-  ...simulation,
-  distPath: path.resolve(__dirname, `../dist/${simulationKey}.js`),
-}));
+// Combine simulation with resource and distPath
+const simulations = [{
+  ...exampleSimulation,
+  resource: exampleResource,
+  distPath: path.resolve(__dirname, '../dist/example.js'),
+}];
 
 runMCPServer({
   name: 'My App',
