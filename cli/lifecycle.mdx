@@ -19,10 +19,30 @@ flowchart LR
 
 ### 1. Create
 
-Start a new project with `sunpeak new`:
+Install sunpeak globally:
+
+<Tabs>
+  <Tab title="pnpm">
+    ```bash
+    pnpm add -g sunpeak
+    ```
+  </Tab>
+  <Tab title="npm">
+    ```bash
+    npm install -g sunpeak
+    ```
+  </Tab>
+  <Tab title="yarn">
+    ```bash
+    yarn global add sunpeak
+    ```
+  </Tab>
+</Tabs>
+
+Then start a new project:
 
 ```bash
-pnpm dlx sunpeak new
+sunpeak new
 ```
 
 This scaffolds a complete sunpeak project with all the configuration and structure you need.

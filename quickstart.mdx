@@ -6,28 +6,36 @@ description: "Create your first ChatGPT App UI with sunpeak."
 ## New projects
 
 <Steps>
-  <Step title="Create a project">
+  <Step title="Install sunpeak">
     **Requirements**: Node.js 20+
 
-    Create a new project with one command (no install needed):
+    Install sunpeak globally:
 
     <Tabs>
       <Tab title="pnpm">
         ```bash
-        pnpm dlx sunpeak new my-app
+        pnpm add -g sunpeak
         ```
       </Tab>
       <Tab title="npm">
         ```bash
-        npx sunpeak new my-app
+        npm install -g sunpeak
         ```
       </Tab>
       <Tab title="yarn">
         ```bash
-        yarn dlx sunpeak new my-app
+        yarn global add sunpeak
         ```
       </Tab>
     </Tabs>
+  </Step>
+
+  <Step title="Create a project">
+    Create a new project:
+
+    ```bash
+    sunpeak new my-app
+    ```
   </Step>
 
   <Step title="Install dependencies">
@@ -83,5 +91,5 @@ description: "Create your first ChatGPT App UI with sunpeak."
 </Steps>
 
 <Card horizontal title="Project Scaffold" icon="page" href="/template/project-scaffold">
-  Explore your new MCP App project.
+  Explore your new ChatGPT App project.
 </Card>

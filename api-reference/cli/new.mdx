@@ -8,34 +8,44 @@ description: "Create a new project with the sunpeak framework."
 The `sunpeak new` command creates a new sunpeak project with a minimal, convention-based structure for building ChatGPT App UIs (MCP Resources).
 
 ```bash
-pnpm dlx sunpeak new
+sunpeak new
 ```
 
 <Tip>
-No global installation required! Use `npx`, `pnpm dlx`, or `yarn dlx` to run the command directly.
-</Tip>
-
-## Usage
-
-Create a new project with a specific name:
+Install sunpeak globally first:
 
 <Tabs>
   <Tab title="pnpm">
     ```bash
-    pnpm dlx sunpeak new
+    pnpm add -g sunpeak
     ```
   </Tab>
   <Tab title="npm">
     ```bash
-    npx sunpeak new
+    npm install -g sunpeak
     ```
   </Tab>
   <Tab title="yarn">
     ```bash
-    yarn dlx sunpeak new
+    yarn global add sunpeak
     ```
   </Tab>
 </Tabs>
+</Tip>
+
+## Usage
+
+Create a new project:
+
+```bash
+sunpeak new
+```
+
+Or specify a project name:
+
+```bash
+sunpeak new my-app
+```
 
 ## What Gets Created
 
