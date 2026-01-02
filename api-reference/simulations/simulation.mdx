@@ -24,7 +24,6 @@ src/simulations/{resource}-{tool}-simulation.json
 
 For example:
 - `albums-show-simulation.json` - linked to `albums-resource.tsx` and `albums-resource.json`
-- `counter-increment-simulation.json` - linked to `counter-resource.tsx` and `counter-resource.json`
 - `map-search-simulation.json` - linked to `map-resource.tsx` and `map-resource.json`
 
 The `{resource}` prefix determines which resource files are automatically linked:
@@ -202,38 +201,6 @@ Simulations are pure JSON files. The resource is automatically linked based on t
         }
       ]
     },
-    "_meta": {}
-  }
-}
-```
-
-## Example - Simulation with Globals
-
-You can include `simulationGlobals` to configure the simulator environment:
-
-```json
-// src/simulations/counter-show-simulation.json
-{
-  "userMessage": "Help me count something",
-  "simulationGlobals": {
-    "theme": "dark",
-    "displayMode": "pip",
-    "locale": "en-US",
-    "maxHeight": 400
-  },
-  "tool": {
-    "name": "show-counter",
-    "description": "Show a simple counter",
-    "inputSchema": { "type": "object", "properties": {}, "additionalProperties": false },
-    "title": "Show Counter",
-    "annotations": { "readOnlyHint": true },
-    "_meta": {
-      "openai/widgetAccessible": true,
-      "openai/resultCanProduceWidget": true
-    }
-  },
-  "toolCall": {
-    "structuredContent": null,
     "_meta": {}
   }
 }

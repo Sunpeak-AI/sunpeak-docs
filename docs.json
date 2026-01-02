@@ -88,7 +88,6 @@
             "pages": [
               "api-reference/resources/albums",
               "api-reference/resources/carousel",
-              "api-reference/resources/counter",
               "api-reference/resources/map",
               "api-reference/resources/review"
             ]
