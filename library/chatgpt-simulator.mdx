@@ -3,7 +3,6 @@ title: "ChatGPT Simulator"
 description: "React component replicating ChatGPT's runtime."
 ---
 
-import CreateSimulation from '/snippets/create-simulation.mdx';
 import ChatGPTSimulator from '/snippets/chatgpt-simulator.mdx';
 import RunMCPServer from '/snippets/run-mcp-server.mdx';
 
@@ -46,25 +45,71 @@ To configure the simulator manually, see [Add to Existing Project](/add-to-exist
 
 ## Simulations
 
-Simulations are JSON files in the `src/simulations` directory that define test scenarios for your resources.
+Simulations define test scenarios for your resources—combining tool definitions, mock data, and platform state.
 
 <Tip>
 Fun fact: Some science fiction authors believe we live in a sunpeak simulation.
 </Tip>
 
-Each simulation file (`*-simulation.json`) contains:
-  1. An MCP Tool definition (metadata about the behavior you are simulating).
-  2. An MCP CallTool response (mock data passed to your UI).
-  3. Optional simulation globals (platform state like dark mode, fullscreen, etc.).
+<Tabs>
+  <Tab title="Framework (JSON)">
+    In the sunpeak framework, simulations are **JSON files** with auto-discovery. The resource component and metadata are automatically linked based on filename prefix.
 
-The resource component and metadata are automatically linked based on the simulation filename prefix
-(e.g., `albums-show-simulation.json` links to `albums-resource.tsx` and `albums-resource.json`).
+    In the sunpeak framework, simulations are JSON files in `src/simulations/`. The filename must start with the resource name:
 
-You can find the full Simulation API Reference [here](/api-reference/simulations/simulation).
+    ```json
+    // src/simulations/example-show-simulation.json
+    {
+      "userMessage": "Show me an example",
+      "tool": {
+        "name": "show-example",
+        "description": "Show an example simulation",
+        "inputSchema": { "type": "object", "properties": {}, "additionalProperties": false },
+        "title": "Show Example",
+        "annotations": { "readOnlyHint": true },
+        "_meta": {
+          "openai/toolInvocation/invoking": "Loading example",
+          "openai/toolInvocation/invoked": "Example loaded",
+          "openai/widgetAccessible": true,
+          "openai/resultCanProduceWidget": true
+        }
+      },
+      "callToolResult": {
+        "structuredContent": null,
+        "_meta": {}
+      }
+    }
+    ```
 
-### Simulation Example
+    The resource component (`example-resource.tsx`) and metadata (`example-resource.json`) are automatically linked based on the `example-` prefix in the simulation filename.
 
-<CreateSimulation />
+    <Note>
+    For library users not using the framework, see the [Simulation API Reference](/api-reference/simulations/simulation) for creating simulations programmatically in TypeScript.
+    </Note>
+
+    See [Framework Simulations](/api-reference/simulations/simulation) for the complete JSON schema and conventions.
+  </Tab>
+  <Tab title="Library (TypeScript)">
+    When using the library directly, create simulations as TypeScript objects:
+
+    ```typescript
+    import type { Simulation } from 'sunpeak';
+    import { AlbumsResource } from './resources/albums';
+
+    const simulations: Record<string, Simulation> = {
+      'albums-show': {
+        name: 'albums-show',
+        resourceComponent: AlbumsResource,
+        tool: { name: 'show-albums', description: '...', inputSchema: {} },
+        resource: { name: 'albums', uri: 'resource://albums', mimeType: 'text/html+skybridge' },
+        callToolResult: { structuredContent: { albums: [] } },
+      },
+    };
+    ```
+
+    See [Simulation API Reference](/api-reference/simulations/simulation) for the complete TypeScript interface.
+  </Tab>
+</Tabs>
 
 
 Simulations can be passed into:
@@ -89,9 +134,12 @@ Simulations can be passed into:
 
 ## Dive Deeper
 
-<Card horizontal title="Simulation API Reference" icon="code" href="/api-reference/simulations/simulation">
-  Complete simulation documentation.
+<Card horizontal title="Framework Simulations" icon="folder" href="/api-reference/simulations/simulation">
+  JSON-based simulations with auto-discovery for framework users.
 </Card>
-<Card horizontal title="ChatGPTSimulator API Reference" icon="code" href="/api-reference/simulations/chatgpt-simulator">
+<Card horizontal title="Simulation API Reference" icon="code" href="/api-reference/simulations/simulation">
+  TypeScript interface for library users.
+</Card>
+<Card horizontal title="ChatGPTSimulator API Reference" icon="desktop" href="/api-reference/simulations/chatgpt-simulator">
   Full component documentation and configuration options.
 </Card>

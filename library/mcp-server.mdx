@@ -1,6 +1,6 @@
 ---
 title: "MCP Server"
-description: "Mock data MCP server for testing local Resources in the real ChatGPT."
+description: "Serve your widgets to the real ChatGPT platform."
 ---
 
 <img
@@ -10,17 +10,16 @@ description: "Mock data MCP server for testing local Resources in the real ChatG
 
 ## Overview
 
-The MCP (Model Context Protocol) server lets you serve your simulations to ChatGPT.
-Once your MCP server is running, ChatGPT can discover and render your App.
+The MCP (Model Context Protocol) server lets you serve your simulations to ChatGPT. Once running, ChatGPT can discover and render your widgets.
 
-sunpeak includes an MCP server implementation that lets your render your App out-of-the-box.
+sunpeak includes an MCP server implementation that serves your widgets out-of-the-box.
 
 ## What is MCP?
 
 MCP is the protocol ChatGPT uses to communicate with your servers. It handles:
 
-- Resource & Tool registration and discovery.
-- Tool invocation and state synchronization.
+- Resource & Tool registration and discovery
+- Tool invocation and state synchronization
 
 <Info>
 Learn more in the [Model Context Protocol documentation](https://modelcontextprotocol.io/).
@@ -28,61 +27,28 @@ Learn more in the [Model Context Protocol documentation](https://modelcontextpro
 
 ## Quick Start
 
-If you set up your project via the sunpeak framework, the simulator is already set up!
-Simply run it with:
-
-<Steps>
-  <Step title="Start the MCP server">
-    Start the MCP server on port 6766:
+<Tabs>
+  <Tab title="Framework">
+    Start the MCP server:
 
     ```bash
     sunpeak mcp
     ```
 
-    This serves your built `Resource`s out of your `dist/` directory.
+    This serves your built resources from `dist/` and watches `src/` for changes.
+  </Tab>
+  <Tab title="Library">
+    Configure the MCP server manually. See [runMCPServer API Reference](/api-reference/simulations/run-mcp-server) for setup instructions.
+  </Tab>
+</Tabs>
 
-    It also watches your `src/` directory and automatically rebuilds on file changes.
-  </Step>
-
-  <Step title="Run a tunnel">
-    In another terminal, run a tunnel to expose your local server:
-
-    ```bash
-    ngrok http 6766
-    ```
-
-    Copy the forwarding URL (e.g., `https://abc123.ngrok.io`).
-  </Step>
-
-  <Step title="Connect to ChatGPT">
-    Open ChatGPT **in developer mode** and connect your app:
-
-    1. Go to `User > Settings > Apps & Connectors > Create`.
-    2. Enter your tunnel URL with the `/mcp` path: `https://abc123.ngrok.io/mcp`.
-    3. Complete the connection flow.
-  </Step>
-
-  <Step title="Test your widget">
-    Send `show carousel` or whatever you named your `Tool` in your `Simulation` to ChatGPT to see your simulation in action!
-
-    <Warning>
-      ChatGPT caches UIs aggressively. The sunpeak MCP server will serve your resources
-      at unique URIs every time they are refreshed in ChatGPT to cache-bust.
-      You need to manually **Refresh** your app from the same settings modal
-      as the previous step after every change to your built package.
-    </Warning>
-  </Step>
-</Steps>
-
-<Note>
-To configure the MCP server manually, see [Add to Existing Project](/add-to-existing-project).
-</Note>
+Then connect to ChatGPT using a tunnel. See [runMCPServer API Reference](/api-reference/simulations/run-mcp-server#connecting-to-chatgpt) for the full connection flow.
 
 ## Dive Deeper
 
+<Card horizontal title="runMCPServer API Reference" icon="code" href="/api-reference/simulations/run-mcp-server">
+  Complete configuration options and ChatGPT connection guide.
+</Card>
 <Card horizontal title="Simulation API Reference" icon="code" href="/api-reference/simulations/simulation">
   Complete simulation documentation.
-</Card>
-<Card horizontal title="runMCPServer API Reference" icon="code" href="/api-reference/simulations/run-mcp-server">
-  Complete sunpeak server configuration reference.
 </Card>

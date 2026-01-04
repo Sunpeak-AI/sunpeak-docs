@@ -10,14 +10,16 @@ When you create a new project with `sunpeak new`, the sunpeak framework gives yo
 ## Key Files & Directories
 
 - `src/resources/` - Directory containing all your MCP Resources (ChatGPT App UIs).
-    Every file in this directory ending with `-resource.tsx` will be automatically built by the framework to
+    - Every file in this directory ending with `-resource.tsx` will be automatically built by the framework to
     `dist/name.js`, where the output name will be whatever was prefixed to `-resource.tsx`.
-    Each resource **must** have a companion `-resource.json` file containing metadata (name, title, description, mimeType).
-- `src/simulations/` - Directory containing simulation JSON files. Files matching `*-simulation.json` are
-    automatically discovered by the dev server and MCP server. Simulations are linked to resources by filename
-    prefix (e.g., `albums-show-simulation.json` links to `albums-resource.tsx`).
-- `public/` - Static assets (favicon, images, etc.) served directly.
-- `.sunpeak/` - Internal framework bootstrap files (managed by sunpeak, don't edit).
+    - Each resource **must** have a companion `-resource.json` file containing metadata (name, title, description, etc.).
+- `src/simulations/` - Directory containing simulation JSON files.
+    - Files in this directory matching `*-simulation.json` are
+    automatically discovered by the dev server and MCP server.
+    - Simulations are linked to resources by filename prefix
+    (e.g., `albums-show-simulation.json` links to `albums-resource.tsx`).
+- `tests/e2e/` - Directory containing end-to-end Playwright tests for each resource.
+    Uses the ChatGPTSimulator to test your resources render properly with any state (tool calls, saved state, dark mode, pip display mode, etc.).
 
 <Note>
 No entry point files needed! The framework automatically discovers your simulations and resources using conventions.
@@ -43,6 +45,10 @@ Type safety with TypeScript 5. Configured via `tsconfig.json`.
 ### Vitest (Unit Tests)
 
 Vite-native testing framework for component testing. Run with `pnpm test`.
+
+### Playwright (E2E Tests)
+
+End-to-end testing against the ChatGPT Simulator. Tests live in `tests/e2e/`. Run with `pnpm test:e2e`.
 
 ### Add Your Own Tooling
 

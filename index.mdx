@@ -36,17 +36,18 @@ Note that each sunpeak component can be used in isolation if preferred, though t
 
 An npm package for running & testing ChatGPT Apps. This standalone library contains:
 
-- **Runtime APIs** - Strongly typed, multi-platform APIs for interacting with the ChatGPT runtime, architected to support future platforms (Gemini, Claude).
-- **ChatGPT Simulator** - React component replicating ChatGPT's runtime.
-- **MCP Server** - Mock data MCP server for testing local Resources in the real ChatGPT.
+- **[Runtime APIs](/library/runtime-apis)** - Strongly typed, multi-platform APIs for interacting with the ChatGPT runtime, architected to support future platforms (Gemini, Claude).
+- **[ChatGPT Simulator](/library/chatgpt-simulator)** - React component replicating ChatGPT's runtime.
+  - Testing utilities to automatically test your app in all platform states (theme, displayMode, saved states, etc.)
+- **[MCP Server](/library/mcp-server)** - Mock data MCP server for testing local Resources in the real ChatGPT.
 
 ### The sunpeak Framework
 
-Next.js for ChatGPT Apps. This templated npm package includes
+Next.js for ChatGPT Apps. This templated npm package includes:
 
-- **Project Scaffold** - Complete development setup with build, test, and mcp tooling, including the sunpeak library.
-- **UI Components** - Production-ready components following ChatGPT design guidelines and using OpenAI apps-sdk-ui React components.
-- **Convention Over Configuration** - Create UIs (resources) by simply creating a `resources/NAME-resource.tsx` React file and `resources/NAME-resource.json` metadata file.
+- **[Project Scaffold](/template/project-scaffold)** - Complete development setup with build, test, and mcp tooling, including the sunpeak library.
+  - **Convention Over Configuration** - Create UIs (resources) by simply creating a `resources/NAME-resource.tsx` React file and `resources/NAME-resource.json` metadata file.
+- **[UI Components](/template/ui-components)** - Production-ready components following ChatGPT design guidelines and using OpenAI apps-sdk-ui React components.
 
 ### The sunpeak CLI
 

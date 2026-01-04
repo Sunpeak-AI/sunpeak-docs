@@ -1,32 +1,8 @@
-For projects using the sunpeak framework, the MCP server automatically discovers simulations.
-Just run:
-
 ```bash
+# Framework
 sunpeak mcp
+
+# Library - see runMCPServer API Reference for manual setup
 ```
 
-For custom setups, you can manually configure the MCP server:
-
-```typescript
-import { runMCPServer } from 'sunpeak/mcp';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import exampleResource from '../src/resources/example-resource.json';
-import exampleSimulation from '../src/simulations/example-show-simulation.json';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-// Combine simulation with resource and distPath
-const simulations = [{
-  ...exampleSimulation,
-  resource: exampleResource,
-  distPath: path.resolve(__dirname, '../dist/example.js'),
-}];
-
-runMCPServer({
-  name: 'My App',
-  version: '0.1.0',
-  simulations,
-  port: 6766,
-});
-```
+See [runMCPServer API Reference](/api-reference/simulations/run-mcp-server) for configuration options and connecting to ChatGPT.
