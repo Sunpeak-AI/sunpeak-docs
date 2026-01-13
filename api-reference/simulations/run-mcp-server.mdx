@@ -21,7 +21,7 @@ This server is for **local development only**. For production, create your own M
     sunpeak mcp
     ```
 
-    This discovers simulations in `src/simulations/`, links them to resources, and serves the built widgets from `dist/`.
+    This discovers simulations from each resource folder (`src/resources/{name}/`) and serves the built widgets from `dist/{name}/`.
   </Tab>
   <Tab title="Library">
     For custom setups, configure the MCP server manually:
@@ -30,15 +30,15 @@ This server is for **local development only**. For production, create your own M
     import { runMCPServer } from 'sunpeak/mcp';
     import path from 'path';
     import { fileURLToPath } from 'url';
-    import exampleResource from '../src/resources/example-resource.json';
-    import exampleSimulation from '../src/simulations/example-show-simulation.json';
+    import exampleResource from '../src/resources/example/example-resource.json';
+    import exampleSimulation from '../src/resources/example/example-show-simulation.json';
 
     const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
     const simulations = [{
       ...exampleSimulation,
       resource: exampleResource,
-      distPath: path.resolve(__dirname, '../dist/example.js'),
+      distPath: path.resolve(__dirname, '../dist/example/example.js'),
     }];
 
     runMCPServer({

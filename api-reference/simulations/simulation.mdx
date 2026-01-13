@@ -9,33 +9,34 @@ Simulations define test scenarios for your resources—combining tool definition
 
 <Tabs>
   <Tab title="Framework (JSON)">
-    In the sunpeak framework, simulations are **JSON files** with auto-discovery. The resource component and metadata are automatically linked based on filename prefix.
+    In the sunpeak framework, simulations are **JSON files** co-located with their resource. The resource component and metadata are automatically linked based on directory structure.
 
     ## File Naming Convention
 
-    Simulation files follow the pattern:
+    Simulation files live alongside their resource in the same folder:
 
     ```
-    src/simulations/{resource}-{scenario}-simulation.json
+    src/resources/{name}/{name}-{scenario}-simulation.json
     ```
 
     For example:
-    - `albums-show-simulation.json` - linked to `albums-resource.tsx`
-    - `review-diff-simulation.json` - linked to `review-resource.tsx`
-    - `review-post-simulation.json` - linked to `review-resource.tsx`
+    - `src/resources/albums/albums-show-simulation.json`
+    - `src/resources/review/review-diff-simulation.json`
+    - `src/resources/review/review-post-simulation.json`
 
-    The `{resource}` prefix determines which resource files are automatically linked:
-    - **Component**: `src/resources/{resource}-resource.tsx`
-    - **Metadata**: `src/resources/{resource}-resource.json`
+    Each resource folder contains all related files:
+    - **Component**: `src/resources/{name}/{name}-resource.tsx`
+    - **Metadata**: `src/resources/{name}/{name}-resource.json`
+    - **Simulations**: `src/resources/{name}/{name}-{scenario}-simulation.json`
 
-    You can have multiple simulations per resource (e.g., `albums-show-simulation.json` and `albums-empty-simulation.json`).
+    You can have multiple simulations per resource (e.g., `albums-show-simulation.json` and `albums-empty-simulation.json` in the same folder).
 
     ## JSON Schema
 
     Each simulation JSON file contains:
 
     ```json
-    // src/simulations/example-show-simulation.json
+    // src/resources/example/example-show-simulation.json
     {
       "userMessage": "Show me an example",
       "tool": {
@@ -64,8 +65,8 @@ Simulations define test scenarios for your resources—combining tool definition
 
     The framework automatically discovers and links simulations:
 
-    1. **Discovery**: Glob pattern `src/simulations/*-simulation.json`
-    2. **Matching**: Longest prefix match links to resources (e.g., `albums-show` matches `albums-resource.tsx`)
+    1. **Discovery**: Scans each resource folder for `*-simulation.json` files
+    2. **Linking**: Simulations are automatically linked to their co-located resource
     3. **No imports needed**: Everything is wired automatically
 
     This means you never need to:
@@ -78,7 +79,9 @@ Simulations define test scenarios for your resources—combining tool definition
     Create multiple simulations per resource to test different scenarios:
 
     ```
-    src/simulations/
+    src/resources/albums/
+      albums-resource.tsx              # Component
+      albums-resource.json             # Metadata
       albums-show-simulation.json      # Default view
       albums-empty-simulation.json     # Empty state
       albums-error-simulation.json     # Error state

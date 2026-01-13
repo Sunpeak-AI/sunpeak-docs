@@ -25,25 +25,29 @@ The build process creates:
 
 ```
 dist/
-├── search.js      # Built resource bundle
-├── search.json    # Resource metadata with generated URI
-├── calendar.js
-└── calendar.json
+├── search/
+│   ├── search.js                        # Built resource bundle
+│   ├── search.json                      # Resource metadata with generated URI
+│   └── search-SCENARIO-simulation.json  # Copied simulation files
+├── calendar/
+│   ├── calendar.js
+│   ├── calendar.json
+│   └── calendar-SCENARIO-simulation.json
 ```
 
-Each MCP Resource from `src/resources/*-resource.tsx` is built to `dist/[name].js`, with a corresponding `[name].json` metadata file.
+Each resource folder from `src/resources/{name}/` is built to `dist/{name}/`, containing the JS bundle, metadata, and simulation files.
 
 ## Automatic Discovery
 
-The build automatically discovers and builds all files matching the pattern:
+The build automatically discovers and builds all resource folders:
 
 ```
-src/resources/*-resource.tsx
+src/resources/{name}/{name}-resource.tsx
 ```
 
 For example:
-- `search-resource.tsx` + `search-resource.json` → `dist/search.js` + `dist/search.json`
-- `calendar-resource.tsx` + `calendar-resource.json` → `dist/calendar.js` + `dist/calendar.json`
+- `src/resources/search/` → `dist/search/search.js` + `dist/search/search.json`
+- `src/resources/calendar/` → `dist/calendar/calendar.js` + `dist/calendar/calendar.json`
 
 ### Metadata JSON Files
 

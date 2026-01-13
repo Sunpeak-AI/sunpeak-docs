@@ -8,7 +8,7 @@ description: "Push built resources to the Sunpeak repository."
 The `sunpeak push` command uploads your built MCP Resources to the Sunpeak repository, making them available for deployment and version management.
 
 ```bash
-sunpeak push [file] [options]
+sunpeak push [directory] [options]
 ```
 
 <Warning>
@@ -26,9 +26,9 @@ Before pushing:
 
 The push command:
 
-1. Finds all built resources in `dist/`
-2. Reads metadata from `*.json` files (name, title, description, mimeType)
-3. Uploads each resource to the Sunpeak repository
+1. Finds all resource folders in `dist/` (e.g., `dist/albums/`, `dist/carousel/`)
+2. Reads metadata from each resource's JSON file (name, title, description, mimeType)
+3. Uploads each resource bundle and its simulations to the Sunpeak repository
 4. Optionally assigns a tag for version management
 
 <Info>
@@ -49,7 +49,7 @@ Pushing 2 resource(s) to repository "myorg/my-app"...
 
 | Argument | Description |
 |----------|-------------|
-| `file` | Optional JS file to push (e.g., `dist/carousel.js`). If not provided, pushes all resources from `dist/` |
+| `directory` | Optional resource directory to push (e.g., `dist/carousel`). If not provided, pushes all resources from `dist/` |
 
 ## Options
 
@@ -71,10 +71,10 @@ sunpeak push
 
 ### Push a Single Resource
 
-Push a specific resource file:
+Push a specific resource directory:
 
 ```bash
-sunpeak push dist/carousel.js
+sunpeak push dist/carousel
 ```
 
 ### Push with Tag
@@ -125,17 +125,21 @@ If no git remote is found, you must specify the repository explicitly with `--re
 
 ## Resource Discovery
 
-The command discovers resources by finding all `.js` files in the dist directory:
+The command discovers resources by finding all resource folders in the dist directory:
 
 ```
 dist/
-├── search.js       # Resource: search
-├── search.json     # Metadata for search resource
-├── dashboard.js    # Resource: dashboard
-└── dashboard.json  # Metadata for dashboard resource
+├── search/
+│   ├── search.js                    # Resource bundle
+│   ├── search.json                  # Metadata
+│   └── search-show-simulation.json  # Simulation (optional)
+├── dashboard/
+│   ├── dashboard.js
+│   ├── dashboard.json
+│   └── dashboard-{scenario}-simulation.json
 ```
 
-Each resource needs a corresponding `.json` file containing metadata like name, title, description, and uri. URIs are generated during `sunpeak build`—if a resource is missing its URI, push will fail with an error.
+Each resource folder needs a `.js` bundle and a `.json` metadata file containing name, title, description, and uri. URIs are generated during `sunpeak build`—if a resource is missing its URI, push will fail with an error. Simulation files are automatically included when pushing.
 
 ## Related Commands
 

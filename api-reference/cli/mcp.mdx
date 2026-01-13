@@ -24,9 +24,10 @@ The MCP server watches your `src/` directory and automatically rebuilds when you
 
 ### Simulation Discovery
 
-Automatically discovers and serves all simulations exported from `src/simulations/index.ts`:
+Automatically discovers and serves all simulations from your resource folders:
 
-- MCP tools based on your simulation configuration
+- Scans each `src/resources/{name}/` folder for `*-simulation.json` files
+- Creates MCP tools based on your simulation configuration
 - MCP Resources pointing to your built widgets
 - Tool metadata and descriptions
 

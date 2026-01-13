@@ -137,10 +137,10 @@ Your existing project needs:
   </Step>
 
   <Step title="Create simulation files">
-    Create a resource metadata JSON file:
+    Create a resource folder with metadata and simulation files. Each resource lives in its own folder:
 
     ```json
-    // src/resources/example-resource.json
+    // src/resources/example/example-resource.json
     {
       "name": "example",
       "title": "Example",
@@ -156,10 +156,10 @@ Your existing project needs:
     }
     ```
 
-    Create a simulation JSON file:
+    Create a simulation JSON file in the same folder:
 
     ```json
-    // src/simulations/example-show-simulation.json
+    // src/resources/example/example-show-simulation.json
     {
       "userMessage": "Show me an example",
       "tool": {
@@ -189,8 +189,8 @@ Your existing project needs:
     import { createRoot } from 'react-dom/client';
     import { ChatGPTSimulator } from 'sunpeak';
     import { MyComponent } from '../src/components/MyComponent';
-    import exampleResource from '../src/resources/example-resource.json';
-    import exampleSimulation from '../src/simulations/example-show-simulation.json';
+    import exampleResource from '../src/resources/example/example-resource.json';
+    import exampleSimulation from '../src/resources/example/example-show-simulation.json';
     import '../src/styles/globals.css';
 
     // Combine simulation with resource and component
@@ -250,8 +250,8 @@ Your existing project needs:
     import { runMCPServer } from 'sunpeak/mcp';
     import path from 'path';
     import { fileURLToPath } from 'url';
-    import exampleResource from '../src/resources/example-resource.json';
-    import exampleSimulation from '../src/simulations/example-show-simulation.json';
+    import exampleResource from '../src/resources/example/example-resource.json';
+    import exampleSimulation from '../src/resources/example/example-show-simulation.json';
 
     const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -259,7 +259,7 @@ Your existing project needs:
     const simulations = [{
       ...exampleSimulation,
       resource: exampleResource,
-      distPath: path.resolve(__dirname, '../dist/example.js'),
+      distPath: path.resolve(__dirname, '../dist/example/example.js'),
     }];
 
     runMCPServer({

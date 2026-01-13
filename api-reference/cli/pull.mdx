@@ -92,12 +92,14 @@ sunpeak pull -r myorg/my-app -t prod -o ./builds
 
 ## Output Files
 
-The pull command creates two files for each resource:
+The pull command creates two files for each resource in the output directory:
 
 ```
-dist/
-├── search.js    # The JavaScript bundle
-└── search.json  # Resource metadata
+./
+├── search.js       # The JavaScript bundle
+├── search.json     # Resource metadata
+├── dashboard.js
+└── dashboard.json
 ```
 
 The metadata file contains:

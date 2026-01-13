@@ -53,12 +53,12 @@ Fun fact: Some science fiction authors believe we live in a sunpeak simulation.
 
 <Tabs>
   <Tab title="Framework (JSON)">
-    In the sunpeak framework, simulations are **JSON files** with auto-discovery. The resource component and metadata are automatically linked based on filename prefix.
+    In the sunpeak framework, simulations are **JSON files** co-located with their resource.
 
-    In the sunpeak framework, simulations are JSON files in `src/simulations/`. The filename must start with the resource name:
+    Simulations live in the same folder as their resource (`src/resources/{name}/`):
 
     ```json
-    // src/simulations/example-show-simulation.json
+    // src/resources/example/example-show-simulation.json
     {
       "userMessage": "Show me an example",
       "tool": {
@@ -81,7 +81,7 @@ Fun fact: Some science fiction authors believe we live in a sunpeak simulation.
     }
     ```
 
-    The resource component (`example-resource.tsx`) and metadata (`example-resource.json`) are automatically linked based on the `example-` prefix in the simulation filename.
+    The resource component (`example-resource.tsx`) and metadata (`example-resource.json`) are automatically linked since they live in the same folder.
 
     <Note>
     For library users not using the framework, see the [Simulation API Reference](/api-reference/simulations/simulation) for creating simulations programmatically in TypeScript.

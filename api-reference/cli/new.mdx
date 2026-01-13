@@ -51,21 +51,27 @@ sunpeak new my-app
 
 The framework includes:
 
-- **Convention-based structure** - MCP Resources auto-discovered from `src/resources/*-resource.tsx`
-- **Simulations** - JSON files auto-discovered from `src/simulations/*-simulation.json`
+- **Convention-based structure** - MCP Resources auto-discovered from `src/resources/{name}/`
+- **Co-located simulations** - Simulation JSON files live alongside their resource
 - **Pre-configured tooling** - Vite, TypeScript, Tailwind CSS 4, Vitest
 - **Development scripts** - Ready-to-use `dev`, `build`, `mcp`, and `test` commands
-- **Example components** - Sample MCP Resource to get started quickly
+- **Example components** - Sample MCP Resources to get started quickly
 
 ## Project Structure
 
 ```
 my-app/
 ├── src/
-│   ├── components/
-│   ├── resources/
-│   └── simulations/
-├── public/
+│   └── resources/
+│       ├── albums/
+│       │   ├── albums-resource.tsx
+│       │   ├── albums-resource.json
+│       │   ├── albums-show-simulation.json
+│       │   └── components/
+│       └── review/
+│           ├── review-resource.tsx
+│           ├── review-resource.json
+│           └── review-{scenario}-simulation.json
 ├── package.json
 └── tsconfig.json
 ```
