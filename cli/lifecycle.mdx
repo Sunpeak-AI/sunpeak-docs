@@ -55,13 +55,11 @@ Run the development server with hot reload:
 sunpeak dev
 ```
 
-This starts the ChatGPT simulator at `http://localhost:6767`, letting you iterate quickly on your App UI.
+This starts:
+- The ChatGPT simulator at `http://localhost:6767` for local development
+- An MCP server at `http://localhost:6766` for testing with the real ChatGPT
 
-For testing with the real ChatGPT, start the MCP server:
-
-```bash
-sunpeak mcp
-```
+Both servers support Hot Module Reload, letting you iterate quickly on your App UI.
 
 ### 3. Build
 

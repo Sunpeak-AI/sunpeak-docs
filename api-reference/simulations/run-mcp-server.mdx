@@ -18,10 +18,11 @@ This server is for **local development only**. For production, create your own M
     The sunpeak framework handles MCP server configuration automatically:
 
     ```bash
-    sunpeak mcp
+    sunpeak dev
     ```
 
-    This discovers simulations from each resource folder (`src/resources/{name}/`) and serves the built widgets from `dist/{name}/`.
+    This starts the ChatGPT simulator and an MCP server with Hot Module Reload.
+    The MCP server discovers simulations from each resource folder (`src/resources/{name}/`) and serves the widgets with automatic rebuilding.
   </Tab>
   <Tab title="Library">
     For custom setups, configure the MCP server manually:

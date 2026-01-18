@@ -64,23 +64,23 @@ description: "Create your first ChatGPT App UI with sunpeak."
   </Step>
 
   <Step title="Develop locally">
-    Run the development server to use your local simulator:
+    Run the development server:
 
     ```bash
     sunpeak dev
     ```
 
-    Open `http://localhost:6767` to see the ChatGPT simulator running your app.
+    This starts:
+    - The ChatGPT simulator at `http://localhost:6767` for local development
+    - An MCP server at `http://localhost:6766` for testing with real ChatGPT
 
-    <Tip>The simulator updates automatically as you edit your components!</Tip>
+    <Tip>Both servers support Hot Module Reload - your changes reflect instantly!</Tip>
   </Step>
 
-  <Step title="Develop in ChatGPT">
-    Run the MCP server and a tunnel to allow ChatGPT to connect to it:
+  <Step title="Test in ChatGPT">
+    Run a tunnel to allow ChatGPT to connect to your local MCP server:
 
     ```bash
-    sunpeak mcp
-
     # In another terminal, run a tunnel. For example:
     ngrok http 6766
     ```

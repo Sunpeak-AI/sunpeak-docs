@@ -67,7 +67,6 @@
               "api-reference/cli/new",
               "api-reference/cli/dev",
               "api-reference/cli/build",
-              "api-reference/cli/mcp",
               "api-reference/cli/login",
               "api-reference/cli/logout",
               "api-reference/cli/push",
